@@ -46,28 +46,42 @@
             <Label alignment="CENTER" layoutX="206.0" layoutY="613.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
             <Label fx:id="qty3" alignment="CENTER" layoutX="5.0" layoutY="639.0" prefHeight="31.0" prefWidth="195.0" text="0" />
             <Label alignment="CENTER" layoutX="5.0" layoutY="613.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty4" alignment="CENTER" layoutX="428.0" layoutY="432.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="433.0" layoutY="401.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty5" alignment="CENTER" layoutX="2.0" layoutY="432.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="401.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty6" alignment="CENTER" layoutX="436.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="436.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty7" alignment="CENTER" layoutX="215.0" layoutY="432.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="213.0" layoutY="401.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="price1" alignment="CENTER" layoutX="10.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="\$3.99">
-               <contextMenu>
-                  <ContextMenu>
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                    </items>
-                  </ContextMenu>
-               </contextMenu></Label>
+            <Label fx:id="qty4" alignment="CENTER" layoutX="415.0" layoutY="430.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="420.0" layoutY="399.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty5" alignment="CENTER" layoutX="-6.0" layoutY="430.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="2.0" layoutY="399.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty6" alignment="CENTER" layoutX="428.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="428.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty7" alignment="CENTER" layoutX="211.0" layoutY="430.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="209.0" layoutY="399.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="price1" alignment="CENTER" layoutX="10.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="\$3.99" />
             <Label alignment="CENTER" layoutX="211.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
             <Label fx:id="qty8" alignment="CENTER" layoutX="211.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="0" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Tocotoco" />
-            <Button layoutX="7.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#addToTable" prefHeight="168.0" prefWidth="181.0" style="-fx-background-color: white;" />
-            <Button layoutX="214.0" layoutY="6.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="188.0" style="-fx-background-color: white;" />
-            <Button layoutX="426.0" layoutY="6.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="181.0" style="-fx-background-color: white;" />
+            <Button layoutX="9.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#addToTable" prefHeight="168.0" prefWidth="173.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/O-Long-Man-Kem-Pho-Mai.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button layoutX="210.0" layoutY="6.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="188.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/trà-xoài-bưởi-hồng.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button layoutX="424.0" layoutY="10.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="181.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/Tra-Sua-Ba-Anh-Em-1-copy.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button layoutX="5.0" layoutY="240.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="181.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
@@ -103,33 +117,22 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button layoutX="216.0" layoutY="488.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="181.0" style="-fx-background-color: white;" />
-            <Button layoutX="428.0" layoutY="488.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="181.0" style="-fx-background-color: white;" />
-            <ImageView fitHeight="200.0" fitWidth="150.0" layoutX="440.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/Stawberry-Milk-Tea.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="150.0" layoutX="234.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/Tra-Sua-Tran-Chau-Hoang-Gia-1-copy.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="150.0" layoutX="25.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/O-Long-Man-Kem-Pho-Mai.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="150.0" layoutX="233.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/trà-xoài-bưởi-hồng.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="150.0" layoutX="444.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/Tra-Sua-Ba-Anh-Em-1-copy.jpg" />
-               </image>
-            </ImageView>
+            <Button layoutX="220.0" layoutY="461.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="181.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/Tra-Sua-Tran-Chau-Hoang-Gia-1-copy.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button layoutX="428.0" layoutY="461.0" mnemonicParsing="false" prefHeight="150.0" prefWidth="181.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/Stawberry-Milk-Tea.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </Pane>
       <Pane layoutX="897.0" layoutY="71.0" prefHeight="85.0" prefWidth="420.0" style="-fx-background-color: #d3d3d3;">
