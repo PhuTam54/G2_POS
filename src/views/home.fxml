@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1315.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PosController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1315.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
    <children>
-      <Pane layoutX="897.0" layoutY="615.0" prefHeight="191.0" prefWidth="420.0" style="-fx-background-color: white;">
+      <Pane layoutX="897.0" layoutY="566.0" prefHeight="191.0" prefWidth="420.0" style="-fx-background-color: white;">
          <children>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="21.0" layoutY="10.0" prefHeight="35.0" prefWidth="91.0" text="Total:">
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="22.0" layoutY="10.0" prefHeight="35.0" prefWidth="91.0" text="Sub Total:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="21.0" layoutY="53.0" prefHeight="35.0" prefWidth="91.0" text="Cash:">
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="21.0" layoutY="53.0" prefHeight="35.0" prefWidth="91.0" text="Tax:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="21.0" layoutY="98.0" prefHeight="35.0" prefWidth="91.0" text="Balance:">
+            <Label alignment="CENTER_RIGHT" layoutX="22.0" layoutY="98.0" prefHeight="35.0" prefWidth="91.0" text="Total">
                <font>
                   <Font size="18.0" />
                </font>
@@ -34,31 +35,21 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="119.0" layoutY="45.0" prefHeight="45.0" prefWidth="203.0" promptText="\$0.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </TextField>
-            <Button layoutX="4.0" layoutY="147.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" style="-fx-background-color: #4e2a84;" text="PRINT" textFill="WHITE">
+            <Button layoutX="4.0" layoutY="147.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="412.0" style="-fx-background-color: #ff0e83;" text="PAY" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="213.0" layoutY="147.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" style="-fx-background-color: #ff0e83;" text="PAY" textFill="WHITE">
+            <Label fx:id="total1" contentDisplay="RIGHT" layoutX="121.0" layoutY="53.0" prefHeight="35.0" prefWidth="210.0" text="\$0.0">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
+            </Label>
          </children>
       </Pane>
-      <Pane layoutX="897.0" layoutY="142.0" prefHeight="473.0" prefWidth="420.0" style="-fx-background-color: #d3d3d3;">
+      <Pane layoutX="897.0" layoutY="142.0" prefHeight="417.0" prefWidth="420.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <Button layoutX="217.0" layoutY="434.0" mnemonicParsing="false" onAction="#reset" prefHeight="39.0" prefWidth="203.0" style="-fx-background-color: black;" text="Reset" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <TableView fx:id="tbv" layoutY="14.0" prefHeight="420.0" prefWidth="420.0">
+            <TableView fx:id="tbv" layoutY="14.0" prefHeight="401.0" prefWidth="420.0">
               <columns>
                 <TableColumn fx:id="colID" prefWidth="42.0" text="ID" />
                 <TableColumn fx:id="colName" prefWidth="191.0" text="Name" />
@@ -67,116 +58,105 @@
               </columns>
             </TableView>
          </children></Pane>
-      <Pane layoutX="254.0" layoutY="78.0" prefHeight="728.0" prefWidth="627.0" style="-fx-background-color: white;">
+      <Pane layoutX="257.0" layoutY="69.0" prefHeight="682.0" prefWidth="629.0" style="-fx-background-color: white;">
          <children>
-            <Label alignment="CENTER" layoutX="433.0" layoutY="673.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty9s" alignment="CENTER" layoutX="426.0" layoutY="699.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label fx:id="qty2" alignment="CENTER" layoutX="208.0" layoutY="699.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="210.0" layoutY="673.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty3" alignment="CENTER" layoutX="9.0" layoutY="699.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="9.0" layoutY="673.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty4" alignment="CENTER" layoutX="423.0" layoutY="456.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="428.0" layoutY="425.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty5" alignment="CENTER" layoutX="-3.0" layoutY="456.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="5.0" layoutY="425.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty6" alignment="CENTER" layoutX="433.0" layoutY="216.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="433.0" layoutY="185.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty7" alignment="CENTER" layoutX="210.0" layoutY="456.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="208.0" layoutY="425.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty1" alignment="CENTER" layoutX="7.0" layoutY="216.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="208.0" layoutY="185.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty8" alignment="CENTER" layoutX="208.0" layoutY="216.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="7.0" layoutY="185.0" prefHeight="31.0" prefWidth="195.0" text="Tocotoco - $3.99" />
-            <Button layoutX="7.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#addToTable" prefHeight="185.0" prefWidth="181.0" style="-fx-background-color: white;">
+            <Label alignment="CENTER" layoutX="430.0" layoutY="622.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty9s" alignment="CENTER" layoutX="423.0" layoutY="648.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label fx:id="qty2" alignment="CENTER" layoutX="205.0" layoutY="648.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="207.0" layoutY="622.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty3" alignment="CENTER" layoutX="6.0" layoutY="648.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="6.0" layoutY="622.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty4" alignment="CENTER" layoutX="428.0" layoutY="432.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="433.0" layoutY="401.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty5" alignment="CENTER" layoutX="2.0" layoutY="432.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="401.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty6" alignment="CENTER" layoutX="436.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="436.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty7" alignment="CENTER" layoutX="215.0" layoutY="432.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="213.0" layoutY="401.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="price1" alignment="CENTER" layoutX="10.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="\$3.99">
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu></Label>
+            <Label alignment="CENTER" layoutX="211.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty8" alignment="CENTER" layoutX="211.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Tocotoco" />
+            <Button layoutX="7.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#addToTable" prefHeight="168.0" prefWidth="181.0" style="-fx-background-color: white;" />
+            <Button layoutX="214.0" layoutY="6.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="188.0" style="-fx-background-color: white;" />
+            <Button layoutX="426.0" layoutY="6.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="181.0" style="-fx-background-color: white;" />
+            <Button layoutX="5.0" layoutY="240.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="181.0" style="-fx-background-color: white;">
                <graphic>
-                  <ImageView fitHeight="200.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/O-Long-Man-Kem-Pho-Mai.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="214.0" layoutY="6.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="181.0" style="-fx-background-color: white;">
-               <graphic>
-                  <ImageView fitHeight="200.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/trà-xoài-bưởi-hồng.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="426.0" layoutY="6.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="181.0" style="-fx-background-color: white;">
-               <graphic>
-                  <ImageView fitHeight="200.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/Tra-Sua-Ba-Anh-Em-1-copy.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="5.0" layoutY="240.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="181.0" style="-fx-background-color: white;">
-               <graphic>
-                  <ImageView fitHeight="200.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/Grass-Jelly-Milk-Coffee.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="218.0" layoutY="240.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="181.0" style="-fx-background-color: white;">
+            <Button layoutX="218.0" layoutY="240.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="181.0" style="-fx-background-color: white;">
                <graphic>
-                  <ImageView fitHeight="200.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/Original-Milk-Tea.jpg" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="424.0" layoutY="240.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="181.0" style="-fx-background-color: white;">
+            <Button layoutX="424.0" layoutY="240.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="181.0" style="-fx-background-color: white;">
                <graphic>
-                  <ImageView fitHeight="200.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/O-Long-Man-Chanh-Leo.jpg" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="9.0" layoutY="488.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="181.0" style="-fx-background-color: white;">
-               <graphic>
-                  <ImageView fitHeight="200.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/Tra-Dua-Nhiet-Doi-2-copy.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="216.0" layoutY="488.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="181.0" style="-fx-background-color: white;">
-               <graphic>
-                  <ImageView fitHeight="200.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/Tra-Sua-Tran-Chau-Hoang-Gia-1-copy.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="428.0" layoutY="488.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="181.0" style="-fx-background-color: white;">
-               <graphic>
-                  <ImageView fitHeight="200.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/Stawberry-Milk-Tea.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            <Button layoutX="9.0" layoutY="488.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="181.0" style="-fx-background-color: white;" />
+            <Button layoutX="216.0" layoutY="488.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="181.0" style="-fx-background-color: white;" />
+            <Button layoutX="428.0" layoutY="488.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="181.0" style="-fx-background-color: white;" />
+            <ImageView fitHeight="200.0" fitWidth="150.0" layoutX="440.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Stawberry-Milk-Tea.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="150.0" layoutX="234.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Tra-Sua-Tran-Chau-Hoang-Gia-1-copy.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="176.0" fitWidth="150.0" layoutX="32.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Tra-Dua-Nhiet-Doi-2-copy.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="150.0" layoutX="40.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/O-Long-Man-Kem-Pho-Mai.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="150.0" layoutX="240.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/trà-xoài-bưởi-hồng.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="150.0" layoutX="444.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Tra-Sua-Ba-Anh-Em-1-copy.jpg" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane layoutX="897.0" layoutY="77.0" prefHeight="79.0" prefWidth="420.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <TextField prefHeight="31.0" prefWidth="420.0" promptText="Enter the customer's name" style="-fx-background-radius: 100;">
+            <TextField layoutY="-8.0" prefHeight="45.0" prefWidth="420.0" promptText="Enter the customer's name" style="-fx-background-radius: 100;">
                <font>
                   <Font size="18.0" />
                </font></TextField>
-            <TextField layoutY="39.0" prefHeight="39.0" prefWidth="420.0" promptText="Find the product" style="-fx-background-radius: 100;">
+            <TextField layoutY="39.0" prefHeight="39.0" prefWidth="420.0" promptText="Comment" style="-fx-background-radius: 100;">
                <font>
                   <Font size="18.0" />
                </font></TextField>
@@ -193,9 +173,14 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Label layoutX="624.0" layoutY="3.0" prefHeight="31.0" prefWidth="68.0" text="POS" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <Pane layoutY="78.0" prefHeight="728.0" prefWidth="247.0" style="-fx-background-color: #d3d3d3;">
+      <Pane layoutY="78.0" prefHeight="682.0" prefWidth="247.0" style="-fx-background-color: #d3d3d3;">
          <children>
             <Button layoutX="11.0" layoutY="63.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: #4e2a84; -fx-background-radius: 10;" text="Bobatea" textFill="WHITE">
                <font>

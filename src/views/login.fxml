@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.LoginController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+   <children>
+      <TextField fx:id="txtUsername" layoutX="144.0" layoutY="108.0" prefHeight="64.0" prefWidth="364.0" />
+      <Button layoutX="327.0" layoutY="288.0" mnemonicParsing="false" onAction="#actionLogin" prefHeight="64.0" prefWidth="180.0" style="-fx-background-color:  #4e2a84;" text="Submit" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <PasswordField fx:id="txtPassword" layoutX="145.0" layoutY="200.0" prefHeight="64.0" prefWidth="364.0" />
+      <Label layoutX="44.0" layoutY="119.0" prefHeight="43.0" prefWidth="87.0" text="Ursename">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="44.0" layoutY="211.0" prefHeight="43.0" prefWidth="87.0" text="Password">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Text layoutX="239.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="121.330078125">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>
