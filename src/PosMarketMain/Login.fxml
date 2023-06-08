@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane fx:controller="PosMarketMain.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="txtUsername" layoutX="77.0" layoutY="110.0" prefHeight="35.0" prefWidth="209.0" />
+      <Button onAction="#actionLogin" layoutX="215.0" layoutY="220.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" style="-fx-background-color:  #4e2a84;" text="Submit" textFill="WHITE" />
+      <PasswordField fx:id="txtPassword" layoutX="77.0" layoutY="165.0" prefHeight="35.0" prefWidth="209.0" />
+      <Label layoutX="14.0" layoutY="119.0" prefHeight="17.0" prefWidth="63.0" text="Ursename" />
+      <Label layoutX="14.0" layoutY="174.0" prefHeight="17.0" prefWidth="54.0" text="Password" />
+      <Text layoutX="131.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>
