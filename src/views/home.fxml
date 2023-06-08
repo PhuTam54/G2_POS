@@ -8,21 +8,21 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1315.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
    <children>
-      <Pane layoutX="897.0" layoutY="638.0" prefHeight="107.0" prefWidth="420.0" style="-fx-background-color: white;">
+      <Pane layoutX="897.0" layoutY="637.0" prefHeight="108.0" prefWidth="420.0" style="-fx-background-color: white;">
          <children>
-            <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="123.0" text="Total product:">
+            <Label alignment="CENTER_RIGHT" layoutX="4.0" prefHeight="35.0" prefWidth="123.0" text="Total product:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label contentDisplay="RIGHT" layoutX="155.0" layoutY="14.0" prefHeight="35.0" prefWidth="141.0" text="0">
+            <Label contentDisplay="RIGHT" layoutX="146.0" prefHeight="35.0" prefWidth="141.0" text="0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="4.0" layoutY="59.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="412.0" style="-fx-background-color: #ff0e83;" text="PAY" textFill="WHITE">
+            <Button layoutX="4.0" layoutY="47.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="412.0" style="-fx-background-color: #ff0e83;" text="PAYMENT" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Button>
          </children>
@@ -40,12 +40,12 @@
          </children></Pane>
       <Pane layoutX="257.0" layoutY="69.0" prefHeight="676.0" prefWidth="629.0" style="-fx-background-color: white;">
          <children>
-            <Label alignment="CENTER" layoutX="430.0" layoutY="622.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty9s" alignment="CENTER" layoutX="423.0" layoutY="648.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label fx:id="qty2" alignment="CENTER" layoutX="205.0" layoutY="648.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="207.0" layoutY="622.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty3" alignment="CENTER" layoutX="6.0" layoutY="648.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="6.0" layoutY="622.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label alignment="CENTER" layoutX="429.0" layoutY="613.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty9s" alignment="CENTER" layoutX="422.0" layoutY="639.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label fx:id="qty2" alignment="CENTER" layoutX="204.0" layoutY="639.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="206.0" layoutY="613.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
+            <Label fx:id="qty3" alignment="CENTER" layoutX="5.0" layoutY="639.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="5.0" layoutY="613.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
             <Label fx:id="qty4" alignment="CENTER" layoutX="428.0" layoutY="432.0" prefHeight="31.0" prefWidth="195.0" text="0" />
             <Label alignment="CENTER" layoutX="433.0" layoutY="401.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
             <Label fx:id="qty5" alignment="CENTER" layoutX="2.0" layoutY="432.0" prefHeight="31.0" prefWidth="195.0" text="0" />
@@ -95,9 +95,9 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="9.0" layoutY="451.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="181.0" style="-fx-background-color: white;">
+            <Button layoutX="9.0" layoutY="459.0" mnemonicParsing="false" prefHeight="160.0" prefWidth="181.0" style="-fx-background-color: white;">
                <graphic>
-                  <ImageView fitHeight="176.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="153.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/Tra-Dua-Nhiet-Doi-2-copy.jpg" />
                      </image>
@@ -155,7 +155,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label layoutX="560.0" layoutY="3.0" prefHeight="53.0" prefWidth="195.0" text="POS Market" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="560.0" layoutY="3.0" prefHeight="53.0" prefWidth="195.0" text="POS Market" textFill="WHITE">
                <font>
                   <Font size="36.0" />
                </font>
@@ -203,22 +203,22 @@
       </Pane>
       <Pane layoutY="757.0" prefHeight="45.0" prefWidth="1315.0" style="-fx-background-color: #d3d3d3; -fx-border-color: white;">
          <children>
-            <Button layoutX="304.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="[F2-Cancel order]">
+            <Button layoutX="304.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Cancel order">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="1076.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="[F5-Exit]" textFill="WHITE">
+            <Button layoutX="1076.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="Exit" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="14.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: #4e2a84; -fx-background-radius: 10;" text="[F1-New order]" textFill="WHITE">
+            <Button layoutX="14.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: #4e2a84; -fx-background-radius: 10;" text="New order" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="605.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="[F3-Sales Report]">
+            <Button layoutX="605.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sales Report">
                <font>
                   <Font size="18.0" />
                </font>
