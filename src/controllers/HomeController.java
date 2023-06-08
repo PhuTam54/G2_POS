@@ -17,7 +17,7 @@ import model.Table;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PosController implements Initializable {
+public class HomeController implements Initializable {
     public TableView<Table> tbv;
     public TableColumn<Table, Integer> colID;
     public TableColumn<Table, String> colName;
