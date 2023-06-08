@@ -13,9 +13,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         mainStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("views/home.fxml"));
-        primaryStage.setScene(new Scene(root,1315,810));
-        primaryStage.setTitle("POS");
+        Parent root = FXMLLoader.load(getClass().getResource("views/login.fxml"));
+        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setResizable(false);
+        primaryStage.setIconified(false);
+        primaryStage.setTitle("Login");
         primaryStage.show();
     }
 }
