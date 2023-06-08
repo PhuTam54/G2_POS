@@ -1,4 +1,4 @@
-package PosMarketMain;
+package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 
 public class JdbcDao {
 
-    private final static String connectionString = "jdbc:mysql://localhost:3306/posjavafx";
+    private final static String connectionString = "jdbc:mysql://localhost:3306/posdb";
     private final static String user = "root";
     private final static String pwd = ""; // xampp: ""  mamp: "root"
     private final static String SELECT_QUERY = "SELECT * FROM users WHERE username = ? AND password = ?";
