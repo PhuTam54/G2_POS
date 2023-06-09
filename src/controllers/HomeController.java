@@ -17,7 +17,7 @@ import model.Table;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PosController implements Initializable {
+public class HomeController implements Initializable {
     public TableView<Table> tbv;
     public TableColumn<Table, Integer> colID;
     public TableColumn<Table, String> colName;
@@ -25,6 +25,7 @@ public class PosController implements Initializable {
     public TableColumn<Table, Double> colPrice;
     public Label qty1;
     public Label total;
+
     ObservableList<Table> list = FXCollections.observableArrayList();
     public static Table resetTable;
     public void addTable(int id, int qty ,String name,  Double price) {
@@ -40,35 +41,21 @@ public class PosController implements Initializable {
         tbv.refresh();
     }
 
-    public void addToTable(MouseEvent mouseEvent) {
-        int count = Integer.parseInt(qty1.getText());
-        count ++;
-        qty1.setText(String.valueOf(count));
+    public void addToTable(MouseEvent mouseEvent) throws Exception {
+      try {
+          int count = Integer.parseInt(qty1.getText());
+          count ++;
+          qty1.setText(String.valueOf(count));
 
-        Double price = Math.ceil((count * 3.99) * 100) / 100;
-        addTable(1, count,"Tocotoco-$" + 3.99, price);
-        total.setText("$" + price);
+          Double price = Math.ceil((count * 3.99) * 100) / 100;
+          addTable(1, count,"Tocotoco-$" + 3.99, price);
+              total.setText("$" + price);
+      }catch (Exception e) {
+          System.out.println("Error: " + e.getMessage());
+      }
     }
 
-    public void reset(ActionEvent mouseEvent) {
-        try {
-            qty1.setText("0");
-            total.setText("$0.0");
-            tbv.setItems(list);
-            tbv.refresh();
-            resetTable = null;
-            resetTable = tbv.getSelectionModel().getSelectedItem();
-            if (resetTable != null) {
-                for (int i = 0; i <= list.size(); i++) {
-                    list.remove(list.get(i));
-                }
-            }
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText(e.getMessage());
-            alert.show();
-        }
-    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
