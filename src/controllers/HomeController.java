@@ -25,6 +25,7 @@ public class HomeController implements Initializable {
     public TableColumn<Table, Double> colPrice;
     public Label qty1;
     public Label total;
+    public Label price1;
     ObservableList<Table> list = FXCollections.observableArrayList();
     public static Table resetTable;
     public void addTable(int id, int qty ,String name,  Double price) {
@@ -50,7 +51,7 @@ public class HomeController implements Initializable {
         total.setText("$" + price);
     }
 
-    public void reset(ActionEvent mouseEvent) {
+    public void reset(ActionEvent actionEvent) {
         try {
             qty1.setText("0");
             total.setText("$0.0");

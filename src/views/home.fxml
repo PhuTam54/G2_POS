@@ -8,28 +8,38 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1315.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
    <children>
-      <Pane layoutX="897.0" layoutY="637.0" prefHeight="108.0" prefWidth="420.0" style="-fx-background-color: white;">
+      <Pane layoutX="897.0" layoutY="594.0" prefHeight="151.0" prefWidth="412.0" style="-fx-background-color: white;">
          <children>
-            <Label alignment="CENTER_RIGHT" layoutX="4.0" prefHeight="35.0" prefWidth="123.0" text="Total product:">
+            <Label alignment="CENTER_RIGHT" layoutX="4.0" layoutY="41.0" prefHeight="35.0" prefWidth="123.0" text="Total product:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label contentDisplay="RIGHT" layoutX="146.0" prefHeight="35.0" prefWidth="141.0" text="0">
+            <Label contentDisplay="RIGHT" layoutX="146.0" layoutY="41.0" prefHeight="35.0" prefWidth="141.0" text="0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="4.0" layoutY="47.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="412.0" style="-fx-background-color: #ff0e83;" text="PAYMENT" textFill="WHITE">
+            <Button layoutX="4.0" layoutY="84.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="405.0" style="-fx-background-color: #ff0e83;" text="PAYMENT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
+            <Label alignment="CENTER_RIGHT" layoutY="6.0" prefHeight="35.0" prefWidth="123.0" text="Sub total:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="total" contentDisplay="RIGHT" layoutX="147.0" layoutY="6.0" prefHeight="35.0" prefWidth="141.0" text="\$0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <Pane layoutX="897.0" layoutY="142.0" prefHeight="484.0" prefWidth="420.0" style="-fx-background-color: #d3d3d3;">
+      <Pane layoutX="897.0" layoutY="142.0" prefHeight="441.0" prefWidth="412.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <TableView fx:id="tbv" layoutY="18.0" prefHeight="466.0" prefWidth="420.0">
+            <TableView fx:id="tbv" layoutY="18.0" prefHeight="424.0" prefWidth="412.0">
               <columns>
                 <TableColumn fx:id="colID" prefWidth="42.0" text="No." />
                 <TableColumn fx:id="colName" prefWidth="191.0" text="Name" />
@@ -54,7 +64,7 @@
             <Label alignment="CENTER" layoutX="428.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
             <Label fx:id="qty7" alignment="CENTER" layoutX="211.0" layoutY="430.0" prefHeight="31.0" prefWidth="195.0" text="0" />
             <Label alignment="CENTER" layoutX="209.0" layoutY="399.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="price1" alignment="CENTER" layoutX="10.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="\$3.99" />
+            <Label fx:id="qty1" alignment="CENTER" layoutX="10.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="0" />
             <Label alignment="CENTER" layoutX="211.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
             <Label fx:id="qty8" alignment="CENTER" layoutX="211.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="0" />
             <Label alignment="CENTER" layoutX="10.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Tocotoco" />
@@ -137,11 +147,11 @@
       </Pane>
       <Pane layoutX="897.0" layoutY="71.0" prefHeight="85.0" prefWidth="420.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <TextField layoutY="-1.0" prefHeight="35.0" prefWidth="412.0" promptText="Enter the customer's name" style="-fx-background-radius: 100;">
+            <TextField layoutY="-1.0" prefHeight="35.0" prefWidth="412.0" promptText="Entering the customer name" style="-fx-background-radius: 100;">
                <font>
                   <Font size="18.0" />
                </font></TextField>
-            <TextField layoutY="43.0" prefHeight="35.0" prefWidth="412.0" promptText="Comment" style="-fx-background-radius: 100;">
+            <TextField layoutY="43.0" prefHeight="35.0" prefWidth="412.0" promptText="Enter notes for order" style="-fx-background-radius: 100;">
                <font>
                   <Font size="18.0" />
                </font></TextField>
@@ -206,7 +216,7 @@
       </Pane>
       <Pane layoutY="757.0" prefHeight="45.0" prefWidth="1315.0" style="-fx-background-color: #d3d3d3; -fx-border-color: white;">
          <children>
-            <Button layoutX="304.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Cancel order">
+            <Button onAction="#reset" layoutX="362.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Cancel order">
                <font>
                   <Font size="18.0" />
                </font>
@@ -221,7 +231,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="605.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sales Report">
+            <Button layoutX="725.0" layoutY="3.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sales Report">
                <font>
                   <Font size="18.0" />
                </font>
