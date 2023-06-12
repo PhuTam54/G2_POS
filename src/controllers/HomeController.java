@@ -26,6 +26,7 @@ public class HomeController implements Initializable {
     public Label qty1;
     public Label total;
     public Label price1;
+    public Label totalproduct;
     ObservableList<Table> list = FXCollections.observableArrayList();
     public static Table resetTable;
     public void addTable(int id, int qty ,String name,  Double price) {
@@ -49,6 +50,7 @@ public class HomeController implements Initializable {
         Double price = Math.ceil((count * 3.99) * 100) / 100;
         addTable(1, count,"Tocotoco-$" + 3.99, price);
         total.setText("$" + price);
+        totalproduct.setText(String.valueOf(count));
     }
 
     public void reset(ActionEvent actionEvent) {
