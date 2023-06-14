@@ -36,9 +36,8 @@ public class HomeController implements Initializable {
     ObservableList<Table> list = FXCollections.observableArrayList();
     public static Table resetTable;
 
-
     // Date
-    private LocalDateTime dateTime = LocalDateTime.now();
+    private final LocalDateTime dateTime = LocalDateTime.now();
     int day = dateTime.getDayOfMonth();
     int month = dateTime.getMonthValue();
     int year = dateTime.getYear();
@@ -47,26 +46,34 @@ public class HomeController implements Initializable {
     int second = dateTime.getSecond();
     //
 
-    public void addTable(int id, int qty ,String name,  Double price) {
-        // product already add
-        for (Table t: list) {
-            if (list.contains(name)) {
-                list.remove(t);
-            }
-        }
-        Table tb = new Table(id, qty, name, price);
-        list.add(tb);
+    public void addToTable(Table table) {
+        list.add(table);
         tbv.setItems(list);
         tbv.refresh();
     }
 
     public void addToTable(MouseEvent mouseEvent) {
+        // test add
+        int id = 1;
         int count = Integer.parseInt(qty1.getText());
         count ++;
-        qty1.setText(String.valueOf(count));
-
+        String name = "Tocotoco Bobatea";
         Double price = Math.ceil((count * 3.99) * 100) / 100;
-        addTable(1, count,"Tocotoco-$" + 3.99, price);
+        Table tb = new Table(id, count, name, price);
+        // product already add
+        try {
+            for (Table t: list) {
+                if (t.getName().equals(tb.getName())) {
+                    list.remove(t);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Product already add Error: " + e.getMessage());
+        }
+        addToTable(tb);
+
+
+        qty1.setText(String.valueOf(count));
         total.setText("$" + price);
         totalproduct.setText(String.valueOf(count));
     }
@@ -75,15 +82,23 @@ public class HomeController implements Initializable {
         try {
             qty1.setText("0");
             total.setText("$0.0");
-            tbv.setItems(list);
-            tbv.refresh();
+            totalproduct.setText("0");
             resetTable = null;
             resetTable = tbv.getSelectionModel().getSelectedItem();
             if (resetTable != null) {
-                for (int i = 0; i <= list.size(); i++) {
-                    list.remove(list.get(i));
+//                for (int i = 0; i <= list.size(); i++) {
+//                    list.remove(list.get(i));
+//                }
+                for (Table tb: list) {
+                    list.remove(tb);
                 }
+
             }
+//            if (resetTable != null) {
+//                list.forEach();
+//            }
+            tbv.setItems(list);
+            tbv.refresh();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText(e.getMessage());
@@ -101,20 +116,20 @@ public class HomeController implements Initializable {
         try {
 //            ObservableList<Table> list = FXCollections.observableArrayList();
             // query
-            list.addAll(RepositoryFactory.createRepositoryInstance(RepositoryType.TABLE).getAll());
+            RepositoryFactory.createRepositoryInstance(RepositoryType.TABLE).getAll();
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Initialize Error: " + e.getMessage());
         }
 
         // Date
         new Thread(()-> {
             boolean flag = true;
             while (flag) {
-                txtDay.setText(day + " /");
-                txtMonth.setText(month + " /");
+                txtDay.setText(day + "/");
+                txtMonth.setText(month + "/");
                 txtYear.setText(String.valueOf(year));
-                txtHours.setText(hours + " :");
-                txtMin.setText(minute + " :");
+                txtHours.setText(hours + ":");
+                txtMin.setText(minute + ":");
                 txtSecond.setText(String.valueOf(second));
                 second ++;
                 if (second > 59) {
@@ -167,7 +182,7 @@ public class HomeController implements Initializable {
                 try {
                     Thread.sleep(1000); // 1000 milliseconds
                 } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
+                    System.out.println("Thread Error: " + e.getMessage());
                 }
             }
         }).start();
