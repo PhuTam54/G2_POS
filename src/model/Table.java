@@ -1,11 +1,14 @@
 package model;
 
+import javafx.scene.control.Button;
+
 public class Table {
     int id, qty;
     String name;
     Double price;
+    Button delete;
 
-    public Table(int id, int qty, String name, Double price) {
+    public Table(int qty, String name, Double price) {
         this.id = id;
         this.qty = qty;
         this.name = name;
@@ -13,6 +16,13 @@ public class Table {
     }
 
     public Table() {
+    }
+    public Table(int id, int qty, String name, Double price) {
+        this.id = id;
+        this.qty = qty;
+        this.name = name;
+        this.price = price;
+        this.delete = new Button("Delete");
     }
 
     public int getId() {
@@ -45,5 +55,9 @@ public class Table {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Button getDelete() {
+        return delete;
     }
 }
