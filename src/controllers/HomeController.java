@@ -6,10 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.Table;
 
 import java.net.URL;
@@ -33,6 +36,7 @@ public class HomeController implements Initializable {
     public Text txtDay;
     public Text txtMonth;
     public Text txtYear;
+    public Label qty2;
     ObservableList<Table> list = FXCollections.observableArrayList();
     public static Table resetTable;
 
@@ -52,7 +56,7 @@ public class HomeController implements Initializable {
         tbv.refresh();
     }
 
-    public void addToTable(MouseEvent mouseEvent) {
+    public void addToTable1(MouseEvent mouseEvent) {
         // test add
         int id = 1;
         int count = Integer.parseInt(qty1.getText());
@@ -77,10 +81,33 @@ public class HomeController implements Initializable {
         total.setText("$" + price);
         totalproduct.setText(String.valueOf(count));
     }
+    public void addToTable2(ActionEvent actionEvent) {
+        // test add
+        int id = 2;
+        int count = Integer.parseInt(qty2.getText());
+        count ++;
+        String name = "Trà xoài bưởi hồng";
+        Double price = Math.ceil((count * 3.99) * 100) / 100;
+        Table tb = new Table(id, count, name, price);
+        // product already add
+        try {
+            for (Table t: list) {
+                if (t.getName().equals(tb.getName())) {
+                    list.remove(t);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Product already add Error: " + e.getMessage());
+        }
+        addToTable(tb);
+
+        qty2.setText(String.valueOf(count));
+    }
 
     public void reset(ActionEvent actionEvent) {
         try {
             qty1.setText("0");
+            qty2.setText("0");
             total.setText("$0.0");
             totalproduct.setText("0");
             resetTable = null;
@@ -92,7 +119,7 @@ public class HomeController implements Initializable {
                 for (Table tb: list) {
                     list.remove(tb);
                 }
-
+                throw new Exception("Canceled");
             }
 //            if (resetTable != null) {
 //                list.forEach();
@@ -187,5 +214,46 @@ public class HomeController implements Initializable {
             }
         }).start();
         //
+    }
+
+    public void printBill(MouseEvent mouseEvent) {
+        String billText = "                              POS Market \n";
+        billText += "                    \tSố 18 Tôn Thất Thuyết \n";
+        billText += "                       \t+84 123456789 \n";
+        billText += "----------------------------------------------------------------\n";
+        billText += " Name                      \tQty                 \tPrice \n";
+        billText += "----------------------------------------------------------------\n";
+
+        ObservableList<Table> data = tbv.getItems();
+        for (int i = 0; i < data.size(); i++) {
+            billText += data.get(i).getName() + "\t\t"+ data.get(i).getQty()+ "\t\t\t"+ data.get(i).getPrice() + " \n";
+        }
+
+        billText += "----------------------------------------------------------------\n";
+        billText += "Total :\t" + total.getText() + "\n";
+        billText += "Cash :\t" + total.getText() + "\n";
+        billText += "Ballance :\t" + totalproduct.getText() + "\n";
+        billText += "======================================\n";
+        billText += "                    Thanks For Your Business...!" + "\n";
+
+
+        TextArea bill = new TextArea(billText); // hiển thị hóa đơn trong TextArea
+        bill.setEditable(false);
+        Stage stage = new Stage();
+        Text billtext = new Text(); //khởi tạo giá trị của billtext
+        billtext.setText(billText);
+        Scene scene = new Scene(bill ,400,600); //sử dụng biến bill thay cho billtext
+        stage.setScene(scene);
+        stage.show();
+
+        // In hóa đơn
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+        if (printerJob != null) {
+            boolean success = printerJob.printPage(billtext);
+            if (success) {
+                printerJob.endJob();
+            }
+        }
+
     }
 }
