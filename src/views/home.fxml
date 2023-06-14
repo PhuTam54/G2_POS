@@ -20,7 +20,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="4.0" layoutY="84.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="405.0" style="-fx-background-color: #ff0e83;" text="PAYMENT" textFill="WHITE">
+            <Button onMouseClicked="#printBill" layoutX="4.0" layoutY="84.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="405.0" style="-fx-background-color: #ff0e83;" text="PAYMENT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -41,7 +41,7 @@
          <children>
             <TableView fx:id="tbv" layoutY="18.0" prefHeight="424.0" prefWidth="412.0">
               <columns>
-                <TableColumn fx:id="colID" prefWidth="42.0" text="No." />
+                <TableColumn fx:id="colID" prefWidth="42.0" text="ID" />
                 <TableColumn fx:id="colName" prefWidth="172.0" text="Name" />
                   <TableColumn fx:id="colQty" minWidth="8.0" prefWidth="43.0" text="Qty" />
                   <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="68.0" text="Price" />
@@ -52,8 +52,8 @@
       <Pane layoutX="256.0" layoutY="71.0" prefHeight="676.0" prefWidth="629.0" style="-fx-background-color: white;">
          <children>
             <Label alignment="CENTER" layoutX="429.0" layoutY="613.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty9s" alignment="CENTER" layoutX="422.0" layoutY="639.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label fx:id="qty2" alignment="CENTER" layoutX="204.0" layoutY="639.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label fx:id="qty9" alignment="CENTER" layoutX="422.0" layoutY="639.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label fx:id="qty8" alignment="CENTER" layoutX="204.0" layoutY="639.0" prefHeight="31.0" prefWidth="195.0" text="0" />
             <Label alignment="CENTER" layoutX="206.0" layoutY="613.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
             <Label fx:id="qty3" alignment="CENTER" layoutX="5.0" layoutY="639.0" prefHeight="31.0" prefWidth="195.0" text="0" />
             <Label alignment="CENTER" layoutX="5.0" layoutY="613.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
@@ -65,11 +65,11 @@
             <Label alignment="CENTER" layoutX="428.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
             <Label fx:id="qty7" alignment="CENTER" layoutX="211.0" layoutY="430.0" prefHeight="31.0" prefWidth="195.0" text="0" />
             <Label alignment="CENTER" layoutX="209.0" layoutY="399.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty1" alignment="CENTER" layoutX="10.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="211.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Name:" />
-            <Label fx:id="qty8" alignment="CENTER" layoutX="211.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="0" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Tocotoco" />
-            <Button layoutX="9.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#addToTable" prefHeight="168.0" prefWidth="173.0" style="-fx-background-color: white;">
+            <Label fx:id="qty1" alignment="CENTER" layoutX="17.0" layoutY="200.0" prefHeight="31.0" prefWidth="157.0" text="0" />
+            <Label alignment="CENTER" layoutX="211.0" layoutY="169.0" prefHeight="31.0" prefWidth="195.0" text="Trà xoài bưởi hồng" />
+            <Label fx:id="qty2" alignment="CENTER" layoutX="211.0" layoutY="200.0" prefHeight="31.0" prefWidth="195.0" text="0" />
+            <Label alignment="CENTER" layoutX="17.0" layoutY="169.0" prefHeight="31.0" prefWidth="157.0" text="Tocotoco" />
+            <Button layoutX="9.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#addToTable1" prefHeight="168.0" prefWidth="173.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -77,7 +77,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button layoutX="210.0" layoutY="6.0" mnemonicParsing="false" prefHeight="168.0" prefWidth="188.0" style="-fx-background-color: white;">
+            <Button layoutX="210.0" layoutY="6.0" mnemonicParsing="false" onAction="#addToTable2" prefHeight="168.0" prefWidth="188.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -174,7 +174,7 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <HBox layoutX="995.0" layoutY="16.0" prefHeight="27.0" prefWidth="103.0">
+            <HBox layoutX="1008.0" layoutY="16.0" prefHeight="27.0" prefWidth="95.0">
                <children>
                   <Text fx:id="txtDay" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="dd /">
                      <font>
@@ -193,7 +193,7 @@
                   </Text>
                </children>
             </HBox>
-            <HBox layoutX="1114.0" layoutY="16.0" prefHeight="27.0" prefWidth="80.0">
+            <HBox layoutX="1120.0" layoutY="16.0" prefHeight="27.0" prefWidth="74.0">
                <children>
                   <Text fx:id="txtHours" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="hh :">
                      <font>
