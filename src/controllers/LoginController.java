@@ -40,8 +40,6 @@ public class LoginController implements Initializable {
     @FXML
     private void actionLogin(ActionEvent event) {
         Window owner = txtUsername.getScene().getWindow();
-        System.out.println(txtUsername.getText());
-        System.out.println(txtPassword.getText());
 
         if(txtUsername.getText().isEmpty()){
             showAlert(Alert.AlertType.ERROR, owner, "Please enter a valid username","Form error!");
@@ -54,6 +52,9 @@ public class LoginController implements Initializable {
 
         String username = txtUsername.getText();
         String password = txtPassword.getText();
+
+        System.out.println(username);
+        System.out.println(password);
 
         JdbcDao jdbcDao = new JdbcDao();
         boolean flag = jdbcDao.validate(username, password);
