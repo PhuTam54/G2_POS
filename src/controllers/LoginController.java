@@ -66,8 +66,8 @@ public class LoginController implements Initializable {
                 Parent root = fxmlLoader.load();
 
                 Stage stage = new Stage();
-                stage.setTitle("POS | Dashboard");
-                stage.setScene(new Scene(root, 1315, 810));
+                stage.setTitle("POS Market | Dashboard");
+                stage.setScene(new Scene(root, 1315, 805));
                 HomeController controller = (HomeController) fxmlLoader.getController();
 
                 stage.show();
