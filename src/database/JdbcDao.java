@@ -11,7 +11,7 @@ public class JdbcDao {
     private final static String connectionString = "jdbc:mysql://localhost:3306/posdb";
     private final static String user = "root";
     private final static String pwd = ""; // xampp: ""  mamp: "root"
-    private final static String SELECT_QUERY = "SELECT * FROM users WHERE username = ? AND password = ?";
+    private final static String SELECT_QUERY = "SELECT * FROM admin WHERE adminUsername = ? AND adminPassword = ?";
 
     public boolean validate(String username, String password) {
         try {
