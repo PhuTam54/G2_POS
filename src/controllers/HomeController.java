@@ -26,23 +26,14 @@ public class HomeController implements Initializable {
     public TableColumn<Table, Integer> colQty;
     public TableColumn<Table, Double> colPrice;
     public TableColumn<Table, Button> colAction;
-    public Label qty1;
-    public Label total;
-    public Label price1;
-    public Label totalproduct;
-    public Text txtHours;
-    public Text txtMin;
-    public Text txtSecond;
-    public Text txtDay;
-    public Text txtMonth;
-    public Text txtYear;
-    public Label qty2;
+    public Label qty1, total, price1, totalproduct, qty2;
     ObservableList<Table> list = FXCollections.observableArrayList();
     public static Table resetTable;
 //    public int countProduct;
 
     // Date
-    private final LocalDateTime dateTime = LocalDateTime.now();
+    public Text txtHours, txtMin, txtSecond, txtDay, txtMonth, txtYear;
+    public final LocalDateTime dateTime = LocalDateTime.now();
     int day = dateTime.getDayOfMonth();
     int month = dateTime.getMonthValue();
     int year = dateTime.getYear();
@@ -50,90 +41,6 @@ public class HomeController implements Initializable {
     int minute = dateTime.getMinute();
     int second = dateTime.getSecond();
     //
-
-    public void addToTable(Table table) {
-        list.add(table);
-        tbv.setItems(list);
-        tbv.refresh();
-    }
-
-    public void addToTable1(MouseEvent mouseEvent) {
-        // test add
-        int id = 1;
-        int count = Integer.parseInt(qty1.getText());
-        count ++;
-        String name = "Tocotoco Bobatea";
-        Double price = Math.ceil((count * 3.99) * 100) / 100;
-        Table tb = new Table(id, count, name, price);
-        // product already add
-        try {
-            for (Table t: list) {
-                if (t.getName().equals(tb.getName())) {
-                    list.remove(t);
-                }
-            }
-        } catch (Exception e) {
-//            System.out.println("Product already add Error: " + e.getMessage());
-        }
-        addToTable(tb);
-
-
-        qty1.setText(String.valueOf(count));
-    }
-    public void addToTable2(ActionEvent actionEvent) {
-        // test add
-        int id = 2;
-        int count = Integer.parseInt(qty2.getText());
-        count ++;
-        String name = "Trà xoài bưởi hồng";
-        Double price = Math.ceil((count * 2.99) * 100) / 100;
-        Table tb = new Table(id, count, name, price);
-        // product already add
-        try {
-            for (Table t: list) {
-                if (t.getName().equals(tb.getName())) {
-                    list.remove(t);
-                }
-            }
-        } catch (Exception e) {
-//            System.out.println("Product already add Error: " + e.getMessage());
-        }
-        addToTable(tb);
-
-        qty2.setText(String.valueOf(count));
-    }
-
-    public void reset(ActionEvent actionEvent) {
-        try {
-            qty1.setText("0");
-            qty2.setText("0");
-            total.setText("$0.0");
-            totalproduct.setText("0");
-            resetTable = null;
-            resetTable = tbv.getSelectionModel().getSelectedItem();
-            if (resetTable != null) {
-//                for (int i = 0; i <= list.size(); i++) {
-//                    list.remove(list.get(i));
-//                }
-                for (Table tb: list) {
-                    list.remove(tb);
-                }
-                throw new Exception("Canceled");
-            }
-//            if (resetTable != null) {
-//                list.forEach();
-//            }
-            tbv.setItems(list);
-            tbv.refresh();
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText(e.getMessage());
-            alert.show();
-        }
-    }
-    public void exit(MouseEvent mouseEvent) {
-        System.exit(0);
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -225,7 +132,6 @@ public class HomeController implements Initializable {
                             year ++;
                         }
                     default:
-                        flag = false;
                 }
                 try {
                     Thread.sleep(1000); // 1000 milliseconds
@@ -235,6 +141,90 @@ public class HomeController implements Initializable {
             }
         }).start();
         //
+    }
+
+    // add to table
+    public void addToTable(Table table) {
+        list.add(table);
+        tbv.setItems(list);
+        tbv.refresh();
+    }
+
+    public void addToTable1(MouseEvent mouseEvent) {
+        // test add
+        int id = 1;
+        int count = Integer.parseInt(qty1.getText());
+        count ++;
+        String name = "Tocotoco Bobatea";
+        Double price = Math.ceil((count * 3.99) * 100) / 100;
+        Table tb = new Table(id, count, name, price);
+        // product already add
+        try {
+            for (Table t: list) {
+                if (t.getName().equals(tb.getName())) {
+                    list.remove(t);
+                }
+            }
+        } catch (Exception e) {
+//            System.out.println("Product already add Error: " + e.getMessage());
+        }
+        addToTable(tb);
+
+        qty1.setText(String.valueOf(count));
+    }
+    public void addToTable2(ActionEvent actionEvent) {
+        // test add
+        int id = 2;
+        int count = Integer.parseInt(qty2.getText());
+        count ++;
+        String name = "Trà xoài bưởi hồng";
+        Double price = Math.ceil((count * 2.99) * 100) / 100;
+        Table tb = new Table(id, count, name, price);
+        // product already add
+        try {
+            for (Table t: list) {
+                if (t.getName().equals(tb.getName())) {
+                    list.remove(t);
+                }
+            }
+        } catch (Exception e) {
+//            System.out.println("Product already add Error: " + e.getMessage());
+        }
+        addToTable(tb);
+
+        qty2.setText(String.valueOf(count));
+    }
+
+    public void reset(ActionEvent actionEvent) {
+        try {
+            qty1.setText("0");
+            qty2.setText("0");
+            total.setText("$0.0");
+            totalproduct.setText("0");
+            resetTable = null;
+            resetTable = tbv.getSelectionModel().getSelectedItem();
+            if (resetTable != null) {
+//                for (int i = 0; i <= list.size(); i++) {
+//                    list.remove(list.get(i));
+//                }
+                for (Table tb: list) {
+                    list.remove(tb);
+                }
+                throw new Exception("Canceled");
+            }
+//            if (resetTable != null) {
+//                list.forEach();
+//            }
+            tbv.setItems(list);
+            tbv.refresh();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText(e.getMessage());
+            alert.show();
+        }
+    }
+    public void exit(MouseEvent mouseEvent) {
+        System.exit(0);
     }
 
     public void printBill(MouseEvent mouseEvent) {
