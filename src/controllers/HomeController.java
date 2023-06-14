@@ -78,8 +78,6 @@ public class HomeController implements Initializable {
 
 
         qty1.setText(String.valueOf(count));
-        total.setText("$" + price);
-        totalproduct.setText(String.valueOf(count));
     }
     public void addToTable2(ActionEvent actionEvent) {
         // test add
@@ -147,6 +145,9 @@ public class HomeController implements Initializable {
         } catch (Exception e) {
             System.out.println("Initialize Error: " + e.getMessage());
         }
+
+//        total.setText("$" + price);
+//        totalproduct.setText(String.valueOf(count));
 
         // Date
         new Thread(()-> {
