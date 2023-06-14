@@ -39,6 +39,7 @@ public class HomeController implements Initializable {
     public Label qty2;
     ObservableList<Table> list = FXCollections.observableArrayList();
     public static Table resetTable;
+//    public int countProduct;
 
     // Date
     private final LocalDateTime dateTime = LocalDateTime.now();
@@ -72,7 +73,7 @@ public class HomeController implements Initializable {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Product already add Error: " + e.getMessage());
+//            System.out.println("Product already add Error: " + e.getMessage());
         }
         addToTable(tb);
 
@@ -85,7 +86,7 @@ public class HomeController implements Initializable {
         int count = Integer.parseInt(qty2.getText());
         count ++;
         String name = "Trà xoài bưởi hồng";
-        Double price = Math.ceil((count * 3.99) * 100) / 100;
+        Double price = Math.ceil((count * 2.99) * 100) / 100;
         Table tb = new Table(id, count, name, price);
         // product already add
         try {
@@ -95,7 +96,7 @@ public class HomeController implements Initializable {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Product already add Error: " + e.getMessage());
+//            System.out.println("Product already add Error: " + e.getMessage());
         }
         addToTable(tb);
 
@@ -130,6 +131,9 @@ public class HomeController implements Initializable {
             alert.show();
         }
     }
+    public void exit(MouseEvent mouseEvent) {
+        System.exit(0);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -146,8 +150,22 @@ public class HomeController implements Initializable {
             System.out.println("Initialize Error: " + e.getMessage());
         }
 
+//        try {
+//            countProduct = 0;
+//            int tableLength = list.size();
+//            for (int i = 0; i < tableLength; i++) {
+//            countProduct += colQty.getCellData(countProduct);
+//            }
+//            for (Table t: list) {
+//                countProduct += t.getQty();
+//            }
+//        }catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+
+
 //        total.setText("$" + price);
-//        totalproduct.setText(String.valueOf(count));
+//        totalproduct.setText(String.valueOf(countProduct));
 
         // Date
         new Thread(()-> {
@@ -206,6 +224,8 @@ public class HomeController implements Initializable {
                             month = 1;
                             year ++;
                         }
+                    default:
+                        flag = false;
                 }
                 try {
                     Thread.sleep(1000); // 1000 milliseconds
