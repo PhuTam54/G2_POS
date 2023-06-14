@@ -17,7 +17,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);
         primaryStage.setIconified(false);
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("POS Market | Login");
         primaryStage.show();
     }
 }
