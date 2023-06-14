@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.DriverManager;
 
 public class JdbcDao {
-
     private final static String connectionString = "jdbc:mysql://localhost:3306/posdb";
     private final static String user = "root";
     private final static String pwd = ""; // xampp: ""  mamp: "root"
