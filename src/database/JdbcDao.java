@@ -21,7 +21,7 @@ public class JdbcDao {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
 
-            System.out.println(preparedStatement);
+//            System.out.println(preparedStatement);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {

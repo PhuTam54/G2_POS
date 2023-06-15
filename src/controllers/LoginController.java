@@ -53,9 +53,6 @@ public class LoginController implements Initializable {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
-        System.out.println(username);
-        System.out.println(password);
-
         JdbcDao jdbcDao = new JdbcDao();
         boolean flag = jdbcDao.validate(username, password);
         if(!flag){
