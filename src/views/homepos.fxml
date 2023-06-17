@@ -230,7 +230,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="14.0" layoutY="410.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: WHITE; -fx-background-radius: 10;" text="Combo">
+            <Button layoutX="14.0" layoutY="410.0" mnemonicParsing="false" onAction="#btnCombo" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: WHITE; -fx-background-radius: 10;" text="Combo">
                <font>
                   <Font size="18.0" />
                </font>
