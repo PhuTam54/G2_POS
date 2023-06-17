@@ -1,34 +1,34 @@
 package daopattern;
 
-import model.Table;
+import model.Order;
 
 import java.util.ArrayList;
 
-public class TableRepository implements IRepository<Table> {
+public class OrderRepository implements IRepository<Order> {
     // singleton pattern
-    private static TableRepository instance;
-    private TableRepository() {
+    private static OrderRepository instance;
+    private OrderRepository() {
 
     }
-    public static TableRepository getInstance() {
+    public static OrderRepository getInstance() {
         if (instance == null) {
-            instance = new TableRepository();
+            instance = new OrderRepository();
         }
         return instance;
     }
 
     @Override
-    public ArrayList<Table> getAll() {
+    public ArrayList<Order> getAll() {
         return null;
     }
 
     @Override
-    public Boolean addToTable(Table table) {
+    public Boolean addToTable(Order order) {
         return null;
     }
 
     @Override
-    public Boolean removeFromTable(Table table) {
+    public Boolean removeFromTable(Order order) {
         return null;
     }
 
