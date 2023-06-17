@@ -55,77 +55,6 @@ public class HomeController implements Initializable {
     public Button btnBobatea, btnFruits, btnMilktea, btnYogurt, btnPastry;
     public TableColumn colDelete;
     private static Order selectedOrder;
-
-    public void addTable(String name, Double price, int qty) {
-        // Check if the product is already in the table
-        for (Order order : list) {
-            if (order.getName().equals(name)) {
-                // Update the quantity and total price of the existing product
-                int currentQty = order.getQty();
-                int newQty = currentQty + qty;
-                order.setQty(newQty);
-                order.setPrice(price * newQty);
-                tbv.refresh();
-                updateTotalProduct();
-                calculateTotalPrice();
-                return;
-            }
-        }
-
-        // Add the new product to the table
-        Order tb = new Order(qty, name, price);
-        list.add(tb);
-        tbv.setItems(list);
-        updateTotalProduct();
-
-        calculateTotalPrice(); // Cập nhật giá trị tổng sau khi thêm sản phẩm mới
-    }
-
-
-    public void addToTable(MouseEvent mouseEvent, String productName, Label quantityLabel, int quantityMultiplier) {
-        try {
-            String text = quantityLabel.getText().replace("$", "");
-            Double price = Double.parseDouble(text);
-            boolean productExists = false;
-
-            // Check if the product is already in the table
-            for (Order order : list) {
-                if (order.getName().equals(productName)) {
-                    // Update the quantity and total price of the existing product
-                    int currentQty = order.getQty();
-                    int newQty = currentQty + quantityMultiplier;
-                    order.setQty(newQty);
-                    order.setPrice(price * newQty);
-                    tbv.refresh();
-                    updateTotalProduct();
-                    calculateTotalPrice();
-                    productExists = true;
-                    break;
-                }
-            }
-
-            if (!productExists) {
-                addTable(productName, price, quantityMultiplier);
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-
-
-    public void updateTotalProduct() {
-        int totalProduct = 0;
-        double totalPrice = 0;
-        for (Order order : list) {
-            totalProduct += order.getQty();
-            totalPrice += order.getPrice();
-        }
-
-        total.setText(String.format("$%.2f", totalPrice));
-        calculateTotalPrice();
-    }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -194,7 +123,7 @@ public class HomeController implements Initializable {
             list.addAll(RepositoryFactory.createRepositoryInstance(RepositoryType.TABLE).getAll());
             updateTotalProduct();
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+//            System.out.println("Error: " + e.getMessage());
         }
 
         // img
@@ -302,6 +231,75 @@ public class HomeController implements Initializable {
             }
         }).start();
         //
+    }
+
+    public void addTable(String name, Double price, int qty) {
+        // Check if the product is already in the table
+        for (Order order : list) {
+            if (order.getName().equals(name)) {
+                // Update the quantity and total price of the existing product
+                int currentQty = order.getQty();
+                int newQty = currentQty + qty;
+                order.setQty(newQty);
+                order.setPrice(price * newQty);
+                tbv.refresh();
+                updateTotalProduct();
+                calculateTotalPrice();
+                return;
+            }
+        }
+
+        // Add the new product to the table
+        Order tb = new Order(qty, name, price);
+        list.add(tb);
+        tbv.setItems(list);
+        updateTotalProduct();
+
+        calculateTotalPrice(); // Cập nhật giá trị tổng sau khi thêm sản phẩm mới
+    }
+
+
+    public void addToTable(MouseEvent mouseEvent, String productName, Label quantityLabel, int quantityMultiplier) {
+        try {
+            String text = quantityLabel.getText().replace("$", "");
+            Double price = Double.parseDouble(text);
+            boolean productExists = false;
+
+            // Check if the product is already in the table
+            for (Order order : list) {
+                if (order.getName().equals(productName)) {
+                    // Update the quantity and total price of the existing product
+                    int currentQty = order.getQty();
+                    int newQty = currentQty + quantityMultiplier;
+                    order.setQty(newQty);
+                    order.setPrice(price * newQty);
+                    tbv.refresh();
+                    updateTotalProduct();
+                    calculateTotalPrice();
+                    productExists = true;
+                    break;
+                }
+            }
+
+            if (!productExists) {
+                addTable(productName, price, quantityMultiplier);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+
+    public void updateTotalProduct() {
+        int totalProduct = 0;
+        double totalPrice = 0;
+        for (Order order : list) {
+            totalProduct += order.getQty();
+            totalPrice += order.getPrice();
+        }
+
+        total.setText(String.format("$%.2f", totalPrice));
+        calculateTotalPrice();
     }
 
     public void addToTable1(MouseEvent mouseEvent) {
@@ -525,13 +523,13 @@ public class HomeController implements Initializable {
         nameImg7.setText("Pickled plums");
         price7.setText("$1");
 
-        Image image8 = new Image("img/");
+        Image image8 = new Image("img");
 
         imageView8.setImage(image8);
         nameImg8.setText("");
         price8.setText("");
 
-        Image image9 = new Image("img/");
+        Image image9 = new Image("img");
         imageView9.setImage(image9);
         nameImg9.setText("");
         price9.setText("");
@@ -594,7 +592,7 @@ public class HomeController implements Initializable {
         nameImg8.setText("Taro Milk Tea");
         price8.setText("$4");
 
-        Image image9 = new Image("img/a1.jfif");
+        Image image9 = new Image("img");
         imageView9.setImage(image9);
         nameImg9.setText("");
         price9.setText("");
@@ -602,11 +600,11 @@ public class HomeController implements Initializable {
     }
 
     public void btnYogurt(ActionEvent actionEvent) {
-        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-        btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
-        btnYogurt.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
-        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+//        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+//        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+//        btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
+//        btnYogurt.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+//        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
 
         Image image1 = new Image("img/l8.jpg");
 
@@ -711,16 +709,19 @@ public class HomeController implements Initializable {
         nameImg7.setText("Tiramisu Matcha");
         price7.setText("$1");
 
-        Image image8 = new Image("img/a1.jfif");
+        Image image8 = new Image("img");
 
         imageView8.setImage(image8);
         nameImg8.setText("");
         price8.setText("");
 
-        Image image9 = new Image("img/a1.jfif");
+        Image image9 = new Image("img");
         imageView9.setImage(image9);
         nameImg9.setText("");
         price9.setText("");
+    }
+
+    public void btnCombo(ActionEvent actionEvent) {
     }
 }
     // PT cmt
