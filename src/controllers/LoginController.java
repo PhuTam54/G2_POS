@@ -60,7 +60,7 @@ public class LoginController implements Initializable {
         }else{
 
             try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/home.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/homepos.fxml"));
                 Parent root = fxmlLoader.load();
 
                 Stage stage = new Stage();
