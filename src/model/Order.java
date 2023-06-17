@@ -2,22 +2,21 @@ package model;
 
 import javafx.scene.control.Button;
 
-public class Table {
+public class Order {
     int id, qty;
     String name;
     Double price;
     Button delete;
 
-    public Table(int qty, String name, Double price) {
-        this.id = id;
+    public Order(int qty, String name, Double price) {
         this.qty = qty;
         this.name = name;
         this.price = price;
     }
 
-    public Table() {
+    public Order() {
     }
-    public Table(int id, int qty, String name, Double price) {
+    public Order(int id, int qty, String name, Double price) {
         this.id = id;
         this.qty = qty;
         this.name = name;
