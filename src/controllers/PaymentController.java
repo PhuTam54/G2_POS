@@ -3,6 +3,7 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -10,13 +11,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Order;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.ResourceBundle;
 
-public class PaymentController {
-
+public class PaymentController implements Initializable {
     public TextField txtchange;
     public TextField txtpay;
     public Button txt10k;
@@ -25,16 +29,24 @@ public class PaymentController {
     public Button btnVis;
     public Button btnVnpay;
     public Button btnBack;
+    public TextField txtsubtotal;
     private String previousPayValue; // Biến tạm để lưu giá trị txtpay trước khi cập nhật
     private TableView<Order> tbv;
     private String lastPayValue = "";
+    // Date
+    public Text txtHours, txtMin, txtSecond, txtDay, txtMonth, txtYear;
+    public final LocalDateTime dateTime = LocalDateTime.now();
+    int day = dateTime.getDayOfMonth();
+    int month = dateTime.getMonthValue();
+    int year = dateTime.getYear();
+    int hours = dateTime.getHour();
+    int minute = dateTime.getMinute();
+    int second = dateTime.getSecond();
+    //
 
     public void setTotal(String total) {
         txttotal.setText(total);
-    }
-
-    public void btnMoney1(MouseEvent mouseEvent) {
-        txtpay.setText("1$");
+        txtsubtotal.setText(total);
     }
 
     public void btnDeletes(MouseEvent mouseEvent) {
@@ -43,32 +55,32 @@ public class PaymentController {
         }
     }
 
-    public void number1(MouseEvent mouseEvent) {
-        txtpay.setText("1");
+    public void btnMoney1(MouseEvent mouseEvent) {
+        txtpay.setText("$1");
     }
 
     public void btnMoney2(MouseEvent mouseEvent) {
-        txtpay.setText("2$");
+        txtpay.setText("$2");
     }
 
     public void btnMoney3(MouseEvent mouseEvent) {
-        txtpay.setText("5$");
+        txtpay.setText("$5");
     }
 
     public void btnMoney4(MouseEvent mouseEvent) {
-        txtpay.setText("10$");
+        txtpay.setText("$10");
     }
 
     public void btnMoney5(MouseEvent mouseEvent) {
-        txtpay.setText("20$");
+        txtpay.setText("$20");
     }
 
     public void btnMoney6(MouseEvent mouseEvent) {
-        txtpay.setText("50$");
+        txtpay.setText("$50");
     }
 
     public void btnMoney7(MouseEvent mouseEvent) {
-        txtpay.setText("100$");
+        txtpay.setText("$100");
     }
 
     public void pay(MouseEvent mouseEvent) {
@@ -106,17 +118,17 @@ public class PaymentController {
                         previousPayValue = txtpay.getText();
 
                         // Chuyển đến trang homepos.fxml
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/homepos.fxml"));
-                            Parent homeParent = loader.load();
-                            Scene homeScene = new Scene(homeParent);
-
-                            Stage window = (Stage) txtpay.getScene().getWindow();
-                            window.setScene(homeScene);
-                            window.show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+//                        try {
+//                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/homepos.fxml"));
+//                            Parent homeParent = loader.load();
+//                            Scene homeScene = new Scene(homeParent);
+//
+//                            Stage window = (Stage) txtpay.getScene().getWindow();
+//                            window.setScene(homeScene);
+//                            window.show();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
 
 
                         // Lưu giá trị của txtpay vào biến tạm khi hoàn tất giao dịch
@@ -189,5 +201,74 @@ public class PaymentController {
         }
     }
 
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Date
+        new Thread(()-> {
+            boolean flag = true;
+            while (flag) {
+                txtDay.setText(day + "/");
+                txtMonth.setText(month + "/");
+                txtYear.setText(String.valueOf(year));
+                txtHours.setText(hours + ":");
+                txtMin.setText(minute + ":");
+                txtSecond.setText(String.valueOf(second));
+                second ++;
+                if (second > 59) {
+                    second = 0;
+                    minute++;
+                }if(minute > 59) {
+                    minute = 0;
+                    hours ++;
+                }if (hours > 23) {
+                    hours = 0;
+                    day ++;
+                } switch (month) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 9:
+                    case 11:
+                        if (day > 31) {
+                            day = 1;
+                            month ++;
+                        }
+                    case 2:
+                        if (year % 4 == 0 && year % 100 != 0) {
+                            if (day > 29) {
+                                day = 1;
+                                month ++;
+                            }
+                        } else {
+                            if (day > 28) {
+                                day = 1;
+                                month ++;
+                            }
+                        }
+                    case 4:
+                    case 6:
+                    case 8:
+                    case 10:
+                        if (day > 30) {
+                            day = 1;
+                            month ++;
+                        }
+                    case 12:
+                        if (day > 30) {
+                            day = 1;
+                            month = 1;
+                            year ++;
+                        }
+                    default:
+                }
+                try {
+                    Thread.sleep(1000); // 1000 milliseconds
+                } catch (Exception e) {
+                    System.out.println("Thread Error: " + e.getMessage());
+                }
+            }
+        }).start();
+        //
+    }
 }
