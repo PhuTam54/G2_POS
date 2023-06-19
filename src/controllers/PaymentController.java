@@ -1,15 +1,14 @@
 package controllers;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -18,6 +17,7 @@ import model.Order;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class PaymentController implements Initializable {
@@ -30,9 +30,13 @@ public class PaymentController implements Initializable {
     public Button btnVnpay;
     public Button btnBack;
     public TextField txtsubtotal;
+    public TextArea billTextArea;
+    public TextField txttotalproduct;
     private String previousPayValue; // Biến tạm để lưu giá trị txtpay trước khi cập nhật
     private TableView<Order> tbv;
     private String lastPayValue = "";
+
+    private  String billText = "";
     // Date
     public Text txtHours, txtMin, txtSecond, txtDay, txtMonth, txtYear;
     public final LocalDateTime dateTime = LocalDateTime.now();
@@ -44,9 +48,15 @@ public class PaymentController implements Initializable {
     int second = dateTime.getSecond();
     //
 
-    public void setTotal(String total) {
+    public void setTotal(String total, String totalProduct) {
         txttotal.setText(total);
         txtsubtotal.setText(total);
+        txttotalproduct.setText(totalProduct);
+    }
+
+    public void setInvoice(String invoiceText) {
+        billText += invoiceText;
+        billTextArea.setText(invoiceText);
     }
 
     public void btnDeletes(MouseEvent mouseEvent) {
@@ -109,7 +119,7 @@ public class PaymentController implements Initializable {
                                 "The amount paid is less than the total amount.");
                     } else {
                         double changeAmount = payAmount - totalAmount;
-                        txtchange.setText(String.format("%.2f", changeAmount) + "$");
+                        txtchange.setText("$" + String.format("%.2f", changeAmount));
 
                         // Hiển thị thông báo thành công
                         showAlert(Alert.AlertType.INFORMATION, "Payment Success", "Payment completed successfully.",
@@ -117,22 +127,12 @@ public class PaymentController implements Initializable {
                         // Lưu giá trị của txtpay vào biến tạm khi hoàn tất giao dịch
                         previousPayValue = txtpay.getText();
 
-                        // Chuyển đến trang homepos.fxml
-//                        try {
-//                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/homepos.fxml"));
-//                            Parent homeParent = loader.load();
-//                            Scene homeScene = new Scene(homeParent);
-//
-//                            Stage window = (Stage) txtpay.getScene().getWindow();
-//                            window.setScene(homeScene);
-//                            window.show();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-
-
-                        // Lưu giá trị của txtpay vào biến tạm khi hoàn tất giao dịch
-                        previousPayValue = txtpay.getText();
+                        // Hiển thị hóa đơn trong TextArea
+                        billText += "                                     \t\t\t\t\tCash: " + txtpay.getText() + "\n";
+                        billText += "                                     \t\t\t\t  Balance: " + txtchange.getText() + "\n";
+                        billText +=  "======================================\n";
+                        billText +=  "                        Thanks For Your Business...!" + "\n";
+                        billTextArea.setText(billText);
                     }
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
@@ -140,12 +140,15 @@ public class PaymentController implements Initializable {
             }
         }
     }
-    private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
-        alert.showAndWait();
+    public void printBill(MouseEvent mouseEvent) {
+        // In hóa đơn
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+        if (printerJob != null) {
+            boolean success = printerJob.printPage(billTextArea);
+            if (success) {
+                printerJob.endJob();
+            }
+        }
     }
 
     public void Number(ActionEvent ae) {
@@ -153,18 +156,16 @@ public class PaymentController implements Initializable {
         txtpay.appendText(no);
     }
 
-
     public void complete(ActionEvent actionEvent) {
         if (txtpay != null && txttotal != null) {
             String payText = txtpay.getText().replaceAll("[^\\d.]", "");
             String totalText = txttotal.getText().replaceAll("[^\\d.,]", "").replace(',', '.');
-
             try {
                 double payAmount = Double.parseDouble(payText);
                 double totalAmount = Double.parseDouble(totalText);
                 double changeAmount = payAmount - totalAmount;
 
-                txtchange.setText(String.format("%.2f", changeAmount) + "$");
+                txtchange.setText("$" + String.format("%.2f", changeAmount));
 
                 // Lưu giá trị của txtpay vào biến lastPayValue khi hoàn tất giao dịch
                 lastPayValue = txtpay.getText();
@@ -178,13 +179,9 @@ public class PaymentController implements Initializable {
         }
     }
 
-
     public void Vis(ActionEvent actionEvent) {
-
         btnVis.setStyle("-fx-background-color: #4e2a84; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: white;");
         btnVnpay.setStyle("-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px;-fx-text-fill: black;");
-
-
     }
 
     public void Vnpay(ActionEvent actionEvent) {
@@ -192,13 +189,20 @@ public class PaymentController implements Initializable {
         btnVis.setStyle("-fx-background-color:white ; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;");
     }
 
-
     public void btnDelete(MouseEvent mouseEvent) {
         String currentText = txtpay.getText();
         if (!currentText.isEmpty()) {
             txtpay.setText(currentText.substring(0, currentText.length() - 1));
             lastPayValue = txtpay.getText(); // Cập nhật giá trị của lastPayValue
         }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
     }
 
     @Override
