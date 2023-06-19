@@ -36,20 +36,6 @@
                   </font>
               </TextField>
               <Button layoutX="164.0" layoutY="451.0" mnemonicParsing="false" onMouseClicked="#btnMoney2" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-font-size: 18;" text="\$2" />
-            <Pane layoutX="55.0" layoutY="137.0" prefHeight="92.0" prefWidth="296.0" style="-fx-border-color: #D3D3D3;">
-               <children>
-                    <TextField fx:id="txtpay" alignment="CENTER" layoutX="110.0" layoutY="27.0" prefHeight="39.0" prefWidth="158.0" promptText="0.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 50;">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </TextField>
-                    <Text layoutX="14.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="    Cash:" wrappingWidth="70.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Text>
-               </children>
-            </Pane>
               <Button fx:id="btnVnpay" layoutX="153.0" layoutY="346.0" mnemonicParsing="false" onAction="#Vnpay" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;" text="VNpay">
                <font>
                   <Font size="18.0" />
@@ -82,71 +68,85 @@
             </TextField>
             <Line endX="100.0" layoutX="213.0" layoutY="423.0" startX="-100.0" />
             <Line endX="100.0" layoutX="203.0" layoutY="318.0" startX="-100.0" />
+            <Pane layoutX="51.0" layoutY="136.0" prefHeight="92.0" prefWidth="296.0" style="-fx-border-color: #D3D3D3;">
+               <children>
+                    <TextField fx:id="txtpay" alignment="CENTER" layoutX="110.0" layoutY="27.0" prefHeight="39.0" prefWidth="158.0" promptText="0.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 50;">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </TextField>
+                    <Text layoutX="14.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="    Cash:" wrappingWidth="70.0">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </Text>
+               </children>
+            </Pane>
          </children>
       </Pane>
-      <Pane layoutX="471.0" layoutY="414.0" prefHeight="367.0" prefWidth="440.0">
+      <Pane layoutX="471.0" layoutY="121.0" prefHeight="660.0" prefWidth="296.0" style="-fx-background-color: white;">
          <children>
-              <Button layoutX="198.0" layoutY="2.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="3">
+              <Button layoutX="198.0" layoutY="112.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="3">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutY="91.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="4">
+              <Button layoutY="201.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="4">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutX="297.0" layoutY="2.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="124.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Print">
+              <Button layoutX="198.0" layoutY="477.0" mnemonicParsing="false" onMouseClicked="#printBill" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: #DDD9; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Print">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-              <Button layoutX="198.0" layoutY="275.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="\$">
+              <Button layoutX="198.0" layoutY="385.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="\$">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutY="275.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="0">
+              <Button layoutY="385.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="0">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutX="99.0" layoutY="183.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="8">
+              <Button layoutX="99.0" layoutY="293.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="8">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutX="99.0" layoutY="275.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="00">
+              <Button layoutX="99.0" layoutY="385.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="00">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutX="198.0" layoutY="183.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="9">
+              <Button layoutX="198.0" layoutY="293.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="9">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutY="2.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="1">
+              <Button layoutY="112.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="1">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutX="99.0" layoutY="2.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="2">
+              <Button layoutX="99.0" layoutY="112.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="2">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutX="99.0" layoutY="91.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="5">
+              <Button layoutX="99.0" layoutY="201.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="5">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutY="183.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="7">
+              <Button layoutY="293.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="7">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutX="297.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#pay" prefHeight="92.0" prefWidth="124.0" style="-fx-background-color: #ff0e83; -fx-border-color: none; -fx-border-width: 2px;" text="Pay" textFill="WHITE">
+              <Button layoutY="569.0" mnemonicParsing="false" onMouseClicked="#pay" prefHeight="92.0" prefWidth="296.0" style="-fx-background-color: #ff0e83; -fx-border-color: white; -fx-border-width: 2px;" text="Payment" textFill="WHITE">
                   <opaqueInsets>
                       <Insets />
                   </opaqueInsets>
@@ -154,26 +154,35 @@
                   <Font size="20.0" />
                </font>
               </Button>
-              <Button layoutX="297.0" layoutY="91.0" mnemonicParsing="false" onMouseClicked="#btnDeletes" prefHeight="92.0" prefWidth="124.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Delete">
+              <Button layoutY="477.0" mnemonicParsing="false" onMouseClicked="#btnDeletes" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: #DDD9; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Delete">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-              <Button layoutX="198.0" layoutY="91.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="6">
+              <Button layoutX="198.0" layoutY="201.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="6">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutX="297.0" layoutY="183.0" mnemonicParsing="false" onAction="#complete" onMouseClicked="#btnDelete" prefHeight="92.0" prefWidth="124.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Complete">
+              <Button layoutX="99.0" layoutY="477.0" mnemonicParsing="false" onAction="#complete" onMouseClicked="#btnDelete" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: #DDD9; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Cacl">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
+            <Text layoutX="16.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total product:" wrappingWidth="116.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txttotalproduct" alignment="CENTER" layoutX="132.0" layoutY="39.0" prefHeight="39.0" prefWidth="142.0" promptText="0.0" style="-fx-background-color: white;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
          </children>
       </Pane>
 
-<!--        <Pane prefHeight="37.0" prefWidth="681.0" style="-fx-background-color: #4e2a84;" />-->
-        <Pane layoutY="2.0" prefHeight="97.0" prefWidth="1315.0" style="-fx-background-color: #4e2a84;">
+        <Pane prefHeight="97.0" prefWidth="1315.0" style="-fx-background-color: #4e2a84;">
             <children>
                 <Button layoutX="14.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: #4e2a84;" text="X" textFill="WHITE">
                     <font>
@@ -230,10 +239,12 @@
                 </HBox>
             </children>
         </Pane>
-      <Pane layoutX="471.0" layoutY="121.0" prefHeight="274.0" prefWidth="419.0" style="-fx-background-color: white;" />
-      <Pane layoutX="911.0" layoutY="121.0" prefHeight="660.0" prefWidth="384.0">
+      <Pane layoutX="792.0" layoutY="121.0" prefHeight="660.0" prefWidth="503.0">
          <children>
-            <TextArea prefHeight="660.0" prefWidth="384.0" />
+            <TextArea fx:id="billTextArea" prefHeight="660.0" prefWidth="503.0" text="____________________________Invoice____________________________">
+               <font>
+                  <Font size="18.0" />
+               </font></TextArea>
          </children>
       </Pane>
     </children>
