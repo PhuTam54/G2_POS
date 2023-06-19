@@ -21,8 +21,6 @@ public class JdbcDao {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
 
-//            System.out.println(preparedStatement);
-
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -33,20 +31,6 @@ public class JdbcDao {
             printSQLException(e);
         }
         return false;
-    }
-
-    public Connection getConnection() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(connectionString,user,pwd);
-            return connection;
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-            return null;
-        } catch (SQLException e) {
-            printSQLException(e);
-            return null;
-        }
     }
 
     public static void printSQLException(SQLException ex) {
