@@ -23,6 +23,7 @@ import model.Order;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -34,6 +35,8 @@ public class HomeController implements Initializable {
     public TableColumn<Order, Double> colPrice;
     public TableColumn<Order, Button> colAction;
     public Label price1, price2, price3, price4, price5, price6, price7, price8, price9, total, totalProductQty;
+    public TextField txtCusName;
+    public TextField txtNote;
     ObservableList<Order> list = FXCollections.observableArrayList();
     public static Order resetOrder;
 
@@ -73,22 +76,11 @@ public class HomeController implements Initializable {
                 } else {
                     setText(String.format("$%.2f", item));
                 }
+                updateTotalProduct();
                 calculateTotalPrice();
             }
         });
 
-        colPrice.setCellFactory(column -> new TableCell<Order, Double>() {
-            @Override
-            protected void updateItem(Double item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item == null || empty) {
-                    setText(null);
-                } else {
-                    setText(String.format("$%.2f", item));
-                }
-                calculateTotalPrice();
-            }
-        });
         // Thêm chức năng xóa vào cột
 
         colDelete.setCellFactory(column -> {
@@ -254,7 +246,6 @@ public class HomeController implements Initializable {
         calculateTotalPrice(); // Cập nhật giá trị tổng sau khi thêm sản phẩm mới
     }
 
-
     public void addToTable(MouseEvent mouseEvent, String productName, Label quantityLabel, int quantityMultiplier) {
         try {
             String text = quantityLabel.getText().replace("$", "");
@@ -369,37 +360,51 @@ public class HomeController implements Initializable {
     }
     public void payment(ActionEvent actionEvent) {
         String totalPrice = total.getText();
+        String totalProduct = totalProductQty.getText();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/paymentpos.fxml"));
             Parent root = loader.load();
             PaymentController pc = loader.getController(); // Lấy tham chiếu đến PayController đã tạo từ FXML
-            pc.setTotal(totalPrice);
+            pc.setTotal(totalPrice, totalProduct);
+            String billText = "\n                \t\t\tPOS Market \n";
+            billText += "                \t\tSố 18 Tôn Thất Thuyết \n";
+            billText += "                   \t\t+84 123456789 \n\n";
+            // Thêm thông tin ngày giờ
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            String formattedDateTime = now.format(formatter);
+            billText += "                                           \tDate: " + formattedDateTime + "\n";
+            // Thêm thông tin tên và ghi chú
+            if (!txtCusName.getText().equals("")){
+                billText += "Customer's name: " + txtCusName.getText() + "\n";
+            }
+            if (!txtNote.getText().equals("")) {
+                billText += "Notes: " + txtNote.getText() + "\n";
+            }
+            billText += "------------------------------------------------------------------\n";
+            billText += "Product Name               \t\t\tQuantity                 \tPrice \n";
+            billText += "------------------------------------------------------------------\n";
+            // Nhập dữ liệu từ db
+            ObservableList<Order> data = tbv.getItems();
+            for (int i = 0; i < data.size(); i++) {
+                billText += data.get(i).getName() + "\t\t\t"+ data.get(i).getQty()+ "\t\t\t"+ Math.ceil(data.get(i).getPrice()*100)/100 + " \n";
+            }
+
+            billText += "------------------------------------------------------------------\n";
+            billText += "                                     \t\t\t\t\tTotal: " + total.getText() + "\n";
+
+            pc.setInvoice(billText);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root, 1315, 805));
+            stage.setTitle("POS Market | Payment");
             stage.show();
 
             // Đóng cửa sổ hiện tại (nếu cần)
-            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            currentStage.close();
+//            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+//            currentStage.close();
         } catch (Exception e) {
             System.out.println("Payment Error: " + e.getMessage());
-        }
-    }
-
-    public void exit(ActionEvent actionEvent) {
-        // Đóng cửa sổ hiện tại
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.close();
-
-        // Mở trang loginpos.fxml
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/views/loginpos.fxml"));
-            Stage loginStage = new Stage();
-            loginStage.setScene(new Scene(root, 600, 400));
-            loginStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -415,6 +420,23 @@ public class HomeController implements Initializable {
             tbv.refresh();
             updateTotalProduct();
             calculateTotalPrice();
+        }
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        // Đóng cửa sổ hiện tại
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+//        System.exit(0);
+
+        // Mở trang loginpos.fxml
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/views/loginpos.fxml"));
+            Stage loginStage = new Stage();
+            loginStage.setScene(new Scene(root, 600, 400));
+            loginStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
