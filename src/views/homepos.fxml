@@ -263,12 +263,12 @@
       </Pane>
       <Pane layoutX="897.0" layoutY="115.0" prefHeight="85.0" prefWidth="412.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <TextField layoutY="-1.0" prefHeight="35.0" prefWidth="412.0" promptText="Enter the customer's name" style="-fx-background-radius: 100;">
+            <TextField fx:id="txtCusName" layoutY="-1.0" prefHeight="35.0" prefWidth="412.0" promptText="Enter the customer's name" style="-fx-background-radius: 100;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField layoutY="43.0" prefHeight="35.0" prefWidth="412.0" promptText="Enter your notes here..." style="-fx-background-radius: 100;">
+            <TextField fx:id="txtNote" layoutY="43.0" prefHeight="35.0" prefWidth="412.0" promptText="Enter your notes here..." style="-fx-background-radius: 100;">
                <font>
                   <Font size="18.0" />
                </font>
