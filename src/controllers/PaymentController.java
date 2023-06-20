@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -149,6 +150,20 @@ public class PaymentController implements Initializable {
                 printerJob.endJob();
             }
         }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/homepos.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 1315, 805));
+            stage.setTitle("POS Market | Dashboard");
+            stage.show();
+            //Đóng cửa sổ hiện tại (nếu cần)
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
+            System.out.println("From print bill to home error: " + e.getMessage());
+        }
     }
 
     public void Number(ActionEvent ae) {
@@ -274,5 +289,11 @@ public class PaymentController implements Initializable {
             }
         }).start();
         //
+    }
+
+    public void backToHome(MouseEvent mouseEvent) {
+//      Đóng cửa sổ hiện tại (nếu cần)
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 }
