@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutY="49.0" prefHeight="354.0" prefWidth="1067.0">
+        <columns>
+          <TableColumn prefWidth="77.0" text="Order ID" />
+          <TableColumn prefWidth="102.0" text="Customer ID" />
+            <TableColumn prefWidth="125.0" text="Customer name" />
+            <TableColumn prefWidth="143.0" text="Order Date" />
+            <TableColumn prefWidth="89.0" text="Product ID" />
+            <TableColumn prefWidth="108.0" text="Product name" />
+            <TableColumn prefWidth="87.0" text="Sold price" />
+            <TableColumn prefWidth="108.0" text="Sold quantity" />
+            <TableColumn prefWidth="92.0" text="Total" />
+            <TableColumn prefWidth="118.0" text="Order status" />
+        </columns>
+      </TableView>
+      <Label layoutX="258.0" layoutY="7.0" prefHeight="35.0" prefWidth="85.0" text="History">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
