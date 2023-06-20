@@ -54,7 +54,7 @@ public class HomeController implements Initializable {
     // team
     public ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
     public Label nameImg1, nameImg2, nameImg3, nameImg4, nameImg5, nameImg6, nameImg7, nameImg8, nameImg9;
-    public Button btnBobatea, btnFruits, btnMilktea, btnYogurt, btnPastry;
+    public Button btnBobatea, btnFruits, btnMilktea, btnYogurt, btnPastry, btnCombo;
     public TableColumn colDelete;
     private static Order selectedOrder;
     @Override
@@ -382,7 +382,7 @@ public class HomeController implements Initializable {
                 billText += "Notes: " + txtNote.getText() + "\n";
             }
             billText += "------------------------------------------------------------------\n";
-            billText += "Product Name               \t\t\tQuantity                 \tPrice \n";
+            billText += "Product Name             \t\t\tQuantity                 \tPrice \n";
             billText += "------------------------------------------------------------------\n";
             // Nhập dữ liệu từ db
             ObservableList<Order> data = tbv.getItems();
@@ -400,7 +400,7 @@ public class HomeController implements Initializable {
             stage.setTitle("POS Market | Payment");
             stage.show();
 
-            // Đóng cửa sổ hiện tại (nếu cần)
+//             Đóng cửa sổ hiện tại (nếu cần)
 //            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 //            currentStage.close();
         } catch (Exception e) {
@@ -425,19 +425,19 @@ public class HomeController implements Initializable {
 
     public void exit(ActionEvent actionEvent) {
         // Đóng cửa sổ hiện tại
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.close();
-//        System.exit(0);
+//        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+//        stage.close();
+        System.exit(0);
 
         // Mở trang loginpos.fxml
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/views/loginpos.fxml"));
-            Stage loginStage = new Stage();
-            loginStage.setScene(new Scene(root, 600, 400));
-            loginStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Parent root = FXMLLoader.load(getClass().getResource("/views/loginpos.fxml"));
+//            Stage loginStage = new Stage();
+//            loginStage.setScene(new Scene(root, 600, 400));
+//            loginStage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void btnBobatea(ActionEvent actionEvent) {
@@ -478,11 +478,12 @@ public class HomeController implements Initializable {
         nameImg9.setText("Toad juice");
         price9.setText("$3");
 
-//        btnBobatea.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
-//        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnMilktea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnBobatea.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnMilktea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnCombo.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
     }
 
     public void btnFruits(ActionEvent actionEvent) {
@@ -531,11 +532,12 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-//        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnFruits.setStyle("-fx-background-color:  #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
-//        btnMilktea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnFruits.setStyle("-fx-background-color:  #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+        btnMilktea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnCombo.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
     }
 
     public void btnMilktea(ActionEvent actionEvent) {
@@ -584,11 +586,12 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-//        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnMilktea.setStyle("-fx-background-color:#4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
-//        btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnMilktea.setStyle("-fx-background-color:#4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+        btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnCombo.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
     }
 
     public void btnYogurt(ActionEvent actionEvent) {
@@ -637,11 +640,12 @@ public class HomeController implements Initializable {
         nameImg9.setText("Strawberry Yogurt");
         price9.setText("$4");
 
-//        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnYogurt.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
-//        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnYogurt.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnCombo.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
     }
 
     public void btnPastry(ActionEvent actionEvent) {
@@ -690,11 +694,12 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-//        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnPastry.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnPastry.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+        btnCombo.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
     }
 
     public void btnCombo(ActionEvent actionEvent) {
@@ -743,238 +748,11 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-//        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
-//        btnPastry.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnCombo.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
     }
 }
-    // PT cmt
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
-//        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-//        colAction.setCellValueFactory(new PropertyValueFactory<>("delete"));
-//        try {
-////            ObservableList<Table> list = FXCollections.observableArrayList();
-//            // query
-//            RepositoryFactory.createRepositoryInstance(RepositoryType.TABLE).getAll();
-//        } catch (Exception e) {
-//            System.out.println("Initialize Error: " + e.getMessage());
-//        }
-//
-////        try {
-////            countProduct = 0;
-////            int tableLength = list.size();
-////            for (int i = 0; i < tableLength; i++) {
-////            countProduct += colQty.getCellData(countProduct);
-////            }
-////            for (Table t: list) {
-////                countProduct += t.getQty();
-////            }
-////        }catch (Exception e) {
-////            System.out.println(e.getMessage());
-////        }
-//
-//
-////        total.setText($"" + price);
-////        totalProductQty.setText(String.valueOf(countProduct));
-//
-//        // Date
-//        new Thread(()-> {
-//            boolean flag = true;
-//            while (flag) {
-//                txtDay.setText(day + "/");
-//                txtMonth.setText(month + "/");
-//                txtYear.setText(String.valueOf(year));
-//                txtHours.setText(hours + ":");
-//                txtMin.setText(minute + ":");
-//                txtSecond.setText(String.valueOf(second));
-//                second ++;
-//                if (second > 59) {
-//                    second = 0;
-//                    minute++;
-//                }if(minute > 59) {
-//                    minute = 0;
-//                    hours ++;
-//                }if (hours > 23) {
-//                    hours = 0;
-//                    day ++;
-//                } switch (month) {
-//                    case 1:
-//                    case 3:
-//                    case 5:
-//                    case 7:
-//                    case 9:
-//                    case 11:
-//                        if (day > 31) {
-//                            day = 1;
-//                            month ++;
-//                        }
-//                    case 2:
-//                        if (year % 4 == 0 && year % 100 != 0) {
-//                            if (day > 29) {
-//                                day = 1;
-//                                month ++;
-//                            }
-//                        } else {
-//                            if (day > 28) {
-//                                day = 1;
-//                                month ++;
-//                            }
-//                        }
-//                    case 4:
-//                    case 6:
-//                    case 8:
-//                    case 10:
-//                        if (day > 30) {
-//                            day = 1;
-//                            month ++;
-//                        }
-//                    case 12:
-//                        if (day > 30) {
-//                            day = 1;
-//                            month = 1;
-//                            year ++;
-//                        }
-//                    default:
-//                }
-//                try {
-//                    Thread.sleep(1000); // 1000 milliseconds
-//                } catch (Exception e) {
-//                    System.out.println("Thread Error: " + e.getMessage());
-//                }
-//            }
-//        }).start();
-//        //
-//    }
-//
-    // add to table
-//    public void addToTable(Table table) {
-//        list.add(table);
-//        tbv.setItems(list);
-//        tbv.refresh();
-//    }
-
-//    public void addToTable1(MouseEvent mouseEvent) {
-//        // test add
-//        int id = 1;
-//        int count = Integer.parseInt(price1.getText());
-//        count ++;
-//        String name = "Tocotoco Bobatea";
-//        Double price = Math.ceil((count * 3.99) * 100) / 100;
-//        Table tb = new Table(id, count, name, price);
-//        // product already add
-//        try {
-//            for (Table t: list) {
-//                if (t.getName().equals(tb.getName())) {
-//                    list.remove(t);
-//                }
-//            }
-//        } catch (Exception e) {
-////            System.out.println("Product already add Error: " + e.getMessage());
-//        }
-//        addToTable(tb);
-//
-//        price1.setText(String.valueOf(count));
-//    }
-
-//    public void addToTable2(ActionEvent actionEvent) {
-//        // test add
-//        int id = 2;
-//        int count = Integer.parseInt(price2.getText());
-//        count ++;
-//        String name = "Trà xoài bưởi hồng";
-//        Double price = Math.ceil((count * 2.99) * 100) / 100;
-//        Table tb = new Table(id, count, name, price);
-//        // product already add
-//        try {
-//            for (Table t: list) {
-//                if (t.getName().equals(tb.getName())) {
-//                    list.remove(t);
-//                }
-//            }
-//        } catch (Exception e) {
-////            System.out.println("Product already add Error: " + e.getMessage());
-//        }
-//        addToTable(tb);
-//
-//        price2.setText(String.valueOf(count));
-//    }
-
-//    public void reset(ActionEvent actionEvent) {
-//        try {
-//            price1.setText("0");
-//            price2.setText("0");
-//            total.setText($"0.0");
-//            totalProductQty.setText("0");
-//            resetTable = null;
-//            resetTable = tbv.getSelectionModel().getSelectedItem();
-//            if (resetTable != null) {
-////                for (int i = 0; i <= list.size(); i++) {
-////                    list.remove(list.get(i));
-////                }
-//                for (Table tb: list) {
-//                    list.remove(tb);
-//                }
-//                throw new Exception("Canceled");
-//            }
-////            if (resetTable != null) {
-////                list.forEach();
-////            }
-//            tbv.setItems(list);
-//            tbv.refresh();
-//        } catch (Exception e) {
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//            alert.setContentText(e.getMessage());
-//            alert.show();
-//        }
-//    }
-
-//    public void exit(MouseEvent mouseEvent) {
-//        System.exit(0);
-//    }
-
-//    public void printBill(MouseEvent mouseEvent) {
-//        String billText = "                              POS Market \n";
-//        billText += "                    \tSố 18 Tôn Thất Thuyết \n";
-//        billText += "                       \t+84 123456789 \n";
-//        billText += "----------------------------------------------------------------\n";
-//        billText += " Name                      \tQty                 \tPrice \n";
-//        billText += "----------------------------------------------------------------\n";
-//
-//        ObservableList<Table> data = tbv.getItems();
-//        for (int i = 0; i < data.size(); i++) {
-//            billText += data.get(i).getName() + "\t\t"+ data.get(i).getQty()+ "\t\t\t"+ data.get(i).getPrice() + " \n";
-//        }
-//
-//        billText += "----------------------------------------------------------------\n";
-//        billText += "Total :\t" + total.getText() + "\n";
-//        billText += "Cash :\t" + total.getText() + "\n";
-//        billText += "Ballance :\t" + totalProductQty.getText() + "\n";
-//        billText += "======================================\n";
-//        billText += "                    Thanks For Your Business...!" + "\n";
-//
-//
-//        TextArea bill = new TextArea(billText); // hiển thị hóa đơn trong TextArea
-//        bill.setEditable(false);
-//        Stage stage = new Stage();
-//        Text billtext = new Text(); //khởi tạo giá trị của billtext
-//        billtext.setText(billText);
-//        Scene scene = new Scene(bill ,400,600); //sử dụng biến bill thay cho billtext
-//        stage.setScene(scene);
-//        stage.show();
-//
-//        // In hóa đơn
-//        PrinterJob printerJob = PrinterJob.createPrinterJob();
-//        if (printerJob != null) {
-//            boolean success = printerJob.printPage(billtext);
-//            if (success) {
-//                printerJob.endJob();
-//            }
-//        }
-//    }
-//}
