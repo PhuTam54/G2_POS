@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         mainStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("views/loginpos.fxml"));
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 930, 525));
         primaryStage.setResizable(false);
         primaryStage.setIconified(false);
         primaryStage.setTitle("POS Market | Login");
