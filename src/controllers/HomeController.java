@@ -54,7 +54,7 @@ public class HomeController implements Initializable {
     // team
     public ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
     public Label nameImg1, nameImg2, nameImg3, nameImg4, nameImg5, nameImg6, nameImg7, nameImg8, nameImg9;
-    public Button btnBobatea, btnFruits, btnMilktea, btnYogurt, btnPastry, btnCombo;
+    public Button btnTocotoco, btnFruits, btnMilktea, btnYogurt, btnPastry, btnCombo;
     public TableColumn colDelete;
     private static Order selectedOrder;
     @Override
@@ -118,40 +118,40 @@ public class HomeController implements Initializable {
         // img
         Image image1 = new Image("img/Tra-sua-pho-mai-tuoi.png");
         imageView1.setImage(image1);
-        nameImg1.setText("Strawberry Whip Juice");
+        nameImg1.setText("Trà sữa phô mai tươi");
         price1.setText("$3.99");
         Image image2 = new Image("img/Tra-Sua-Tran-Chau-Hoang-Gia-1-copy.jpg");
         imageView2.setImage(image2);
-        nameImg2.setText("Grapefruit Juice");
+        nameImg2.setText("Trà Sữa Trân Châu Hoàng Gia");
         price2.setText("$4");
         Image image3 = new Image("img/Tra-Sua-Panda-1-copy.jpg");
         imageView3.setImage(image3);
-        nameImg3.setText("Whip Juice");
-        price3.setText("$2");
+        nameImg3.setText("Trà Sữa Panda");
+        price3.setText("$2.99");
         Image image4 = new Image("img/Tra-Sua-Ba-Anh-Em-1-copy.jpg");
         imageView4.setImage(image4);
-        nameImg4.setText("Pineapple Orange Juice");
-        price4.setText("$4");
+        nameImg4.setText("Trà Sữa Ba Anh Em");
+        price4.setText("$4.25");
         Image image5 = new Image("img/O-Long-Man-Kem-Pho-Mai.jpg");
         imageView5.setImage(image5);
-        nameImg5.setText("Watermelon juice");
+        nameImg5.setText("Ô Long Mặn Kem Phô Mai");
         price5.setText("$5");
         Image image6 = new Image("img/Royal-Pearl-Milk-Coffee.png");
         imageView6.setImage(image6);
         nameImg6.setText("Royal Pearl Milk Coffee");
-        price6.setText("$2");
+        price6.setText("$2.99");
         Image image7 = new Image("img/trà-xoài-bưởi-hồng.png");
         imageView7.setImage(image7);
-        nameImg7.setText("Toad Guava Juice");
+        nameImg7.setText("Trà xoài bưởi hồng");
         price7.setText("$4");
         Image image8 = new Image("img/trà-xoài-bưởi-hồng-kem-phô-mai.png");
         imageView8.setImage(image8);
-        nameImg8.setText("Pineapple Juice");
-        price8.setText("$6");
+        nameImg8.setText("Trà xoài bưởi hồng kem phô mai");
+        price8.setText("$4.25");
         Image image9 = new Image("img/O-Long-Man-Chanh-Leo.jpg");
         imageView9.setImage(image9);
-        nameImg9.setText("Toad juice");
-        price9.setText("$3");
+        nameImg9.setText("Ô Long Mặn Chanh Leo");
+        price9.setText("$3.45");
 
         // Date
         new Thread(()-> {
@@ -440,45 +440,45 @@ public class HomeController implements Initializable {
 //        }
     }
 
-    public void btnBobatea(ActionEvent actionEvent) {
+    public void btnTocotoco(ActionEvent actionEvent) {
         Image image1 = new Image("img/Tra-sua-pho-mai-tuoi.png");
         imageView1.setImage(image1);
-        nameImg1.setText("Strawberry Whip Juice");
+        nameImg1.setText("Trà sữa phô mai tươi");
         price1.setText("$3.99");
         Image image2 = new Image("img/Tra-Sua-Tran-Chau-Hoang-Gia-1-copy.jpg");
         imageView2.setImage(image2);
-        nameImg2.setText("Grapefruit Juice");
+        nameImg2.setText("Trà Sữa Trân Châu Hoàng Gia");
         price2.setText("$4");
         Image image3 = new Image("img/Tra-Sua-Panda-1-copy.jpg");
         imageView3.setImage(image3);
-        nameImg3.setText("Whip Juice");
-        price3.setText("$2");
+        nameImg3.setText("Trà Sữa Panda");
+        price3.setText("$2.99");
         Image image4 = new Image("img/Tra-Sua-Ba-Anh-Em-1-copy.jpg");
         imageView4.setImage(image4);
-        nameImg4.setText("Pineapple Orange Juice");
-        price4.setText("$4");
+        nameImg4.setText("Trà Sữa Ba Anh Em");
+        price4.setText("$4.25");
         Image image5 = new Image("img/O-Long-Man-Kem-Pho-Mai.jpg");
         imageView5.setImage(image5);
-        nameImg5.setText("Watermelon juice");
+        nameImg5.setText("Ô Long Man Kem Phô Mai");
         price5.setText("$5");
         Image image6 = new Image("img/Royal-Pearl-Milk-Coffee.png");
         imageView6.setImage(image6);
         nameImg6.setText("Royal Pearl Milk Coffee");
-        price6.setText("$2");
+        price6.setText("$2.99");
         Image image7 = new Image("img/trà-xoài-bưởi-hồng.png");
         imageView7.setImage(image7);
-        nameImg7.setText("Toad Guava Juice");
+        nameImg7.setText("Trà xoài bưởi hồng");
         price7.setText("$4");
         Image image8 = new Image("img/trà-xoài-bưởi-hồng-kem-phô-mai.png");
         imageView8.setImage(image8);
-        nameImg8.setText("Pineapple Juice");
-        price8.setText("$6");
+        nameImg8.setText("Trà xoài bưởi hồng kem phô mai");
+        price8.setText("$4.25");
         Image image9 = new Image("img/O-Long-Man-Chanh-Leo.jpg");
         imageView9.setImage(image9);
-        nameImg9.setText("Toad juice");
-        price9.setText("$3");
+        nameImg9.setText("Ô Long Mặn Chanh Leo");
+        price9.setText("$3.45");
 
-        btnBobatea.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+        btnTocotoco.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
@@ -532,7 +532,7 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnTocotoco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color:  #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
@@ -586,7 +586,7 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnTocotoco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color:#4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
@@ -640,7 +640,7 @@ public class HomeController implements Initializable {
         nameImg9.setText("Strawberry Yogurt");
         price9.setText("$4");
 
-        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnTocotoco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
@@ -694,7 +694,7 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnTocotoco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
@@ -748,7 +748,7 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-        btnBobatea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnTocotoco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");

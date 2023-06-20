@@ -205,7 +205,7 @@
       </Pane>
       <Pane layoutY="115.0" prefHeight="463.0" prefWidth="247.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <Button fx:id="btnBobatea" layoutX="14.0" layoutY="63.0" mnemonicParsing="false" onAction="#btnBobatea" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: #4e2a84; -fx-background-radius: 10;" text="Bobatea" textFill="WHITE">
+            <Button fx:id="btnTocotoco" layoutX="14.0" layoutY="63.0" mnemonicParsing="false" onAction="#btnTocotoco" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: #4e2a84; -fx-background-radius: 10;" text="Tocotoco" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
