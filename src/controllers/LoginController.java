@@ -1,96 +1,105 @@
 package controllers;
 
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import database.JdbcDao;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import database.Connector;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+    public TextField txtUser;
+    public PasswordField txtPass;
+    public Label lblError;
+    public Button btnSignin;
 
-    @FXML
-    private TextField txtUsername;
-    @FXML
-    private PasswordField txtPassword;
+    public void handleButtonAction(MouseEvent event) {
+        if (event.getSource() == btnSignin) {
+            //login here
+            if (logIn().equals("Success")) {
+                try {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/homepos.fxml"));
+                    Parent root = fxmlLoader.load();
 
-    @FXML
-    private void actionLogin(ActionEvent event) {
-        Window owner = txtUsername.getScene().getWindow();
+                    Stage stage = new Stage();
+                    stage.setTitle("POS");
+                    stage.setScene(new Scene(root, 1315, 810));
 
-        if(txtUsername.getText().isEmpty()){
-            showAlert(Alert.AlertType.ERROR, owner, "Please enter a valid username","Form error!");
-            return;
-        }
-        if(txtPassword.getText().isEmpty()){
-            showAlert(Alert.AlertType.ERROR, owner, "Please enter a valid password","Form error!");
-            return;
-        }
-
-        String username = txtUsername.getText();
-        String password = txtPassword.getText();
-
-        JdbcDao jdbcDao = new JdbcDao();
-        boolean flag = jdbcDao.validate(username, password);
-        if(!flag){
-            infoBox("Please enter correct username and password", null,"Failed");
-        }else{
-
-            try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/homepos.fxml"));
-                Parent root = fxmlLoader.load();
-
-                Stage stage = new Stage();
-                stage.setTitle("POS Market | Dashboard");
-                stage.setScene(new Scene(root, 1315, 805));
-                HomeController controller = (HomeController) fxmlLoader.getController();
-
-                stage.show();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
-            }catch(IOException ex){
-                ex.printStackTrace();
+                    stage.show();
+                    ((Node)(event.getSource())).getScene().getWindow().hide();
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
             }
         }
     }
 
-    public static void infoBox(String infoMessage, String headerText, String title){
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setContentText(infoMessage);
-        alert.setTitle(title);
-        alert.setHeaderText(headerText);
-        alert.showAndWait();
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
+            Connection conn = new Connector().getConn();
+            if (conn == null) {
+                lblError.setTextFill(Color.TOMATO);
+                lblError.setText("Server Error : Check");
+            } else {
+                lblError.setTextFill(Color.GREEN);
+                lblError.setText("Server is up : Good to go");
+            }
+
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
     }
-    public static void showAlert(Alert.AlertType alertType,Window owner, String message, String title){
-        Alert alert = new Alert(alertType);
-        alert.setContentText(message);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.initOwner(owner);
-        alert.show();
+
+    private String logIn() {
+        String status = "Success";
+        String user = txtUser.getText();
+        String password = txtPass.getText();
+        if(user.isEmpty() || password.isEmpty()) {
+//            Label lbLogin2 = new text(user).lbLogin2;
+            setLblError(Color.TOMATO, "Empty credentials");
+            status = "Error";
+        } else {
+            //query
+            String sql = "SELECT * FROM admin WHERE adminUsername = ? AND adminPassword = ?";
+            try {
+                Connection conn = new Connector().getConn();
+                PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs;
+                pst.setString(1, user);
+                pst.setString(2, password);
+                rs = pst.executeQuery();
+                if (!rs.next()) {
+//                    new CRUD1(user).showBooks();
+                    setLblError(Color.TOMATO, "Enter Correct Email/Password");
+                    status = "Error";
+                } else {
+                    setLblError(Color.GREEN, "Logged In Successfully...");
+                }
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+                status = "Exception";
+            }
+        }
+        return status;
+    }
+    private void setLblError(Color color, String text) {
+        lblError.setTextFill(color);
+        lblError.setText(text);
+        System.out.println(text);
     }
 }
-
-
