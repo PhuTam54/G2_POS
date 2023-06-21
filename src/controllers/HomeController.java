@@ -118,23 +118,23 @@ public class HomeController implements Initializable {
         // img
         Image image1 = new Image("img/Tra-sua-pho-mai-tuoi.png");
         imageView1.setImage(image1);
-        nameImg1.setText("Trà sữa phô mai tươi");
+        nameImg1.setText("Fresh cheese milk tea");
         price1.setText("$3.99");
         Image image2 = new Image("img/Tra-Sua-Tran-Chau-Hoang-Gia-1-copy.jpg");
         imageView2.setImage(image2);
-        nameImg2.setText("Trà Sữa Trân Châu Hoàng Gia");
+        nameImg2.setText("Royal Pearl Milk Tea");
         price2.setText("$4");
         Image image3 = new Image("img/Tra-Sua-Panda-1-copy.jpg");
         imageView3.setImage(image3);
-        nameImg3.setText("Trà Sữa Panda");
+        nameImg3.setText("Panda milk tea");
         price3.setText("$2.99");
         Image image4 = new Image("img/Tra-Sua-Ba-Anh-Em-1-copy.jpg");
         imageView4.setImage(image4);
-        nameImg4.setText("Trà Sữa Ba Anh Em");
+        nameImg4.setText("Three Brother milk tea");
         price4.setText("$4.25");
         Image image5 = new Image("img/O-Long-Man-Kem-Pho-Mai.jpg");
         imageView5.setImage(image5);
-        nameImg5.setText("Ô Long Mặn Kem Phô Mai");
+        nameImg5.setText("O Long salted cream cheese");
         price5.setText("$5");
         Image image6 = new Image("img/Royal-Pearl-Milk-Coffee.png");
         imageView6.setImage(image6);
@@ -142,15 +142,15 @@ public class HomeController implements Initializable {
         price6.setText("$2.99");
         Image image7 = new Image("img/trà-xoài-bưởi-hồng.png");
         imageView7.setImage(image7);
-        nameImg7.setText("Trà xoài bưởi hồng");
+        nameImg7.setText("Pink grapefruit mango tea");
         price7.setText("$4");
         Image image8 = new Image("img/trà-xoài-bưởi-hồng-kem-phô-mai.png");
         imageView8.setImage(image8);
-        nameImg8.setText("Trà xoài bưởi hồng kem phô mai");
+        nameImg8.setText("Pink grapefruit mango tea creame cheese");
         price8.setText("$4.25");
         Image image9 = new Image("img/O-Long-Man-Chanh-Leo.jpg");
         imageView9.setImage(image9);
-        nameImg9.setText("Ô Long Mặn Chanh Leo");
+        nameImg9.setText("O Long salty passion fruit");
         price9.setText("$3.45");
 
         // Date
@@ -381,17 +381,17 @@ public class HomeController implements Initializable {
             if (!txtNote.getText().equals("")) {
                 billText += "Notes: " + txtNote.getText() + "\n";
             }
-            billText += "------------------------------------------------------------------\n";
-            billText += "Product Name             \t\t\tQuantity                 \tPrice \n";
-            billText += "------------------------------------------------------------------\n";
+            billText += "----------------------------------------------------------------\n";
+            billText += "Product Name             \t\tQuantity                 \tPrice \n";
+            billText += "----------------------------------------------------------------\n";
             // Nhập dữ liệu từ db
             ObservableList<Order> data = tbv.getItems();
             for (int i = 0; i < data.size(); i++) {
-                billText += data.get(i).getName() + "\t\t\t"+ data.get(i).getQty()+ "\t\t\t"+ Math.ceil(data.get(i).getPrice()*100)/100 + " \n";
+                billText += data.get(i).getName() + "\n" + data.get(i).getId() + "\t\t\t\t\t\t     "+ data.get(i).getQty()+ "\t\t\t\t$"+ Math.ceil(data.get(i).getPrice()*100)/100 + " \n";
             }
 
-            billText += "------------------------------------------------------------------\n";
-            billText += "                                     \t\t\t\t\tTotal: " + total.getText() + "\n";
+            billText += "----------------------------------------------------------------\n";
+            billText += "Total:                                    \t\t\t\t\t" + total.getText() + "\n";
 
             pc.setInvoice(billText);
 
@@ -401,8 +401,9 @@ public class HomeController implements Initializable {
             stage.show();
 
 //             Đóng cửa sổ hiện tại (nếu cần)
-//            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 //            currentStage.close();
+            pc.closeOldOrder(currentStage);
         } catch (Exception e) {
             System.out.println("Payment Error: " + e.getMessage());
         }
@@ -425,41 +426,56 @@ public class HomeController implements Initializable {
 
     public void exit(ActionEvent actionEvent) {
         // Đóng cửa sổ hiện tại
-//        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
 //        stage.close();
-        System.exit(0);
+//        System.exit(0);
 
         // Mở trang loginpos.fxml
-//        try {
-//            Parent root = FXMLLoader.load(getClass().getResource("/views/loginpos.fxml"));
-//            Stage loginStage = new Stage();
-//            loginStage.setScene(new Scene(root, 600, 400));
-//            loginStage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/views/loginpos.fxml"));
+            Stage loginStage = new Stage();
+            loginStage.setScene(new Scene(root, 930, 525));
+            loginStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goToHistory(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/views/history_pos.fxml"));
+            Stage historyStage = new Stage();
+//            historyStage.setScene(new Scene(root, 1065, 500));
+            historyStage.setScene(new Scene(root, 1315, 810));
+            historyStage.setTitle("POS | Sale report");
+            historyStage.show();
+
+        } catch (Exception e) {
+
+        }
     }
 
     public void btnTocotoco(ActionEvent actionEvent) {
         Image image1 = new Image("img/Tra-sua-pho-mai-tuoi.png");
         imageView1.setImage(image1);
-        nameImg1.setText("Trà sữa phô mai tươi");
+        nameImg1.setText("Fresh cheese milk tea");
         price1.setText("$3.99");
         Image image2 = new Image("img/Tra-Sua-Tran-Chau-Hoang-Gia-1-copy.jpg");
         imageView2.setImage(image2);
-        nameImg2.setText("Trà Sữa Trân Châu Hoàng Gia");
+        nameImg2.setText("Royal Pearl Milk Tea");
         price2.setText("$4");
         Image image3 = new Image("img/Tra-Sua-Panda-1-copy.jpg");
         imageView3.setImage(image3);
-        nameImg3.setText("Trà Sữa Panda");
+        nameImg3.setText("Panda milk tea");
         price3.setText("$2.99");
         Image image4 = new Image("img/Tra-Sua-Ba-Anh-Em-1-copy.jpg");
         imageView4.setImage(image4);
-        nameImg4.setText("Trà Sữa Ba Anh Em");
+        nameImg4.setText("Three Brother milk tea");
         price4.setText("$4.25");
         Image image5 = new Image("img/O-Long-Man-Kem-Pho-Mai.jpg");
         imageView5.setImage(image5);
-        nameImg5.setText("Ô Long Man Kem Phô Mai");
+        nameImg5.setText("O Long salted cream cheese");
         price5.setText("$5");
         Image image6 = new Image("img/Royal-Pearl-Milk-Coffee.png");
         imageView6.setImage(image6);
@@ -467,15 +483,15 @@ public class HomeController implements Initializable {
         price6.setText("$2.99");
         Image image7 = new Image("img/trà-xoài-bưởi-hồng.png");
         imageView7.setImage(image7);
-        nameImg7.setText("Trà xoài bưởi hồng");
+        nameImg7.setText("Pink grapefruit mango tea");
         price7.setText("$4");
         Image image8 = new Image("img/trà-xoài-bưởi-hồng-kem-phô-mai.png");
         imageView8.setImage(image8);
-        nameImg8.setText("Trà xoài bưởi hồng kem phô mai");
+        nameImg8.setText("Pink grapefruit mango tea creame cheese");
         price8.setText("$4.25");
         Image image9 = new Image("img/O-Long-Man-Chanh-Leo.jpg");
         imageView9.setImage(image9);
-        nameImg9.setText("Ô Long Mặn Chanh Leo");
+        nameImg9.setText("O Long salty passion fruit");
         price9.setText("$3.45");
 
         btnTocotoco.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
