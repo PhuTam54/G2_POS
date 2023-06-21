@@ -1,32 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryController">
    <children>
-      <TableView layoutY="49.0" prefHeight="354.0" prefWidth="1067.0">
+       <Pane prefHeight="97.0" prefWidth="1315.0" style="-fx-background-color: #4e2a84;">
+           <children>
+               <Button layoutX="14.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: #4e2a84;" text="X" textFill="WHITE">
+                   <font>
+                       <Font size="20.0" />
+                   </font>
+               </Button>
+               <Button layoutX="1273.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: #4e2a84;" text=":" textFill="WHITE">
+                   <font>
+                       <Font size="20.0" />
+                   </font>
+               </Button>
+               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="545.0" layoutY="22.0" prefHeight="58.0" prefWidth="225.0" text="POS Market" textFill="WHITE">
+                   <font>
+                       <Font size="40.0" />
+                   </font>
+               </Label>
+               <HBox layoutX="1008.0" layoutY="35.0" prefHeight="27.0" prefWidth="95.0">
+                   <children>
+                       <Text fx:id="txtDay" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="dd /">
+                           <font>
+                               <Font size="20.0" />
+                           </font>
+                       </Text>
+                       <Text fx:id="txtMonth" fill="WHITE" layoutX="10.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm /">
+                           <font>
+                               <Font size="20.0" />
+                           </font>
+                       </Text>
+                       <Text fx:id="txtYear" fill="WHITE" layoutX="44.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="yyyy">
+                           <font>
+                               <Font size="20.0" />
+                           </font>
+                       </Text>
+                   </children>
+               </HBox>
+               <HBox layoutX="1120.0" layoutY="36.0" prefHeight="27.0" prefWidth="74.0">
+                   <children>
+                       <Text fx:id="txtHours" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="hh :">
+                           <font>
+                               <Font size="20.0" />
+                           </font>
+                       </Text>
+                       <Text fx:id="txtMin" fill="WHITE" layoutX="10.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mi :">
+                           <font>
+                               <Font size="20.0" />
+                           </font>
+                       </Text>
+                       <Text fx:id="txtSecond" fill="WHITE" layoutX="40.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ss">
+                           <font>
+                               <Font size="20.0" />
+                           </font>
+                       </Text>
+                   </children>
+               </HBox>
+           </children>
+       </Pane>
+      <TableView fx:id="historyView" layoutY="159.0" prefHeight="651.0" prefWidth="1315.0">
         <columns>
-          <TableColumn prefWidth="77.0" text="Order ID" />
-          <TableColumn prefWidth="102.0" text="Customer ID" />
-            <TableColumn prefWidth="125.0" text="Customer name" />
-            <TableColumn prefWidth="143.0" text="Order Date" />
-            <TableColumn prefWidth="89.0" text="Product ID" />
-            <TableColumn prefWidth="108.0" text="Product name" />
-            <TableColumn prefWidth="87.0" text="Sold price" />
-            <TableColumn prefWidth="108.0" text="Sold quantity" />
-            <TableColumn prefWidth="92.0" text="Total" />
-            <TableColumn prefWidth="118.0" text="Order status" />
+          <TableColumn fx:id="colOrderid" prefWidth="77.0" text="Order ID" />
+          <TableColumn fx:id="colCusid" prefWidth="102.0" text="Customer ID" />
+            <TableColumn fx:id="colCusName" prefWidth="185.0" text="Customer name" />
+            <TableColumn fx:id="colAdminID" prefWidth="84.0" text="Admin ID" />
+            <TableColumn fx:id="colOrderDate" prefWidth="132.0" text="Order Date" />
+            <TableColumn fx:id="colProductid" prefWidth="111.0" text="Product ID" />
+            <TableColumn fx:id="colProductName" prefWidth="302.0" text="Product name" />
+            <TableColumn fx:id="colSoldPrice" prefWidth="115.0" text="Sold price" />
+            <TableColumn fx:id="colSoldQty" prefWidth="84.0" text="Sold Qty" />
+            <TableColumn fx:id="colOrderStatus" prefWidth="104.0" text="Order status" />
         </columns>
       </TableView>
-      <Label layoutX="258.0" layoutY="7.0" prefHeight="35.0" prefWidth="85.0" text="History">
+      <Label layoutX="14.0" layoutY="108.0" prefHeight="37.0" prefWidth="107.0" text="History">
          <font>
-            <Font size="24.0" />
+            <Font size="30.0" />
          </font>
       </Label>
    </children>
