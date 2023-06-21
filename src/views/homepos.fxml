@@ -249,7 +249,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="84.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sales Report">
+            <Button onMouseClicked="#goToHistory" layoutX="8.0" layoutY="84.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sales Report">
                <font>
                   <Font size="18.0" />
                </font>
