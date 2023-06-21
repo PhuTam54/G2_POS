@@ -36,7 +36,6 @@ public class PaymentController implements Initializable {
     private String previousPayValue; // Biến tạm để lưu giá trị txtpay trước khi cập nhật
     private TableView<Order> tbv;
     private String lastPayValue = "";
-
     private  String billText = "";
     // Date
     public Text txtHours, txtMin, txtSecond, txtDay, txtMonth, txtYear;
@@ -64,6 +63,9 @@ public class PaymentController implements Initializable {
         if(txtpay!=null){
             txtpay.setText("");
         }
+    }
+    public Stage closeOldOrder(Stage oldStage) {
+        return oldStage;
     }
 
     public void btnMoney1(MouseEvent mouseEvent) {
@@ -129,9 +131,9 @@ public class PaymentController implements Initializable {
                         previousPayValue = txtpay.getText();
 
                         // Hiển thị hóa đơn trong TextArea
-                        billText += "                                     \t\t\t\t\tCash: " + txtpay.getText() + "\n";
-                        billText += "                                     \t\t\t\t  Balance: " + txtchange.getText() + "\n";
-                        billText +=  "======================================\n";
+                        billText += "Cash:                                    \t\t\t\t\t" + txtpay.getText() + "\n";
+                        billText += "Balance:                                 \t\t\t\t\t" + txtchange.getText() + "\n";
+                        billText +=  "=====================================\n";
                         billText +=  "                        Thanks For Your Business...!" + "\n";
                         billTextArea.setText(billText);
                     }
@@ -161,6 +163,7 @@ public class PaymentController implements Initializable {
             //Đóng cửa sổ hiện tại (nếu cần)
             Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             currentStage.close();
+
         } catch (Exception e) {
             System.out.println("From print bill to home error: " + e.getMessage());
         }
