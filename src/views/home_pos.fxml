@@ -41,11 +41,11 @@
          <children>
             <TableView fx:id="tbv" layoutY="18.0" prefHeight="416.0" prefWidth="412.0">
               <columns>
-                <TableColumn fx:id="colID" prefWidth="36.0" text="ID" />
-                <TableColumn fx:id="colName" prefWidth="171.0" text="Name" />
-                  <TableColumn fx:id="colQty" minWidth="8.0" prefWidth="50.0" text="Qty" />
-                  <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="61.0" text="Price" />
-                  <TableColumn fx:id="colDelete" maxWidth="89.0" prefWidth="78.0" text="Action" />
+<!--                <TableColumn fx:id="colID" prefWidth="36.0" text="ID" />-->
+                <TableColumn fx:id="colName" prefWidth="207.0" text="Name" />
+                  <TableColumn fx:id="colQty" minWidth="8.0" prefWidth="44.0" text="Qty" />
+                  <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="69.0" text="Price" />
+                  <TableColumn fx:id="colDelete" maxWidth="111.0" prefWidth="73.0" text="Action" />
               </columns>
             </TableView>
          </children></Pane>
