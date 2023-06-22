@@ -1,5 +1,6 @@
 package controllers;
 
+import database.Connector;
 import enums.RepositoryType;
 import factory.RepositoryFactory;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -22,8 +23,12 @@ import model.Order;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -362,41 +367,105 @@ public class HomeController implements Initializable {
     public void payment(ActionEvent actionEvent) {
         String totalPrice = total.getText();
         String totalProduct = totalProductQty.getText();
+        // add to orders
+        int sqlYear = year;
+        int sqlMonth = month;
+        int sqlDay = day;
+        int sqlHours = hours;
+        int sqlMinute = minute;
+        int sqlSecond = second;
+        // get product ID
+        ArrayList<String> productNameInOrder = new ArrayList<>();
+        ArrayList<Integer> productIDInOrder = new ArrayList<>();
+        ObservableList<Order> data = tbv.getItems();
+        // get soldPrice and soldQty
+        ArrayList<Double> soldPrice = new ArrayList<>();
+        ArrayList<Integer> soldQty = new ArrayList<>();
+        int orderID = 0;
         try {
-//            try {
-//                Connection conn = Connector.getInstance().getConn();
-//                // query
-//                String getAdminIDSql = "SELECT `adminID` FROM `admin` WHERE `adminUserName` = ?";
-//                PreparedStatement pst = conn.prepareStatement(getAdminIDSql);
-//                pst.setString(1, "'" + adminName.getText() +"'");
-//                ResultSet rs = pst.executeQuery(getAdminIDSql);
-//                int adminID = 0;
-//                while (rs.next()) {
-//                    adminID = rs.getInt("adminID");
-//                }
-//                String getCustomerIDSql = "SELECT customerID FROM customer WHERE customerName LIKE ?";
-//                PreparedStatement pst2 = conn.prepareStatement(getCustomerIDSql);
-//                pst2.setString(1, "Retail customers");
-//                ResultSet resultSet = pst2.executeQuery(getCustomerIDSql);
-//                int customerID = 0;
-//                while (resultSet.next()) {
-//                    customerID = resultSet.getInt("customerID");
-//                }
-//                try {
-//                    String insertOrderSql = "INSERT INTO `orders`(`orderID`,`customerID`, `orderDate`, `orderStatus`, `adminID`) VALUES (?, ?, ?, ?, ?)";
-//                    PreparedStatement insertOrderStatement = conn.prepareStatement(insertOrderSql);
-//                    insertOrderStatement.setString(2, String.valueOf(customerID));
-//                    insertOrderStatement.setString(3, year + "-" + month + "-" + day + " " + hours + ":" + minute + ":" + second);
-//                    insertOrderStatement.setString(4, "1");
-//                    insertOrderStatement.setString(5, String.valueOf(adminID));
-//                    System.out.println(insertOrderStatement);
-//                    insertOrderStatement.executeUpdate();
-//                } catch (Exception e) {
-//                    System.out.println("Insert error: " + e.getMessage());
-//                }
-//            } catch (Exception e) {
-//                System.out.println("get ID sql error: " + e.getMessage());
-//            }
+            try {
+                Connection conn = Connector.getInstance().getConn();
+                // query
+
+                // get admin ID
+                String getAdminIDSql = "SELECT `adminID` FROM `admin` WHERE `adminUserName` = '" + adminName.getText() + "'";
+                PreparedStatement pst = conn.prepareStatement(getAdminIDSql);
+                ResultSet rs = pst.executeQuery(getAdminIDSql);
+                int adminID = 0;
+                while (rs.next()) {
+                    adminID = rs.getInt("adminID");
+                    System.out.println(adminID);
+                }
+                // get customer ID
+                String getCustomerIDSql = "SELECT customerID FROM customer WHERE customerName LIKE 'Retail customers'";
+                PreparedStatement pst2 = conn.prepareStatement(getCustomerIDSql);
+                ResultSet resultSet = pst2.executeQuery(getCustomerIDSql);
+                int customerID = 0;
+                while (resultSet.next()) {
+                    customerID = resultSet.getInt("customerID");
+                    System.out.println(customerID);
+                }
+
+                // add new orders
+                try {
+                    String insertOrderSql = "INSERT INTO `orders`(`customerID`, `orderDate`, `orderStatus`, `adminID`, `orderNotes`) VALUES (?, ?, ?, ?, ?)";
+                    PreparedStatement insertOrderStatement = conn.prepareStatement(insertOrderSql);
+                    insertOrderStatement.setString(1, String.valueOf(customerID));
+                    insertOrderStatement.setString(2, sqlYear + "-" + sqlMonth + "-" + sqlDay + " " + sqlHours + ":" + sqlMinute + ":" + sqlSecond);
+                    insertOrderStatement.setString(3, "1");
+                    insertOrderStatement.setString(4, String.valueOf(adminID));
+                    insertOrderStatement.setString(5, txtNote.getText());
+                    insertOrderStatement.executeUpdate();
+                    System.out.println(insertOrderStatement);
+                } catch (Exception e) {
+                    System.out.println("Insert error: " + e.getMessage());
+                }
+
+                // get orders ID
+                String getOrdersIDSql = "SELECT `orderID` FROM `orders` WHERE `orderDate` = '" + sqlYear + "-" + sqlMonth + "-" + sqlDay + " " + sqlHours + ":" + sqlMinute + ":" + sqlSecond + "'";
+                PreparedStatement psOrders = conn.prepareStatement(getOrdersIDSql);
+                ResultSet rsOrders = psOrders.executeQuery(getOrdersIDSql);
+                while (rsOrders.next()) {
+                    orderID = rsOrders.getInt("orderID");
+                }
+
+                // get Product ID and soldPrice
+                for (int i = 0; i < data.size(); i++) {
+                    productNameInOrder.add(data.get(i).getName());
+                }
+                for (int i = 0; i < data.size(); i++) {
+                    String getProductIDSql = "SELECT `productID`, `productPrice` FROM `product` WHERE `productName` = '" + productNameInOrder.get(i) + "'";
+                    PreparedStatement psProduct = conn.prepareStatement(getProductIDSql);
+                    ResultSet rsProduct = psProduct.executeQuery(getProductIDSql);
+                    while (rsProduct.next()) {
+                        productIDInOrder.add(rsProduct.getInt("productID"));
+                        soldPrice.add(rsProduct.getDouble("productPrice"));
+                    }
+                }
+
+                // get soldQty
+                for (int i = 0; i < data.size(); i++) {
+                    soldQty.add(data.get(i).getQty());
+                }
+
+//                add to order_detail
+                try {
+                    for (int i = 0; i < data.size(); i++) {
+                        String insertOrderSql = "INSERT INTO `order_detail`(`orderID`, `productID`, `soldPrice`, `soldQty`) VALUES ( ?,  ? , ? ,? )";
+                        PreparedStatement insertOrderStatement = conn.prepareStatement(insertOrderSql);
+                        insertOrderStatement.setString(1, String.valueOf(orderID));
+                        insertOrderStatement.setString(2, String.valueOf(productIDInOrder.get(i)));
+                        insertOrderStatement.setString(3, String.valueOf(soldPrice.get(i)));
+                        insertOrderStatement.setString(4, String.valueOf(soldQty.get(i)));
+                        insertOrderStatement.executeUpdate();
+                    }
+                } catch (Exception e) {
+                    System.out.println("Insert error: " + e.getMessage());
+                }
+
+            } catch (Exception e) {
+                System.out.println("get ID sql error: " + e.getMessage());
+            }
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/payment_pos.fxml"));
             Parent root = loader.load();
@@ -421,15 +490,15 @@ public class HomeController implements Initializable {
             billText += "Product Name             \t\tQuantity                 \tPrice \n";
             billText += "----------------------------------------------------------------\n";
             // Nhập dữ liệu từ db
-            ObservableList<Order> data = tbv.getItems();
             for (int i = 0; i < data.size(); i++) {
-                billText += data.get(i).getName() + "\n" + data.get(i).getId() + "\t\t\t\t\t\t     "+ data.get(i).getQty()+ "\t\t\t\t$"+ Math.ceil(data.get(i).getPrice()*100)/100 + " \n";
+                billText += data.get(i).getName() + "\n" + productIDInOrder.get(i) + "\t\t\t\t\t\t     "+ data.get(i).getQty()+ "\t\t\t\t$"+ Math.ceil(data.get(i).getPrice()*100)/100 + " \n";
             }
 
             billText += "----------------------------------------------------------------\n";
             billText += "Total:                                  \t\t\t\t\t" + total.getText() + "\n";
 
             pc.setInvoice(billText);
+            pc.setOrderID(orderID);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root, 1315, 805));
