@@ -427,7 +427,7 @@ public class HomeController implements Initializable {
             }
 
             billText += "----------------------------------------------------------------\n";
-            billText += "Total:                                    \t\t\t\t\t" + total.getText() + "\n";
+            billText += "Total:                                  \t\t\t\t\t" + total.getText() + "\n";
 
             pc.setInvoice(billText);
 

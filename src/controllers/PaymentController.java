@@ -128,8 +128,8 @@ public class PaymentController implements Initializable {
                         previousPayValue = txtpay.getText();
 
                         // Hiển thị hóa đơn trong TextArea
-                        billText += "Cash:                                    \t\t\t\t\t" + txtpay.getText() + "\n";
-                        billText += "Balance:                                 \t\t\t\t\t" + txtchange.getText() + "\n";
+                        billText += "Cash:                                  \t\t\t\t\t" + txtpay.getText() + "\n";
+                        billText += "Balance:                               \t\t\t\t\t" + txtchange.getText() + "\n";
                         billText +=  "=====================================\n";
                         billText +=  "                        Thanks For Your Business...!" + "\n";
                         billTextArea.setText(billText);
