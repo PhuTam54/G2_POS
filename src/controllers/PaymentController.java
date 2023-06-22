@@ -1,6 +1,5 @@
 package controllers;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +14,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Order;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class PaymentController implements Initializable {
@@ -154,7 +151,7 @@ public class PaymentController implements Initializable {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/homepos.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home_pos.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root, 1315, 805));
