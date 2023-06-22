@@ -31,9 +31,16 @@ public class LoginController implements Initializable {
             //login here
             if (logIn().equals("Success")) {
                 try {
-
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/homepos.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home_pos.fxml"));
                     Parent root = fxmlLoader.load();
+
+                    try {
+                        String adminName = txtUser.getText();
+                        HomeController hc = fxmlLoader.getController();
+                        hc.setAdminName(adminName);
+                    } catch (Exception e) {
+                        System.out.println("Set admin error: " + e.getMessage());
+                    }
 
                     Stage stage = new Stage();
                     stage.setTitle("POS | Dashboard");
@@ -88,6 +95,7 @@ public class LoginController implements Initializable {
                     setLblError(Color.TOMATO, "Enter Correct Email/Password");
                     status = "Error";
                 } else {
+
                     setLblError(Color.GREEN, "Logged In Successfully...");
                 }
             } catch (Exception e) {

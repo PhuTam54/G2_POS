@@ -201,6 +201,16 @@
                   </Text>
                </children>
             </HBox>
+            <Label layoutX="106.0" layoutY="38.0" text="Admin: " textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="adminName" layoutX="168.0" layoutY="38.0" prefHeight="27.0" prefWidth="108.0" text="a" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane layoutY="115.0" prefHeight="463.0" prefWidth="247.0" style="-fx-background-color: #d3d3d3;">
@@ -249,7 +259,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button onMouseClicked="#goToHistory" layoutX="8.0" layoutY="84.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sales Report">
+            <Button layoutX="8.0" layoutY="84.0" mnemonicParsing="false" onMouseClicked="#goToHistory" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sales Report">
                <font>
                   <Font size="18.0" />
                </font>
