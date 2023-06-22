@@ -3,7 +3,6 @@ package controllers;
 import database.Connector;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,10 +23,10 @@ public class LoginController implements Initializable {
     public TextField txtUser;
     public PasswordField txtPass;
     public Label lblError;
-    public Button btnSignin;
+    public Button btnSignIn;
 
     public void handleButtonAction(MouseEvent event) {
-        if (event.getSource() == btnSignin) {
+        if (event.getSource() == btnSignIn) {
             //login here
             if (logIn().equals("Success")) {
                 try {
@@ -45,9 +44,7 @@ public class LoginController implements Initializable {
                     Stage stage = new Stage();
                     stage.setTitle("POS | Dashboard");
                     stage.setScene(new Scene(root, 1315, 810));
-
                     stage.show();
-                    ((Node)(event.getSource())).getScene().getWindow().hide();
                 } catch (Exception e) {
                     System.err.println(e.getMessage());
                 }

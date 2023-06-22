@@ -314,7 +314,6 @@ public class PaymentController implements Initializable {
     }
 
     public void backToHome(MouseEvent mouseEvent) {
-//      Đóng cửa sổ hiện tại (nếu cần)
         Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         currentStage.close();
     }

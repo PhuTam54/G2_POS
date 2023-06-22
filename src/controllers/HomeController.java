@@ -21,7 +21,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Order;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,17 +33,14 @@ import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
     public TableView<Order> tbv;
-    public TableColumn<Order, Integer> colID;
     public TableColumn<Order, String> colName;
     public TableColumn<Order, Integer> colQty;
     public TableColumn<Order, Double> colPrice;
-    public TableColumn<Order, Button> colAction;
     public Label price1, price2, price3, price4, price5, price6, price7, price8, price9, total, totalProductQty;
     public TextField txtCusName;
     public TextField txtNote;
     public Label adminName;
     ObservableList<Order> list = FXCollections.observableArrayList();
-    public static Order resetOrder;
 
     // Date
     public Text txtHours, txtMin, txtSecond, txtDay, txtMonth, txtYear;
@@ -60,7 +56,7 @@ public class HomeController implements Initializable {
     // team
     public ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
     public Label nameImg1, nameImg2, nameImg3, nameImg4, nameImg5, nameImg6, nameImg7, nameImg8, nameImg9;
-    public Button btnTocotoco, btnFruits, btnMilktea, btnYogurt, btnPastry, btnCombo;
+    public Button btnTocoToco, btnFruits, btnMilktea, btnYogurt, btnPastry, btnCombo;
     public TableColumn colDelete;
     private static Order selectedOrder;
     @Override
@@ -118,7 +114,6 @@ public class HomeController implements Initializable {
             list.addAll(RepositoryFactory.createRepositoryInstance(RepositoryType.TABLE).getAll());
             updateTotalProduct();
         } catch (Exception e) {
-//            System.out.println("Error: " + e.getMessage());
         }
 
         // img
@@ -394,7 +389,6 @@ public class HomeController implements Initializable {
                 int adminID = 0;
                 while (rs.next()) {
                     adminID = rs.getInt("adminID");
-                    System.out.println(adminID);
                 }
                 // get customer ID
                 String getCustomerIDSql = "SELECT customerID FROM customer WHERE customerName LIKE 'Retail customers'";
@@ -403,7 +397,6 @@ public class HomeController implements Initializable {
                 int customerID = 0;
                 while (resultSet.next()) {
                     customerID = resultSet.getInt("customerID");
-                    System.out.println(customerID);
                 }
 
                 // add new orders
@@ -504,11 +497,6 @@ public class HomeController implements Initializable {
             stage.setScene(new Scene(root, 1315, 805));
             stage.setTitle("POS Market | Payment");
             stage.show();
-
-//             Đóng cửa sổ hiện tại (nếu cần)
-            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-//            currentStage.close();
-            pc.closeOldOrder(currentStage);
         } catch (Exception e) {
             System.out.println("Payment Error: " + e.getMessage());
         }
@@ -530,28 +518,13 @@ public class HomeController implements Initializable {
     }
 
     public void exit(ActionEvent actionEvent) {
-        // Đóng cửa sổ hiện tại
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.close();
-//        stage.close();
-//        System.exit(0);
-
-        // Mở trang login_pos.fxml
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/views/login_pos.fxml"));
-            Stage loginStage = new Stage();
-            loginStage.setScene(new Scene(root, 930, 525));
-            loginStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.exit(0);
     }
 
     public void goToHistory(MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/views/history_pos.fxml"));
             Stage historyStage = new Stage();
-//            historyStage.setScene(new Scene(root, 1065, 500));
             historyStage.setScene(new Scene(root, 1315, 810));
             historyStage.setTitle("POS | Sale report");
             historyStage.show();
@@ -565,7 +538,7 @@ public class HomeController implements Initializable {
         adminName.setText(admin);
     }
 
-    public void btnTocotoco(ActionEvent actionEvent) {
+    public void btnTocoToco(ActionEvent actionEvent) {
         Image image1 = new Image("img/Tra-sua-pho-mai-tuoi.png");
         imageView1.setImage(image1);
         nameImg1.setText("Fresh cheese milk tea");
@@ -603,7 +576,7 @@ public class HomeController implements Initializable {
         nameImg9.setText("O Long salty passion fruit");
         price9.setText("$3.45");
 
-        btnTocotoco.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+        btnTocoToco.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
@@ -657,7 +630,7 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-        btnTocotoco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnTocoToco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color:  #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
@@ -711,7 +684,7 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-        btnTocotoco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnTocoToco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color:#4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
@@ -765,7 +738,7 @@ public class HomeController implements Initializable {
         nameImg9.setText("Strawberry Yogurt");
         price9.setText("$4");
 
-        btnTocotoco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnTocoToco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
@@ -819,7 +792,7 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-        btnTocotoco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnTocoToco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
@@ -873,11 +846,16 @@ public class HomeController implements Initializable {
         nameImg9.setText("");
         price9.setText("");
 
-        btnTocotoco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
+        btnTocoToco.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnFruits.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnMilktea.setStyle("-fx-background-color:white; -fx-text-fill: black;-fx-background-radius:10;");
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnCombo.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
+    }
+
+    public void goBackLogin(MouseEvent mouseEvent) {
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 }
