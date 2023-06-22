@@ -5,125 +5,123 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.Date;
 
 public class HistoryTable {
-    int Orderid;
-    int Cusid;
-    String CusName;
-    int Adminid;
-    Date OrderDate;
-    int Productid;
-    String ProductName;
-    double SoldPrice;
-    int SoldQty ;
-//    double Total;
-    int OrderStatus;
+    int orderID;
+    int customerID;
+    String customerName;
+    int adminID;
+    Date orderDate;
+    int productID;
+    String productName;
+    double soldPrice;
+    int soldQty;
+    int orderStatus;
 
-    public HistoryTable(int orderid, int cusid, String cusName, int adminid,  Date orderDate, int productid, String productName, Double soldPrice, int soldQty, int orderStatus) {
-        Orderid = orderid;
-        Cusid = cusid;
-        CusName = cusName;
-        Adminid = adminid;
-        OrderDate = orderDate;
-        Productid = productid;
-        ProductName = productName;
-        SoldPrice = soldPrice;
-        SoldQty = soldQty;
-//        Total = total;
-        OrderStatus = orderStatus;
+    public HistoryTable(int orderID, int customerID, String customerName, int adminID, Date orderDate, int productID, String productName, double soldPrice, int soldQty, int orderStatus) {
+        this.orderID = orderID;
+        this.customerID = customerID;
+        this.customerName = customerName;
+        this.adminID = adminID;
+        this.orderDate = orderDate;
+        this.productID = productID;
+        this.productName = productName;
+        this.soldPrice = soldPrice;
+        this.soldQty = soldQty;
+        this.orderStatus = orderStatus;
     }
 
-    public int getOrderid() {
-        return Orderid;
+    public int getOrderID() {
+        return orderID;
     }
 
-    public void setOrderid(int orderid) {
-        Orderid = orderid;
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
     }
 
-    public int getCusid() {
-        return Cusid;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setCusid(int cusid) {
-        Cusid = cusid;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
-    public String getCusName() {
-        return CusName;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCusName(String cusName) {
-        CusName = cusName;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public int getAdminid() {
-        return Adminid;
+    public int getAdminID() {
+        return adminID;
     }
 
-    public void setAdminid(int adminid) {
-        Adminid = adminid;
+    public void setAdminID(int adminID) {
+        this.adminID = adminID;
     }
 
     public Date getOrderDate() {
-        return OrderDate;
+        return orderDate;
     }
 
     public void setOrderDate(Date orderDate) {
-        OrderDate = orderDate;
+        this.orderDate = orderDate;
     }
 
-    public int getProductid() {
-        return Productid;
+    public int getProductID() {
+        return productID;
     }
 
-    public void setProductid(int productid) {
-        Productid = productid;
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public String getProductName() {
-        return ProductName;
+        return productName;
     }
 
     public void setProductName(String productName) {
-        ProductName = productName;
+        this.productName = productName;
     }
 
     public double getSoldPrice() {
-        return SoldPrice;
+        return soldPrice;
     }
 
     public void setSoldPrice(double soldPrice) {
-        SoldPrice = soldPrice;
+        this.soldPrice = soldPrice;
     }
 
     public int getSoldQty() {
-        return SoldQty;
+        return soldQty;
     }
 
     public void setSoldQty(int soldQty) {
-        SoldQty = soldQty;
+        this.soldQty = soldQty;
     }
 
     public int getOrderStatus() {
-        return OrderStatus;
+        return orderStatus;
     }
 
     public void setOrderStatus(int orderStatus) {
-        OrderStatus = orderStatus;
+        this.orderStatus = orderStatus;
     }
 
     @Override
     public String toString() {
         return "HistoryTable{" +
-                "Orderid=" + Orderid +
-                ", Cusid=" + Cusid +
-                ", CusName='" + CusName + '\'' +
-                ", Adminid=" + Adminid +
-                ", OrderDate=" + OrderDate +
-                ", Productid=" + Productid +
-                ", ProductName='" + ProductName + '\'' +
-                ", SoldPrice=" + SoldPrice +
-                ", SoldQty=" + SoldQty +
-                ", OrderStatus=" + OrderStatus +
+                "orderID=" + orderID +
+                ", customerID=" + customerID +
+                ", customerName='" + customerName + '\'' +
+                ", adminID=" + adminID +
+                ", orderDate=" + orderDate +
+                ", productID=" + productID +
+                ", productName='" + productName + '\'' +
+                ", soldPrice=" + soldPrice +
+                ", soldQty=" + soldQty +
+                ", orderStatus=" + orderStatus +
                 '}';
     }
 }
