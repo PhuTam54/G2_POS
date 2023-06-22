@@ -1,17 +1,16 @@
 package controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import database.Connector;
-import enums.RepositoryType;
-import factory.RepositoryFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import model.HistoryTable;
+import javafx.stage.Stage;
 import model.HistoryTable;
 
 import java.net.URL;
@@ -25,16 +24,17 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HistoryController implements Initializable {
-    public TableColumn<HistoryTable, Integer> colOrderid;
-    public TableColumn<HistoryTable, Integer> colCusid;
-    public TableColumn<HistoryTable, String> colCusName;
+    public TableColumn<HistoryTable, Integer> colOrderID;
+    public TableColumn<HistoryTable, Integer> colCusID;
     public TableColumn<HistoryTable, Integer> colAdminID;
     public TableColumn<HistoryTable, DateTimeFormatter> colOrderDate;
-    public TableColumn<HistoryTable, Integer> colProductid;
+    public TableColumn<HistoryTable, Integer> colProductID;
     public TableColumn<HistoryTable, String> colProductName;
     public TableColumn<HistoryTable, Double> colSoldPrice;
     public TableColumn<HistoryTable, Integer> colSoldQty;
     public TableColumn<HistoryTable, Integer> colOrderStatus;
+    public TableColumn<HistoryTable, Double> colOrderCash;
+    public TableColumn<HistoryTable, String> colOrderNote;
     public TableView<HistoryTable> historyView;
     // Date
     public Text txtHours, txtMin, txtSecond, txtDay, txtMonth, txtYear;
@@ -49,16 +49,18 @@ public class HistoryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colOrderid.setCellValueFactory(new PropertyValueFactory<>("orderID"));
-        colCusid.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        colCusName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        colOrderID.setCellValueFactory(new PropertyValueFactory<>("orderID"));
+        colCusID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         colAdminID.setCellValueFactory(new PropertyValueFactory<>("adminID"));
         colOrderDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
-        colProductid.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
         colProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
         colSoldPrice.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
         colSoldQty.setCellValueFactory(new PropertyValueFactory<>("soldQty"));
         colOrderStatus.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
+        colOrderCash.setCellValueFactory(new PropertyValueFactory<>("orderCash"));
+        colOrderNote.setCellValueFactory(new PropertyValueFactory<>("orderNotes"));
+
         try{
             ObservableList<HistoryTable> list = FXCollections.observableArrayList();
             list.addAll(getAll());
@@ -142,14 +144,13 @@ public class HistoryController implements Initializable {
             // query
             Statement stt = conn.createStatement();
             String sql =
-                    "SELECT o.orderID, c.customerID, c.customerName, a.adminID, o.orderDate, p.productID, p.productName, od.soldPrice, od.soldQty, o.orderStatus \n" +
+                    "SELECT o.orderID, c.customerID, c.customerName, a.adminID, o.orderDate, p.productID, p.productName, od.soldPrice, od.soldQty, o.orderStatus, o.orderCash, o.orderNotes \n" +
                     "FROM orders AS o INNER JOIN order_detail AS od ON o.orderID = od.orderID INNER JOIN customer AS c ON o.customerID = c.customerID INNER JOIN `admin` AS a ON o.adminID = a.adminID INNER JOIN product AS p ON od.productID = p.productID\n" +
                     "ORDER BY o.orderID DESC";
             ResultSet rs = stt.executeQuery(sql);
             while (rs.next()) {
                 int orderID = rs.getInt("orderID");
                 int customerID = rs.getInt("customerID");
-                String customerName = rs.getString("customerName");
                 int adminID = rs.getInt("adminID");
                 Date orderDate = rs.getDate("orderDate");
                 int productID = rs.getInt("productID");
@@ -157,7 +158,9 @@ public class HistoryController implements Initializable {
                 double soldPrice = rs.getDouble("soldPrice");
                 int soldQty = rs.getInt("soldQty");
                 int orderStatus = rs.getInt("orderStatus");
-                HistoryTable historyTable= new HistoryTable(orderID, customerID, customerName, adminID, orderDate, productID, productName, soldPrice, soldQty, orderStatus);
+                double orderCash = rs.getDouble("orderCash");
+                String orderNotes = rs.getString("orderNotes");
+                HistoryTable historyTable= new HistoryTable(orderID, customerID, adminID, orderDate, productID, productName, soldPrice, soldQty, orderStatus, orderCash, orderNotes);
                 orders.add(historyTable);
             }
         } catch (Exception e) {
@@ -165,5 +168,10 @@ public class HistoryController implements Initializable {
         }
         System.out.println(orders + "\n");
         return orders;
+    }
+
+    public void goBackHome(MouseEvent mouseEvent) {
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 }

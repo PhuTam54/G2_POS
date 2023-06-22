@@ -15,11 +15,13 @@ public class HistoryTable {
     double soldPrice;
     int soldQty;
     int orderStatus;
+    double orderCash;
+    String orderNotes;
 
-    public HistoryTable(int orderID, int customerID, String customerName, int adminID, Date orderDate, int productID, String productName, double soldPrice, int soldQty, int orderStatus) {
+
+    public HistoryTable(int orderID, int customerID, int adminID, Date orderDate, int productID, String productName, double soldPrice, int soldQty, int orderStatus, double orderCash, String orderNotes) {
         this.orderID = orderID;
         this.customerID = customerID;
-        this.customerName = customerName;
         this.adminID = adminID;
         this.orderDate = orderDate;
         this.productID = productID;
@@ -27,6 +29,8 @@ public class HistoryTable {
         this.soldPrice = soldPrice;
         this.soldQty = soldQty;
         this.orderStatus = orderStatus;
+        this.orderCash = orderCash;
+        this.orderNotes = orderNotes;
     }
 
     public int getOrderID() {
@@ -109,12 +113,27 @@ public class HistoryTable {
         this.orderStatus = orderStatus;
     }
 
+    public double getOrderCash() {
+        return orderCash;
+    }
+
+    public void setOrderCash(double orderCash) {
+        this.orderCash = orderCash;
+    }
+
+    public String getOrderNotes() {
+        return orderNotes;
+    }
+
+    public void setOrderNotes(String orderNotes) {
+        this.orderNotes = orderNotes;
+    }
+
     @Override
     public String toString() {
         return "HistoryTable{" +
                 "orderID=" + orderID +
                 ", customerID=" + customerID +
-                ", customerName='" + customerName + '\'' +
                 ", adminID=" + adminID +
                 ", orderDate=" + orderDate +
                 ", productID=" + productID +
@@ -122,6 +141,8 @@ public class HistoryTable {
                 ", soldPrice=" + soldPrice +
                 ", soldQty=" + soldQty +
                 ", orderStatus=" + orderStatus +
+                ", orderCash=" + orderCash +
+                ", orderNotes='" + orderNotes + '\'' +
                 '}';
     }
 }
