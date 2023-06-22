@@ -1,5 +1,6 @@
 package controllers;
 
+import database.Connector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,8 @@ import javafx.stage.Stage;
 import model.Order;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
@@ -45,6 +48,9 @@ public class PaymentController implements Initializable {
     int second = dateTime.getSecond();
     //
 
+    // db
+    int orderIDInPayment;
+
     public void setTotal(String total, String totalProduct) {
         txttotal.setText(total);
         txtsubtotal.setText(total);
@@ -54,6 +60,10 @@ public class PaymentController implements Initializable {
     public void setInvoice(String invoiceText) {
         billText += invoiceText;
         billTextArea.setText(invoiceText);
+    }
+
+    public void setOrderID(int orderID) {
+        orderIDInPayment = orderID;
     }
 
     public void btnDeletes(MouseEvent mouseEvent) {
@@ -148,6 +158,18 @@ public class PaymentController implements Initializable {
             if (success) {
                 printerJob.endJob();
             }
+        }
+        // update orderStatus
+        try {
+            String cash = txtpay.getText().replaceAll("[^\\d.]", "");
+            Double.parseDouble(cash);
+            Connection conn = Connector.getInstance().getConn();
+            // query
+            String updateOrderSql = "UPDATE `orders` SET `orderStatus`= 2,`orderCash`='" + cash +"' WHERE orderID = '" + orderIDInPayment + "'";
+            PreparedStatement updateOrderStatement = conn.prepareStatement(updateOrderSql);
+            updateOrderStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Update error: " + e.getMessage());
         }
 
         try {
