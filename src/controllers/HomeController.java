@@ -37,6 +37,7 @@ public class HomeController implements Initializable {
     public Label price1, price2, price3, price4, price5, price6, price7, price8, price9, total, totalProductQty;
     public TextField txtCusName;
     public TextField txtNote;
+    public Label adminName;
     ObservableList<Order> list = FXCollections.observableArrayList();
     public static Order resetOrder;
 
@@ -362,7 +363,42 @@ public class HomeController implements Initializable {
         String totalPrice = total.getText();
         String totalProduct = totalProductQty.getText();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/paymentpos.fxml"));
+//            try {
+//                Connection conn = Connector.getInstance().getConn();
+//                // query
+//                String getAdminIDSql = "SELECT `adminID` FROM `admin` WHERE `adminUserName` = ?";
+//                PreparedStatement pst = conn.prepareStatement(getAdminIDSql);
+//                pst.setString(1, "'" + adminName.getText() +"'");
+//                ResultSet rs = pst.executeQuery(getAdminIDSql);
+//                int adminID = 0;
+//                while (rs.next()) {
+//                    adminID = rs.getInt("adminID");
+//                }
+//                String getCustomerIDSql = "SELECT customerID FROM customer WHERE customerName LIKE ?";
+//                PreparedStatement pst2 = conn.prepareStatement(getCustomerIDSql);
+//                pst2.setString(1, "Retail customers");
+//                ResultSet resultSet = pst2.executeQuery(getCustomerIDSql);
+//                int customerID = 0;
+//                while (resultSet.next()) {
+//                    customerID = resultSet.getInt("customerID");
+//                }
+//                try {
+//                    String insertOrderSql = "INSERT INTO `orders`(`orderID`,`customerID`, `orderDate`, `orderStatus`, `adminID`) VALUES (?, ?, ?, ?, ?)";
+//                    PreparedStatement insertOrderStatement = conn.prepareStatement(insertOrderSql);
+//                    insertOrderStatement.setString(2, String.valueOf(customerID));
+//                    insertOrderStatement.setString(3, year + "-" + month + "-" + day + " " + hours + ":" + minute + ":" + second);
+//                    insertOrderStatement.setString(4, "1");
+//                    insertOrderStatement.setString(5, String.valueOf(adminID));
+//                    System.out.println(insertOrderStatement);
+//                    insertOrderStatement.executeUpdate();
+//                } catch (Exception e) {
+//                    System.out.println("Insert error: " + e.getMessage());
+//                }
+//            } catch (Exception e) {
+//                System.out.println("get ID sql error: " + e.getMessage());
+//            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/payment_pos.fxml"));
             Parent root = loader.load();
             PaymentController pc = loader.getController(); // Lấy tham chiếu đến PayController đã tạo từ FXML
             pc.setTotal(totalPrice, totalProduct);
@@ -431,9 +467,9 @@ public class HomeController implements Initializable {
 //        stage.close();
 //        System.exit(0);
 
-        // Mở trang loginpos.fxml
+        // Mở trang login_pos.fxml
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/views/loginpos.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/views/login_pos.fxml"));
             Stage loginStage = new Stage();
             loginStage.setScene(new Scene(root, 930, 525));
             loginStage.show();
@@ -454,6 +490,10 @@ public class HomeController implements Initializable {
         } catch (Exception e) {
 
         }
+    }
+
+    public void setAdminName(String admin) {
+        adminName.setText(admin);
     }
 
     public void btnTocotoco(ActionEvent actionEvent) {
