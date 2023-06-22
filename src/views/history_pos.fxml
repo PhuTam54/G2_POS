@@ -9,7 +9,7 @@
    <children>
        <Pane prefHeight="97.0" prefWidth="1315.0" style="-fx-background-color: #4e2a84;">
            <children>
-               <Button layoutX="14.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: #4e2a84;" text="X" textFill="WHITE">
+               <Button layoutX="14.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#goBackHome" style="-fx-background-color: #4e2a84;" text="X" textFill="WHITE">
                    <font>
                        <Font size="20.0" />
                    </font>
@@ -66,16 +66,17 @@
        </Pane>
       <TableView fx:id="historyView" layoutY="159.0" prefHeight="651.0" prefWidth="1315.0">
         <columns>
-          <TableColumn fx:id="colOrderid" prefWidth="77.0" text="Order ID" />
-          <TableColumn fx:id="colCusid" prefWidth="102.0" text="Customer ID" />
-            <TableColumn fx:id="colCusName" prefWidth="185.0" text="Customer name" />
+          <TableColumn fx:id="colOrderID" prefWidth="77.0" text="Order ID" />
+          <TableColumn fx:id="colCusID" prefWidth="102.0" text="Customer ID" />
             <TableColumn fx:id="colAdminID" prefWidth="84.0" text="Admin ID" />
-            <TableColumn fx:id="colOrderDate" prefWidth="132.0" text="Order Date" />
-            <TableColumn fx:id="colProductid" prefWidth="111.0" text="Product ID" />
-            <TableColumn fx:id="colProductName" prefWidth="302.0" text="Product name" />
-            <TableColumn fx:id="colSoldPrice" prefWidth="115.0" text="Sold price" />
-            <TableColumn fx:id="colSoldQty" prefWidth="84.0" text="Sold Qty" />
+            <TableColumn fx:id="colOrderDate" prefWidth="125.0" text="Order Date" />
+            <TableColumn fx:id="colProductID" prefWidth="90.0" text="Product ID" />
+            <TableColumn fx:id="colProductName" prefWidth="289.0" text="Product name" />
+            <TableColumn fx:id="colSoldPrice" prefWidth="93.0" text="Sold price" />
+            <TableColumn fx:id="colSoldQty" text="Sold Qty" />
             <TableColumn fx:id="colOrderStatus" prefWidth="104.0" text="Order status" />
+            <TableColumn fx:id="colOrderCash" prefWidth="104.0" text="Cash" />
+            <TableColumn fx:id="colOrderNote" prefWidth="160.0" text="Order Note" />
         </columns>
       </TableView>
       <Label layoutX="14.0" layoutY="108.0" prefHeight="37.0" prefWidth="107.0" text="History">

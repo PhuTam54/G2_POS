@@ -20,7 +20,7 @@
         </AnchorPane>
         <Pane layoutX="575.0" layoutY="143.0" prefHeight="302.0" prefWidth="292.0" AnchorPane.bottomAnchor="44.0" AnchorPane.topAnchor="143.0">
             <children>
-                <Button fx:id="btnSignin" layoutX="4.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="54.0" prefWidth="279.0" style="-fx-background-radius: 100; -fx-background-color: #4e2a84;" stylesheets="" text="Sign in" textFill="WHITE" />
+                <Button fx:id="btnSignIn" layoutX="4.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="54.0" prefWidth="279.0" style="-fx-background-radius: 100; -fx-background-color: #4e2a84;" stylesheets="" text="Sign in" textFill="WHITE" />
                 <Label fx:id="lblError" alignment="CENTER" layoutX="4.0" layoutY="182.0" prefHeight="23.0" prefWidth="275.0" textFill="#ff6354">
                     <font>
                         <Font name="Segoe UI" size="16.0" />

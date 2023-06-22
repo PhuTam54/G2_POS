@@ -148,7 +148,7 @@
       </Pane>
       <Pane prefHeight="97.0" prefWidth="1315.0" style="-fx-background-color: #4e2a84;">
          <children>
-            <Button layoutX="14.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: #4e2a84;" text="X" textFill="WHITE">
+            <Button onMouseClicked="#goBackLogin" layoutX="14.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: #4e2a84;" text="X" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
@@ -215,7 +215,7 @@
       </Pane>
       <Pane layoutY="115.0" prefHeight="463.0" prefWidth="247.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <Button fx:id="btnTocotoco" layoutX="14.0" layoutY="63.0" mnemonicParsing="false" onAction="#btnTocotoco" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: #4e2a84; -fx-background-radius: 10;" text="Tocotoco" textFill="WHITE">
+            <Button fx:id="btnTocoToco" layoutX="14.0" layoutY="63.0" mnemonicParsing="false" onAction="#btnTocoToco" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: #4e2a84; -fx-background-radius: 10;" text="Tocotoco" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
