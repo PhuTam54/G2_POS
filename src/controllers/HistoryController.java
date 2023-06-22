@@ -58,14 +58,13 @@ public class HistoryController implements Initializable {
         colProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
         colSoldPrice.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
         colSoldQty.setCellValueFactory(new PropertyValueFactory<>("soldQty"));
-//        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
         colOrderStatus.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
         try{
             ObservableList<HistoryTable> list = FXCollections.observableArrayList();
             list.addAll(getAll());
             historyView.setItems(list);
         }catch (Exception e){
-            System.out.println("error init:"+e.getMessage());
+            System.out.println("Init error: "+e.getMessage());
         }
         // Date
         new Thread(()-> {
@@ -139,11 +138,12 @@ public class HistoryController implements Initializable {
         ArrayList<HistoryTable> orders = new ArrayList<>();
 
         try {
-            Connection conn = new Connector().getConn();
+            Connection conn = Connector.getInstance().getConn();
             // query
             Statement stt = conn.createStatement();
-            String sql = "SELECT o.orderID, o.customerID, a.adminID, c.customerName, o.orderDate, p.productID, p.productName, od.soldPrice, od.soldQty, o.orderStatus \n" +
-                    "FROM orders AS o INNER JOIN order_detail AS od ON o.orderID = od.orderID INNER JOIN customer AS c ON o.customerID = c.customerID INNER JOIN admin AS a ON o.adminID = a.adminID INNER JOIN product AS p ON od.productID = p.productID\n" +
+            String sql =
+                    "SELECT o.orderID, c.customerID, c.customerName, a.adminID, o.orderDate, p.productID, p.productName, od.soldPrice, od.soldQty, o.orderStatus \n" +
+                    "FROM orders AS o INNER JOIN order_detail AS od ON o.orderID = od.orderID INNER JOIN customer AS c ON o.customerID = c.customerID INNER JOIN `admin` AS a ON o.adminID = a.adminID INNER JOIN product AS p ON od.productID = p.productID\n" +
                     "ORDER BY o.orderID DESC";
             ResultSet rs = stt.executeQuery(sql);
             while (rs.next()) {
@@ -156,7 +156,6 @@ public class HistoryController implements Initializable {
                 String productName = rs.getString("productName");
                 double soldPrice = rs.getDouble("soldPrice");
                 int soldQty = rs.getInt("soldQty");
-//                double total = 0;
                 int orderStatus = rs.getInt("orderStatus");
                 HistoryTable historyTable= new HistoryTable(orderID, customerID, customerName, adminID, orderDate, productID, productName, soldPrice, soldQty, orderStatus);
                 orders.add(historyTable);

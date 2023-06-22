@@ -51,7 +51,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            Connection conn = new Connector().getConn();
+            Connection conn = Connector.getInstance().getConn();
             if (conn == null) {
                 lblError.setTextFill(Color.TOMATO);
                 lblError.setText("Server Error : Check");
@@ -77,7 +77,7 @@ public class LoginController implements Initializable {
             //query
             String sql = "SELECT * FROM admin WHERE adminUsername = ? AND adminPassword = ?";
             try {
-                Connection conn = new Connector().getConn();
+                Connection conn = Connector.getInstance().getConn();
                 PreparedStatement pst = conn.prepareStatement(sql);
                 ResultSet rs;
                 pst.setString(1, user);
