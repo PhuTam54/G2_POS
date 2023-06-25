@@ -37,17 +37,22 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="897.0" layoutY="192.0" prefHeight="441.0" prefWidth="412.0" style="-fx-background-color: #d3d3d3;">
+      <Pane layoutX="897.0" layoutY="192.0" prefHeight="446.0" prefWidth="412.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <TableView fx:id="tbv" layoutY="18.0" prefHeight="416.0" prefWidth="412.0">
+            <TableView fx:id="tbv" layoutY="18.0" prefHeight="383.0" prefWidth="412.0">
               <columns>
 <!--                <TableColumn fx:id="colID" prefWidth="36.0" text="ID" />-->
                 <TableColumn fx:id="colName" prefWidth="207.0" text="Name" />
                   <TableColumn fx:id="colQty" minWidth="8.0" prefWidth="44.0" text="Qty" />
-                  <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="69.0" text="Price" />
+                  <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="69.0" text="Total" />
                   <TableColumn fx:id="colDelete" maxWidth="111.0" prefWidth="73.0" text="Action" />
               </columns>
             </TableView>
+            <Button layoutX="187.0" layoutY="401.0" mnemonicParsing="false" onAction="#cancelOrder" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Cancel order" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children></Pane>
       <Pane layoutX="255.0" layoutY="115.0" prefHeight="676.0" prefWidth="629.0" style="-fx-background-color: white;">
          <children>
@@ -148,7 +153,7 @@
       </Pane>
       <Pane prefHeight="97.0" prefWidth="1315.0" style="-fx-background-color: #4e2a84;">
          <children>
-            <Button onMouseClicked="#goBackLogin" layoutX="14.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: #4e2a84;" text="X" textFill="WHITE">
+            <Button layoutX="14.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#goBackLogin" style="-fx-background-color: #4e2a84;" text="X" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
@@ -254,7 +259,7 @@
       </Pane>
       <Pane layoutX="6.0" layoutY="593.0" prefHeight="198.0" prefWidth="241.0" style="-fx-border-color: white;">
          <children>
-            <Button layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onAction="#cancelOrder" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Cancel order">
+            <Button layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goToAddMember" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Add member">
                <font>
                   <Font size="18.0" />
                </font>
@@ -273,7 +278,7 @@
       </Pane>
       <Pane layoutX="897.0" layoutY="115.0" prefHeight="85.0" prefWidth="412.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <TextField fx:id="txtCusName" layoutY="-1.0" prefHeight="35.0" prefWidth="412.0" promptText="Enter the customer's name" style="-fx-background-radius: 100;">
+            <TextField fx:id="txtCusID" layoutY="-1.0" prefHeight="35.0" prefWidth="412.0" promptText="Enter the customer's ID" style="-fx-background-radius: 100;">
                <font>
                   <Font size="18.0" />
                </font>

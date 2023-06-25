@@ -20,7 +20,10 @@
         </AnchorPane>
         <Pane layoutX="575.0" layoutY="143.0" prefHeight="302.0" prefWidth="292.0" AnchorPane.bottomAnchor="44.0" AnchorPane.topAnchor="143.0">
             <children>
-                <Button fx:id="btnSignIn" layoutX="4.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="54.0" prefWidth="279.0" style="-fx-background-radius: 100; -fx-background-color: #4e2a84;" stylesheets="" text="Sign in" textFill="WHITE" />
+                <Button fx:id="btnSignIn" layoutX="4.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="54.0" prefWidth="279.0" style="-fx-background-radius: 100; -fx-background-color: #4e2a84;" stylesheets="" text="Sign in" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
                 <Label fx:id="lblError" alignment="CENTER" layoutX="4.0" layoutY="182.0" prefHeight="23.0" prefWidth="275.0" textFill="#ff6354">
                     <font>
                         <Font name="Segoe UI" size="16.0" />
@@ -33,7 +36,10 @@
                                 <Image url="@../img/user.png" />
                             </image>
                         </ImageView>
-                        <TextField fx:id="txtUser" prefHeight="46.0" prefWidth="212.0" promptText="Username" style="-fx-background-color: rgba(0,0,0,0);" />
+                        <TextField fx:id="txtUser" prefHeight="46.0" prefWidth="212.0" promptText="Username" style="-fx-background-color: rgba(0,0,0,0);">
+                     <font>
+                        <Font size="18.0" />
+                     </font></TextField>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="7.0" layoutY="118.0" prefHeight="54.0" prefWidth="279.0" style="-fx-background-radius: 100; -fx-background-color: #E8E8E8;">
@@ -43,7 +49,10 @@
                                 <Image url="@../img/padlock.png" />
                             </image>
                         </ImageView>
-                        <PasswordField fx:id="txtPass" prefHeight="46.0" prefWidth="216.0" promptText="Password" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="" />
+                        <PasswordField fx:id="txtPass" prefHeight="46.0" prefWidth="216.0" promptText="Password" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="">
+                     <font>
+                        <Font size="18.0" />
+                     </font></PasswordField>
                     </children>
                 </HBox>
             </children>

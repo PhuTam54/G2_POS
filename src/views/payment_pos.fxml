@@ -14,7 +14,7 @@
               <Button layoutX="297.0" layoutY="451.0" mnemonicParsing="false" onMouseClicked="#btnMoney3" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-font-size: 18;" text="\$5" />
               <Button layoutX="30.0" layoutY="517.0" mnemonicParsing="false" onMouseClicked="#btnMoney4" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-font-size: 18;" text="\$10" />
               <Button layoutX="164.0" layoutY="517.0" mnemonicParsing="false" onMouseClicked="#btnMoney5" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-font-size: 18;" text="\$20" />
-              <Button fx:id="btnVis" layoutX="30.0" layoutY="346.0" mnemonicParsing="false" onAction="#Vis" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;" text="Visa">
+              <Button fx:id="btnVis" layoutX="30.0" layoutY="346.0" mnemonicParsing="false" onAction="#payByVisa" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;" text="Visa">
                <font>
                   <Font size="18.0" />
                </font>
@@ -36,7 +36,7 @@
                   </font>
               </TextField>
               <Button layoutX="164.0" layoutY="451.0" mnemonicParsing="false" onMouseClicked="#btnMoney2" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-font-size: 18;" text="\$2" />
-              <Button fx:id="btnVnpay" layoutX="153.0" layoutY="346.0" mnemonicParsing="false" onAction="#Vnpay" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;" text="VNpay">
+              <Button fx:id="btnVnpay" layoutX="153.0" layoutY="346.0" mnemonicParsing="false" onAction="#payByVNpay" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;" text="VNpay">
                <font>
                   <Font size="18.0" />
                </font>
@@ -67,7 +67,7 @@
                </font>
             </TextField>
             <Line endX="100.0" layoutX="213.0" layoutY="423.0" startX="-100.0" />
-            <Line endX="100.0" layoutX="203.0" layoutY="318.0" startX="-100.0" />
+            <Line endX="100.0" layoutX="212.0" layoutY="318.0" startX="-100.0" />
             <Pane layoutX="51.0" layoutY="136.0" prefHeight="92.0" prefWidth="296.0" style="-fx-border-color: #D3D3D3;">
                <children>
                     <TextField fx:id="txtpay" alignment="CENTER" layoutX="110.0" layoutY="27.0" prefHeight="39.0" prefWidth="158.0" promptText="0.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 50;">
@@ -184,7 +184,7 @@
 
         <Pane prefHeight="97.0" prefWidth="1315.0" style="-fx-background-color: #4e2a84;">
             <children>
-                <Button onMouseClicked="#backToHome" fx:id="btnBack" layoutX="14.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: #4e2a84;" text="X" textFill="WHITE">
+                <Button fx:id="btnBack" layoutX="14.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#backToHome" style="-fx-background-color: #4e2a84;" text="X" textFill="WHITE">
                     <font>
                         <Font size="20.0" />
                     </font>
