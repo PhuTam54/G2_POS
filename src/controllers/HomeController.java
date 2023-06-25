@@ -37,7 +37,7 @@ public class HomeController implements Initializable {
     public TableColumn<Order, Integer> colQty;
     public TableColumn<Order, Double> colPrice;
     public Label price1, price2, price3, price4, price5, price6, price7, price8, price9, total, totalProductQty;
-    public TextField txtCusName;
+    public TextField txtCusID;
     public TextField txtNote;
     public Label adminName;
     ObservableList<Order> list = FXCollections.observableArrayList();
@@ -473,18 +473,18 @@ public class HomeController implements Initializable {
             String formattedDateTime = now.format(formatter);
             billText += "                                           \tDate: " + formattedDateTime + "\n";
             // Thêm thông tin tên và ghi chú
-            if (!txtCusName.getText().equals("")){
-                billText += "Customer's name: " + txtCusName.getText() + "\n";
+            if (!txtCusID.getText().equals("")){
+                billText += "Customer's ID: " + txtCusID.getText() + "\n";
             }
             if (!txtNote.getText().equals("")) {
                 billText += "Notes: " + txtNote.getText() + "\n";
             }
             billText += "----------------------------------------------------------------\n";
-            billText += "Product Name             \t\tQuantity                 \tPrice \n";
+            billText += "Product\t\tPrice      \t\tQuantity                \tTotal \n";
             billText += "----------------------------------------------------------------\n";
             // Nhập dữ liệu từ db
             for (int i = 0; i < data.size(); i++) {
-                billText += data.get(i).getName() + "\n" + productIDInOrder.get(i) + "\t\t\t\t\t\t     "+ data.get(i).getQty()+ "\t\t\t\t$"+ Math.ceil(data.get(i).getPrice()*100)/100 + " \n";
+                billText += data.get(i).getName() + "\n" + productIDInOrder.get(i) + "\t\t       $"+ soldPrice.get(i) + "\t\t\t     x"+ data.get(i).getQty()+ "\t\t\t$"+ Math.ceil(data.get(i).getPrice()*100)/100 + " \n";
             }
 
             billText += "----------------------------------------------------------------\n";
@@ -529,13 +529,32 @@ public class HomeController implements Initializable {
             historyStage.setTitle("POS | Sale report");
             historyStage.show();
 
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
     }
 
+    public void goToAddMember(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/views/member_pos.fxml"));
+            Stage historyStage = new Stage();
+            historyStage.setScene(new Scene(root, 930, 525));
+            historyStage.setTitle("POS | Add membership");
+            historyStage.show();
+
+        } catch (Exception ignored) {
+
+        }
+    }
+
+
     public void setAdminName(String admin) {
         adminName.setText(admin);
+    }
+
+    public void goBackLogin(MouseEvent mouseEvent) {
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 
     public void btnTocoToco(ActionEvent actionEvent) {
@@ -852,10 +871,5 @@ public class HomeController implements Initializable {
         btnYogurt.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnPastry.setStyle("-fx-background-color: white; -fx-text-fill: black;-fx-background-radius:10;");
         btnCombo.setStyle("-fx-background-color: #4e2a84; -fx-text-fill: white;-fx-background-radius:10;");
-    }
-
-    public void goBackLogin(MouseEvent mouseEvent) {
-        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        currentStage.close();
     }
 }
