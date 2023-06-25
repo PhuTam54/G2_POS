@@ -71,9 +71,6 @@ public class PaymentController implements Initializable {
             txtpay.setText("");
         }
     }
-    public Stage closeOldOrder(Stage oldStage) {
-        return oldStage;
-    }
 
     public void btnMoney1(MouseEvent mouseEvent) {
         txtpay.setText("$1");
@@ -104,6 +101,26 @@ public class PaymentController implements Initializable {
     }
 
     public void pay(MouseEvent mouseEvent) {
+        if (txtpay != null && txttotal != null) {
+            String payText = txtpay.getText().replaceAll("[^\\d.]", "");
+            String totalText = txttotal.getText().replaceAll("[^\\d.,]", "").replace(',', '.');
+            try {
+                double payAmount = Double.parseDouble(payText);
+                double totalAmount = Double.parseDouble(totalText);
+                double changeAmount = payAmount - totalAmount;
+
+                txtchange.setText("$" + String.format("%.2f", changeAmount));
+
+                // Lưu giá trị của txtpay vào biến lastPayValue khi hoàn tất giao dịch
+                lastPayValue = txtpay.getText();
+
+                // Cập nhật giá trị của txtpay
+                txtpay.setText(lastPayValue);
+                txtpay.setText(lastPayValue + "$");
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         String changeText = txtchange.getText();
         String payText = txtpay.getText();
         if (changeText.isEmpty() && payText.isEmpty()) {
@@ -140,6 +157,8 @@ public class PaymentController implements Initializable {
                         // Hiển thị hóa đơn trong TextArea
                         billText += "Cash:                                  \t\t\t\t\t" + txtpay.getText() + "\n";
                         billText += "Balance:                               \t\t\t\t\t" + txtchange.getText() + "\n";
+                        billText += "----------------------------------------------------------------\n";
+                        billText +=  "            Tax Invoice will be issued within the same day" + "\n";
                         billText +=  "=====================================\n";
                         billText +=  "                        Thanks For Your Business...!" + "\n";
                         billTextArea.setText(billText);
@@ -179,7 +198,7 @@ public class PaymentController implements Initializable {
             stage.setScene(new Scene(root, 1315, 805));
             stage.setTitle("POS Market | Dashboard");
             stage.show();
-            //Đóng cửa sổ hiện tại (nếu cần)
+            //Đóng cửa sổ hiện tại
             Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             currentStage.close();
 
@@ -193,35 +212,12 @@ public class PaymentController implements Initializable {
         txtpay.appendText(no);
     }
 
-    public void complete(ActionEvent actionEvent) {
-        if (txtpay != null && txttotal != null) {
-            String payText = txtpay.getText().replaceAll("[^\\d.]", "");
-            String totalText = txttotal.getText().replaceAll("[^\\d.,]", "").replace(',', '.');
-            try {
-                double payAmount = Double.parseDouble(payText);
-                double totalAmount = Double.parseDouble(totalText);
-                double changeAmount = payAmount - totalAmount;
-
-                txtchange.setText("$" + String.format("%.2f", changeAmount));
-
-                // Lưu giá trị của txtpay vào biến lastPayValue khi hoàn tất giao dịch
-                lastPayValue = txtpay.getText();
-
-                // Cập nhật giá trị của txtpay
-                txtpay.setText(lastPayValue);
-                txtpay.setText(lastPayValue + "$");
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void Vis(ActionEvent actionEvent) {
+    public void payByVisa(ActionEvent actionEvent) {
         btnVis.setStyle("-fx-background-color: #4e2a84; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: white;");
         btnVnpay.setStyle("-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px;-fx-text-fill: black;");
     }
 
-    public void Vnpay(ActionEvent actionEvent) {
+    public void payByVNpay(ActionEvent actionEvent) {
         btnVnpay.setStyle("-fx-background-color: #4e2a84; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: white;");
         btnVis.setStyle("-fx-background-color:white ; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;");
     }

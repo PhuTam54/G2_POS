@@ -96,7 +96,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-              <Button layoutX="198.0" layoutY="477.0" mnemonicParsing="false" onMouseClicked="#printBill" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: #DDD9; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Print">
+              <Button layoutX="96.0" layoutY="477.0" mnemonicParsing="false" onMouseClicked="#printBill" prefHeight="92.0" prefWidth="201.0" style="-fx-background-color: #DDD9; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Print">
                <font>
                   <Font size="18.0" />
                </font>
@@ -162,11 +162,6 @@
               <Button layoutX="198.0" layoutY="201.0" mnemonicParsing="false" onAction="#Number" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #A9A9A9; -fx-border-width: 2px; -fx-font-size: 19px;" text="6">
                <font>
                   <Font size="24.0" />
-               </font>
-            </Button>
-              <Button layoutX="99.0" layoutY="477.0" mnemonicParsing="false" onAction="#complete" onMouseClicked="#btnDelete" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: #DDD9; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Cacl">
-               <font>
-                  <Font size="18.0" />
                </font>
             </Button>
             <Text layoutX="16.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total product:" wrappingWidth="116.0">
