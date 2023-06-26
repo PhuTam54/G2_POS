@@ -37,7 +37,7 @@ public class HomeController implements Initializable {
     public TableColumn<Order, Integer> colQty;
     public TableColumn<Order, Double> colPrice;
     public Label price1, price2, price3, price4, price5, price6, price7, price8, price9, total, totalProductQty;
-    public TextField txtCusID;
+    public TextField txtCusPhoneNumber;
     public TextField txtNote;
     public Label adminName;
     ObservableList<Order> list = FXCollections.observableArrayList();
@@ -391,12 +391,14 @@ public class HomeController implements Initializable {
                     adminID = rs.getInt("adminID");
                 }
                 // get customer ID
-                String getCustomerIDSql = "SELECT customerID FROM customer WHERE customerName LIKE 'Retail customers'";
+                String getCustomerIDSql = "SELECT customerID FROM customer WHERE customerPhone LIKE '" + txtCusPhoneNumber.getText() + "'";
                 PreparedStatement pst2 = conn.prepareStatement(getCustomerIDSql);
                 ResultSet resultSet = pst2.executeQuery(getCustomerIDSql);
                 int customerID = 0;
-                while (resultSet.next()) {
+                if (resultSet.next()) {
                     customerID = resultSet.getInt("customerID");
+                } else {
+                    customerID = 1;
                 }
 
                 // add new orders
@@ -473,8 +475,8 @@ public class HomeController implements Initializable {
             String formattedDateTime = now.format(formatter);
             billText += "                                           \tDate: " + formattedDateTime + "\n";
             // Thêm thông tin tên và ghi chú
-            if (!txtCusID.getText().equals("")){
-                billText += "Customer's ID: " + txtCusID.getText() + "\n";
+            if (!txtCusPhoneNumber.getText().equals("")){
+                billText += "Customer's phone number: " + txtCusPhoneNumber.getText() + "\n";
             }
             if (!txtNote.getText().equals("")) {
                 billText += "Notes: " + txtNote.getText() + "\n";
