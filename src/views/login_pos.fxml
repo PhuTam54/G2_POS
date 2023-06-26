@@ -26,7 +26,7 @@
                </font></Button>
                 <Label fx:id="lblError" alignment="CENTER" layoutX="4.0" layoutY="182.0" prefHeight="23.0" prefWidth="275.0" textFill="#ff6354">
                     <font>
-                        <Font name="Segoe UI" size="16.0" />
+                        <Font name="Segue UI" size="16.0" />
                     </font>
                 </Label>
                 <HBox alignment="CENTER" layoutX="7.0" layoutY="39.0" prefHeight="54.0" prefWidth="279.0" style="-fx-background-radius: 100; -fx-background-color: #E8E8E8;">

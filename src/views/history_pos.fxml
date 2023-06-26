@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" style="-fx-background-color: #d3d3d3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryController">
    <children>
        <Pane prefHeight="97.0" prefWidth="1315.0" style="-fx-background-color: #4e2a84;">
            <children>
@@ -64,22 +64,56 @@
                </HBox>
            </children>
        </Pane>
-      <TableView fx:id="historyView" layoutY="159.0" prefHeight="651.0" prefWidth="1315.0">
+      <TableView fx:id="historyView" layoutX="17.0" layoutY="159.0" prefHeight="632.0" prefWidth="681.0">
         <columns>
           <TableColumn fx:id="colOrderID" prefWidth="77.0" text="Order ID" />
           <TableColumn fx:id="colCusID" prefWidth="102.0" text="Customer ID" />
             <TableColumn fx:id="colAdminID" prefWidth="84.0" text="Admin ID" />
             <TableColumn fx:id="colOrderDate" prefWidth="125.0" text="Order Date" />
-            <TableColumn fx:id="colProductID" prefWidth="90.0" text="Product ID" />
-            <TableColumn fx:id="colProductName" prefWidth="289.0" text="Product name" />
-            <TableColumn fx:id="colSoldPrice" prefWidth="93.0" text="Sold price" />
-            <TableColumn fx:id="colSoldQty" text="Sold Qty" />
-            <TableColumn fx:id="colOrderStatus" prefWidth="104.0" text="Order status" />
             <TableColumn fx:id="colOrderCash" prefWidth="104.0" text="Cash" />
-            <TableColumn fx:id="colOrderNote" prefWidth="160.0" text="Order Note" />
+            <TableColumn fx:id="colOrderNote" prefWidth="155.0" text="Order Note" />
         </columns>
       </TableView>
-      <Label layoutX="14.0" layoutY="108.0" prefHeight="37.0" prefWidth="107.0" text="History">
+      <Label layoutX="265.0" layoutY="105.0" prefHeight="45.0" prefWidth="185.0" text="Order history">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Pane layoutX="719.0" layoutY="159.0" prefHeight="632.0" prefWidth="573.0" style="-fx-background-color: white; -fx-background-radius: 5px;">
+         <children>
+            <Separator layoutX="6.0" layoutY="35.0" prefHeight="14.0" prefWidth="562.0" />
+            <Label layoutX="254.0" prefHeight="35.0" prefWidth="65.0" text="Order">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="53.0" text="Order ID      " />
+            <Label layoutX="12.0" layoutY="87.0" text="Customer" />
+            <Label layoutX="12.0" layoutY="122.0" text="Phone number" />
+            <Label layoutX="12.0" layoutY="156.0" text="Order date  " />
+            <Label fx:id="txtOrderID" layoutX="143.0" layoutY="53.0" prefHeight="21.0" prefWidth="64.0" />
+            <Label fx:id="txtCusName" layoutX="143.0" layoutY="87.0" prefHeight="21.0" prefWidth="167.0" />
+            <Label fx:id="txtCusPhone" layoutX="143.0" layoutY="122.0" prefHeight="21.0" prefWidth="167.0" />
+            <Label fx:id="txtOrderDate" layoutX="143.0" layoutY="156.0" prefHeight="21.0" prefWidth="167.0" />
+            <Separator layoutX="6.0" layoutY="183.0" prefHeight="21.0" prefWidth="562.0" />
+            <Label layoutX="225.0" layoutY="204.0" prefHeight="35.0" prefWidth="124.0" text="Product list">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TableView fx:id="orderDetailView" layoutX="15.0" layoutY="253.0" prefHeight="325.0" prefWidth="543.0">
+              <columns>
+                <TableColumn fx:id="colProductName" prefWidth="217.0" text="Product name" />
+                <TableColumn fx:id="colSoldPrice" minWidth="9.0" prefWidth="99.0" text="Sold price" />
+                  <TableColumn fx:id="colSoldQty" minWidth="9.0" prefWidth="87.0" text="Quantity" />
+                  <TableColumn fx:id="colTotal" minWidth="9.0" prefWidth="112.0" text="Total" />
+              </columns>
+            </TableView>
+            <Label layoutX="439.0" layoutY="590.0" text="Total:" />
+            <Label fx:id="txtTotalPrice" layoutX="482.0" layoutY="590.0" prefHeight="21.0" prefWidth="72.0" text="\$0.0" />
+         </children>
+      </Pane>
+      <Label layoutX="922.0" layoutY="105.0" prefHeight="45.0" prefWidth="167.0" text="Order detail">
          <font>
             <Font size="30.0" />
          </font>

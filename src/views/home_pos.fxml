@@ -48,7 +48,7 @@
                   <TableColumn fx:id="colDelete" maxWidth="111.0" prefWidth="73.0" text="Action" />
               </columns>
             </TableView>
-            <Button layoutX="187.0" layoutY="401.0" mnemonicParsing="false" onAction="#cancelOrder" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Cancel order" textFill="WHITE">
+            <Button layoutX="187.0" layoutY="401.0" mnemonicParsing="false" onAction="#cancelOrder" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: #ff2f99; -fx-background-radius: 10;" text="Cancel order" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -220,7 +220,7 @@
       </Pane>
       <Pane layoutY="115.0" prefHeight="463.0" prefWidth="247.0" style="-fx-background-color: #d3d3d3;">
          <children>
-            <Button fx:id="btnTocoToco" layoutX="14.0" layoutY="63.0" mnemonicParsing="false" onAction="#btnTocoToco" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: #4e2a84; -fx-background-radius: 10;" text="Tocotoco" textFill="WHITE">
+            <Button fx:id="btnTocoToco" layoutX="14.0" layoutY="63.0" mnemonicParsing="false" onAction="#btnTocoToco" prefHeight="45.0" prefWidth="225.0" style="-fx-background-color: #4e2a84; -fx-background-radius: 10;" text="ToCoToCo" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -269,7 +269,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="8.0" layoutY="147.0" mnemonicParsing="false" onAction="#exit" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="Exit" textFill="WHITE">
+            <Button layoutX="8.0" layoutY="147.0" mnemonicParsing="false" onAction="#exit" prefHeight="39.0" prefWidth="225.0" style="-fx-background-color: #ff2f99; -fx-background-radius: 10;" text="Exit" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
