@@ -529,8 +529,8 @@ public class HomeController implements Initializable {
             historyStage.setTitle("POS | Sale report");
             historyStage.show();
 
-        } catch (Exception ignored) {
-
+        } catch (Exception e) {
+            System.out.println("Go to history error: " + e.getMessage());
         }
     }
 
@@ -542,8 +542,8 @@ public class HomeController implements Initializable {
             historyStage.setTitle("POS | Add membership");
             historyStage.show();
 
-        } catch (Exception ignored) {
-
+        } catch (Exception e) {
+            System.out.println("Member error: " + e.getMessage());
         }
     }
 

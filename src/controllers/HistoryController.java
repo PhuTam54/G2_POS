@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -28,14 +29,23 @@ public class HistoryController implements Initializable {
     public TableColumn<HistoryTable, Integer> colCusID;
     public TableColumn<HistoryTable, Integer> colAdminID;
     public TableColumn<HistoryTable, DateTimeFormatter> colOrderDate;
-    public TableColumn<HistoryTable, Integer> colProductID;
+//    public TableColumn<HistoryTable, Integer> colProductID;
     public TableColumn<HistoryTable, String> colProductName;
-    public TableColumn<HistoryTable, Double> colSoldPrice;
-    public TableColumn<HistoryTable, Integer> colSoldQty;
-    public TableColumn<HistoryTable, Integer> colOrderStatus;
     public TableColumn<HistoryTable, Double> colOrderCash;
     public TableColumn<HistoryTable, String> colOrderNote;
     public TableView<HistoryTable> historyView;
+
+    // edit
+    public TableColumn<HistoryTable, Double> colSoldPrice;
+    public TableColumn<HistoryTable, Integer> colSoldQty;
+    public TableColumn<HistoryTable, Double> colTotal;
+    public Label txtOrderID;
+    public Label txtCusName;
+    public Label txtCusPhone;
+    public Label txtOrderDate;
+    public Label txtTotalPrice;
+    public TableView orderDetailView;
+
     // Date
     public Text txtHours, txtMin, txtSecond, txtDay, txtMonth, txtYear;
     public final LocalDateTime dateTime = LocalDateTime.now();
@@ -53,11 +63,11 @@ public class HistoryController implements Initializable {
         colCusID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         colAdminID.setCellValueFactory(new PropertyValueFactory<>("adminID"));
         colOrderDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
-        colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
-        colProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        colSoldPrice.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
-        colSoldQty.setCellValueFactory(new PropertyValueFactory<>("soldQty"));
-        colOrderStatus.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
+//        colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
+//        colProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+//        colSoldPrice.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
+//        colSoldQty.setCellValueFactory(new PropertyValueFactory<>("soldQty"));
+//        colOrderStatus.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
         colOrderCash.setCellValueFactory(new PropertyValueFactory<>("orderCash"));
         colOrderNote.setCellValueFactory(new PropertyValueFactory<>("orderNotes"));
 
@@ -143,24 +153,28 @@ public class HistoryController implements Initializable {
             Connection conn = Connector.getInstance().getConn();
             // query
             Statement stt = conn.createStatement();
-            String sql =
-                    "SELECT o.orderID, c.customerID, c.customerName, a.adminID, o.orderDate, p.productID, p.productName, od.soldPrice, od.soldQty, o.orderStatus, o.orderCash, o.orderNotes \n" +
-                    "FROM orders AS o INNER JOIN order_detail AS od ON o.orderID = od.orderID INNER JOIN customer AS c ON o.customerID = c.customerID INNER JOIN `admin` AS a ON o.adminID = a.adminID INNER JOIN product AS p ON od.productID = p.productID\n" +
-                    "ORDER BY o.orderID DESC";
+            String sql = "SELECT * \n" +
+                    "FROM orders AS o \n" +
+                    "WHERE o.orderStatus = 2 ORDER BY o.orderID DESC";
+
+//            String sql ="SELECT o.orderID, c.customerID, c.customerName, a.adminID, o.orderDate, p.productID, p.productName, od.soldPrice, od.soldQty, o.orderStatus, o.orderCash, o.orderNotes \n" +
+//                    "FROM orders AS o INNER JOIN order_detail AS od ON o.orderID = od.orderID INNER JOIN customer AS c ON o.customerID = c.customerID INNER JOIN `admin` AS a ON o.adminID = a.adminID INNER JOIN product AS p ON od.productID = p.productID\n" +
+//                    "WHERE o.orderStatus = 2 ORDER BY o.orderID DESC";
             ResultSet rs = stt.executeQuery(sql);
             while (rs.next()) {
                 int orderID = rs.getInt("orderID");
                 int customerID = rs.getInt("customerID");
                 int adminID = rs.getInt("adminID");
                 Date orderDate = rs.getDate("orderDate");
-                int productID = rs.getInt("productID");
-                String productName = rs.getString("productName");
-                double soldPrice = rs.getDouble("soldPrice");
-                int soldQty = rs.getInt("soldQty");
-                int orderStatus = rs.getInt("orderStatus");
+//                int productID = rs.getInt("productID");
+//                String productName = rs.getString("productName");
+//                double soldPrice = rs.getDouble("soldPrice");
+//                int soldQty = rs.getInt("soldQty");
+//                int orderStatus = rs.getInt("orderStatus");
                 double orderCash = rs.getDouble("orderCash");
                 String orderNotes = rs.getString("orderNotes");
-                HistoryTable historyTable= new HistoryTable(orderID, customerID, adminID, orderDate, productID, productName, soldPrice, soldQty, orderStatus, orderCash, orderNotes);
+//                HistoryTable historyTable= new HistoryTable(orderID, customerID, adminID, orderDate, productID, productName, soldPrice, soldQty, orderStatus, orderCash, orderNotes);
+                HistoryTable historyTable= new HistoryTable(orderID, customerID, adminID, orderDate, orderCash, orderNotes);
                 orders.add(historyTable);
             }
         } catch (Exception e) {
