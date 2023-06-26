@@ -1,10 +1,9 @@
 package controllers;
 
 import database.Connector;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -27,25 +26,25 @@ public class MemberController implements Initializable {
     public void handleButtonAction(MouseEvent event) {
         if (event.getSource() == btnAddMember) {
             //login here
-            if (logIn().equals("Success")) {
+            if (checkMemberExist().equals("No Exist")) {
                 try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home_pos.fxml"));
-                    Parent root = fxmlLoader.load();
-
-                    try {
-                        String adminName = txtCustomerName.getText();
-                        HomeController hc = fxmlLoader.getController();
-                        hc.setAdminName(adminName);
-                    } catch (Exception e) {
-                        System.out.println("Set admin error: " + e.getMessage());
-                    }
-
-                    Stage stage = new Stage();
-                    stage.setTitle("POS | Dashboard");
-                    stage.setScene(new Scene(root, 1315, 810));
-                    stage.show();
+                    String customerName = txtCustomerName.getText();
+                    String customerPhoneNumber = txtCustomerPhoneNumber.getText();
+                    Connection conn = Connector.getInstance().getConn();
+                    //query
+                    String sql = "INSERT INTO `customer`(`customerName`, `customerPhone`) VALUES ( ?, ?)";
+                    PreparedStatement pst = conn.prepareStatement(sql);
+                    pst.setString(1, customerName);
+                    pst.setString(2, customerPhoneNumber);
+                    pst.executeUpdate();
+                    //Đóng cửa sổ hiện tại
+                    Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    currentStage.close();
+                    throw new Exception("Add member successfully!");
                 } catch (Exception e) {
-                    System.err.println(e.getMessage());
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText(e.getMessage());
+                    alert.show();
                 }
             }
         }
@@ -68,31 +67,27 @@ public class MemberController implements Initializable {
         }
     }
 
-    private String logIn() {
-        String status = "Success";
-        String user = txtCustomerName.getText();
-        String password = txtCustomerPhoneNumber.getText();
-        if(user.isEmpty() || password.isEmpty()) {
-//            Label lbLogin2 = new text(user).lbLogin2;
+    private String checkMemberExist() {
+        String customerName = txtCustomerName.getText();
+        String customerPhoneNumber = txtCustomerPhoneNumber.getText();
+        String status = "No Exist";
+        if(customerName.isEmpty() || customerPhoneNumber.isEmpty()) {
             setLblError(Color.TOMATO, "Empty credentials");
-            status = "Error";
+            status = "Exist";
         } else {
-            //query
-            String sql = "SELECT * FROM admin WHERE adminUsername = ? AND adminPassword = ?";
             try {
                 Connection conn = Connector.getInstance().getConn();
-                PreparedStatement pst = conn.prepareStatement(sql);
+                //query
+                String sqlCheckMember = "SELECT `customerPhone` FROM `customer` WHERE `customerPhone` = ?";
+                PreparedStatement psCheckMember = conn.prepareStatement(sqlCheckMember);
                 ResultSet rs;
-                pst.setString(1, user);
-                pst.setString(2, password);
-                rs = pst.executeQuery();
-                if (!rs.next()) {
-//                    new CRUD1(user).showBooks();
-                    setLblError(Color.TOMATO, "Enter Correct Email/Password");
-                    status = "Error";
+                psCheckMember.setString(1, customerPhoneNumber);
+                rs = psCheckMember.executeQuery();
+                if (rs.next()) {
+                    setLblError(Color.TOMATO, "This phone number has been added before.");
                 } else {
-
-                    setLblError(Color.GREEN, "Logged In Successfully...");
+                    setLblError(Color.GREEN, "You can add this member now!");
+                    status = "No Exist";
                 }
             } catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -104,6 +99,5 @@ public class MemberController implements Initializable {
     private void setLblError(Color color, String text) {
         lblError.setTextFill(color);
         lblError.setText(text);
-        System.out.println(text);
     }
 }
