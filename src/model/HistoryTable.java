@@ -5,7 +5,7 @@ import java.sql.Date;
 public class HistoryTable {
     int orderID;
     int customerID;
-    String customerName;
+    String customerName, adminUserName;
     int adminID;
     Date orderDate;
     int productID;
@@ -45,6 +45,15 @@ public class HistoryTable {
         this.orderID = orderID;
         this.customerID = customerID;
         this.adminID = adminID;
+        this.orderDate = orderDate;
+        this.orderCash = orderCash;
+        this.orderNotes = orderNotes;
+    }
+
+    public HistoryTable(int orderID, String customerName, String adminUserName, Date orderDate, double orderCash, String orderNotes) {
+        this.orderID = orderID;
+        this.customerName = customerName;
+        this.adminUserName = adminUserName;
         this.orderDate = orderDate;
         this.orderCash = orderCash;
         this.orderNotes = orderNotes;
@@ -144,6 +153,14 @@ public class HistoryTable {
 
     public void setOrderNotes(String orderNotes) {
         this.orderNotes = orderNotes;
+    }
+
+    public String getAdminUserName() {
+        return adminUserName;
+    }
+
+    public void setAdminUserName(String adminUserName) {
+        this.adminUserName = adminUserName;
     }
 
     @Override

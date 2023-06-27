@@ -66,8 +66,8 @@ public class HistoryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colOrderID.setCellValueFactory(new PropertyValueFactory<>("orderID"));
-        colCusID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        colAdminID.setCellValueFactory(new PropertyValueFactory<>("adminID"));
+        colCusID.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        colAdminID.setCellValueFactory(new PropertyValueFactory<>("adminUserName"));
         colOrderDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
         colOrderCash.setCellValueFactory(new PropertyValueFactory<>("orderCash"));
         colOrderNote.setCellValueFactory(new PropertyValueFactory<>("orderNotes"));
@@ -155,17 +155,19 @@ public class HistoryController implements Initializable {
             // query
             Statement stt = conn.createStatement();
             String sql = "SELECT * \n" +
-                    "FROM orders AS o \n" +
+                    "FROM orders AS o INNER JOIN customer AS c ON o.customerID = c.customerID INNER JOIN `admin` AS a ON o.adminID = a.adminID\n" +
                     "WHERE o.orderStatus  = 2 ORDER BY o.orderID DESC";
             ResultSet rs = stt.executeQuery(sql);
             while (rs.next()) {
                 int orderID = rs.getInt("orderID");
-                int customerID = rs.getInt("customerID");
-                int adminID = rs.getInt("adminID");
+                String customerName = rs.getString("customerName");
+                String adminUserName = rs.getString("adminUserName");
+//                int customerID = rs.getInt("customerID");
+//                int adminID = rs.getInt("adminID");
                 Date orderDate = rs.getDate("orderDate");
                 double orderCash = rs.getDouble("orderCash");
                 String orderNotes = rs.getString("orderNotes");
-                HistoryTable historyTable= new HistoryTable(orderID, customerID, adminID, orderDate, orderCash, orderNotes);
+                HistoryTable historyTable= new HistoryTable(orderID, customerName, adminUserName, orderDate, orderCash, orderNotes);
                 orders.add(historyTable);
             }
         } catch (Exception e) {
@@ -193,7 +195,7 @@ public class HistoryController implements Initializable {
                 Connection conn = Connector.getInstance().getConn();
                 // query
                 Statement stt = conn.createStatement();
-                String sql ="SELECT o.orderID, c.customerID, c.customerName, c.customerPhone, c.customerPoint ,a.adminName, o.orderDate, p.productID, p.productName, od.soldPrice, od.soldQty, o.orderStatus, o.orderCash, o.orderNotes \n" +
+                String sql ="SELECT o.orderID, c.customerID, c.customerName, c.customerPhone, c.customerPoint ,a.adminUserName, o.orderDate, p.productID, p.productName, od.soldPrice, od.soldQty, o.orderStatus, o.orderCash, o.orderNotes \n" +
                     "FROM orders AS o INNER JOIN order_detail AS od ON o.orderID = od.orderID INNER JOIN customer AS c ON o.customerID = c.customerID INNER JOIN `admin` AS a ON o.adminID = a.adminID INNER JOIN product AS p ON od.productID = p.productID\n" +
                     "WHERE o.orderID = '" + selectedOrder.getOrderID() + "'";
                 ResultSet rs = stt.executeQuery(sql);
@@ -205,7 +207,7 @@ public class HistoryController implements Initializable {
                     double soldPrice = rs.getDouble("soldPrice");
                     int soldQty = rs.getInt("soldQty");
                     Date orderDate = rs.getDate("orderDate");
-                    String adminName = rs.getString("adminName");
+                    String adminUserName = rs.getString("adminUserName");
                     int customerPoint = rs.getInt("customerPoint");
 
                     Order orderDetail = new Order(soldQty, productName, soldPrice);
@@ -215,7 +217,7 @@ public class HistoryController implements Initializable {
                     txtCusName.setText(customerName);
                     txtCusPhone.setText(String.valueOf(customerPhone));
                     txtOrderDate.setText(String.valueOf(orderDate));
-                    txtAdminName.setText(adminName);
+                    txtAdminName.setText(adminUserName);
                     txtCusPoint.setText(String.valueOf(customerPoint));
 
                 }

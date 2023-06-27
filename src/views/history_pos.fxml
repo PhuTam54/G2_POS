@@ -67,11 +67,11 @@
       <TableView fx:id="historyView" layoutX="17.0" layoutY="159.0" onMouseClicked="#viewOrderDetail" prefHeight="632.0" prefWidth="681.0">
         <columns>
           <TableColumn fx:id="colOrderID" prefWidth="77.0" text="Order ID" />
-          <TableColumn fx:id="colCusID" prefWidth="102.0" text="Customer ID" />
-            <TableColumn fx:id="colAdminID" prefWidth="84.0" text="Admin ID" />
-            <TableColumn fx:id="colOrderDate" prefWidth="125.0" text="Order Date" />
-            <TableColumn fx:id="colOrderCash" prefWidth="104.0" text="Cash" />
-            <TableColumn fx:id="colOrderNote" prefWidth="155.0" text="Order Note" />
+          <TableColumn fx:id="colCusID" prefWidth="166.0" text="Customer" />
+            <TableColumn fx:id="colAdminID" prefWidth="91.0" text="Admin" />
+            <TableColumn fx:id="colOrderDate" prefWidth="107.0" text="Order Date" />
+            <TableColumn fx:id="colOrderCash" prefWidth="81.0" text="Cash" />
+            <TableColumn fx:id="colOrderNote" prefWidth="125.0" text="Order Note" />
         </columns>
       </TableView>
       <Label layoutX="265.0" layoutY="105.0" prefHeight="45.0" prefWidth="185.0" text="Order history">
@@ -88,13 +88,13 @@
                </font>
             </Label>
             <Label layoutX="13.0" layoutY="53.0" text="Order ID      " />
-            <Label layoutX="297.0" layoutY="51.0" text="Customer" />
-            <Label layoutX="297.0" layoutY="100.0" text="Phone" />
+            <Label layoutX="298.0" layoutY="53.0" text="Customer" />
+            <Label layoutX="298.0" layoutY="102.0" text="Phone" />
             <Label layoutX="12.0" layoutY="156.0" text="Order date  " />
             <Label fx:id="txtOrderID" layoutX="133.0" layoutY="53.0" prefHeight="21.0" prefWidth="64.0" />
             <Label fx:id="txtCusName" layoutX="387.0" layoutY="53.0" prefHeight="21.0" prefWidth="167.0" />
             <Label fx:id="txtCusPhone" layoutX="387.0" layoutY="102.0" prefHeight="21.0" prefWidth="167.0" />
-            <Label fx:id="txtOrderDate" layoutX="133.0" layoutY="156.0" prefHeight="27.0" prefWidth="139.0" />
+            <Label fx:id="txtOrderDate" layoutX="133.0" layoutY="153.0" prefHeight="27.0" prefWidth="139.0" />
             <Separator layoutX="6.0" layoutY="183.0" prefHeight="21.0" prefWidth="562.0" />
             <Label layoutX="225.0" layoutY="204.0" prefHeight="35.0" prefWidth="124.0" text="Product list">
                <font>
@@ -117,9 +117,9 @@
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <Label fx:id="txtAdminName" layoutX="133.0" layoutY="102.0" prefHeight="27.0" prefWidth="139.0" />
+            <Label fx:id="txtAdminName" layoutX="133.0" layoutY="99.0" prefHeight="27.0" prefWidth="139.0" />
             <Label layoutX="14.0" layoutY="102.0" text="Admin" />
-            <Label layoutX="297.0" layoutY="154.0" text="Point" />
+            <Label layoutX="302.0" layoutY="156.0" text="Point" />
             <Label fx:id="txtCusPoint" layoutX="387.0" layoutY="156.0" prefHeight="21.0" prefWidth="167.0" />
          </children>
       </Pane>
