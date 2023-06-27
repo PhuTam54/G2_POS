@@ -1,7 +1,6 @@
 package controllers;
 
 import database.Connector;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -13,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.HistoryTable;
 import model.Order;
 
@@ -32,7 +30,6 @@ public class HistoryController implements Initializable {
     public TableColumn<HistoryTable, Integer> colCusID;
     public TableColumn<HistoryTable, Integer> colAdminID;
     public TableColumn<HistoryTable, DateTimeFormatter> colOrderDate;
-//    public TableColumn<HistoryTable, Integer> colProductID;
     public TableColumn<HistoryTable, String> colProductName;
     public TableColumn<HistoryTable, Double> colOrderCash;
     public TableColumn<HistoryTable, String> colOrderNote;
@@ -162,8 +159,6 @@ public class HistoryController implements Initializable {
                 int orderID = rs.getInt("orderID");
                 String customerName = rs.getString("customerName");
                 String adminUserName = rs.getString("adminUserName");
-//                int customerID = rs.getInt("customerID");
-//                int adminID = rs.getInt("adminID");
                 Date orderDate = rs.getDate("orderDate");
                 double orderCash = rs.getDouble("orderCash");
                 String orderNotes = rs.getString("orderNotes");
@@ -173,7 +168,6 @@ public class HistoryController implements Initializable {
         } catch (Exception e) {
             System.out.println("Error get all" + e.getMessage());
         }
-        System.out.println(orders + "\n");
         return orders;
     }
 

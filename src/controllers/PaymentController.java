@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Order;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -34,7 +33,6 @@ public class PaymentController implements Initializable {
     public TextArea billTextArea;
     public TextField txttotalproduct;
     private String previousPayValue; // Biến tạm để lưu giá trị txtpay trước khi cập nhật
-    private TableView<Order> tbv;
     private String lastPayValue = "";
     private  String billText = "";
     // Date

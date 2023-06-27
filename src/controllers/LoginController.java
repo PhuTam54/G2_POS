@@ -74,7 +74,6 @@ public class LoginController implements Initializable {
         String user = txtUser.getText();
         String password = txtPass.getText();
         if(user.isEmpty() || password.isEmpty()) {
-//            Label lbLogin2 = new text(user).lbLogin2;
             setLblError(Color.TOMATO, "Empty credentials");
             status = "Error";
         } else {
@@ -88,7 +87,6 @@ public class LoginController implements Initializable {
                 pst.setString(2, password);
                 rs = pst.executeQuery();
                 if (!rs.next()) {
-//                    new CRUD1(user).showBooks();
                     setLblError(Color.TOMATO, "Enter Correct Email/Password");
                     status = "Error";
                 } else {
