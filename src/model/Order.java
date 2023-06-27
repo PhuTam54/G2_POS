@@ -5,8 +5,9 @@ import javafx.scene.control.Button;
 public class Order {
     int id, qty;
     String name;
-    Double price;
+    Double price, total;
     Button delete;
+
 
     public Order(int qty, String name, Double price) {
         this.qty = qty;
@@ -23,6 +24,7 @@ public class Order {
         this.price = price;
         this.delete = new Button("Delete");
     }
+
 
     public int getId() {
         return id;
@@ -54,6 +56,14 @@ public class Order {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     public Button getDelete() {
