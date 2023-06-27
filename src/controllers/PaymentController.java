@@ -66,9 +66,17 @@ public class PaymentController implements Initializable {
         orderIDInPayment = orderID;
     }
 
-    public void btnDeletes(MouseEvent mouseEvent) {
+    public void btnClear(MouseEvent mouseEvent) {
         if(txtpay!=null){
             txtpay.setText("");
+        }
+    }
+
+    public void btnDelete(MouseEvent mouseEvent) {
+        String currentText = txtpay.getText();
+        if (!currentText.isEmpty()) {
+            txtpay.setText(currentText.substring(0, currentText.length() - 1));
+            lastPayValue = txtpay.getText(); // Cập nhật giá trị của lastPayValue
         }
     }
 
@@ -220,14 +228,6 @@ public class PaymentController implements Initializable {
     public void payByVNpay(ActionEvent actionEvent) {
         btnVnpay.setStyle("-fx-background-color: #4e2a84; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: white;");
         btnVis.setStyle("-fx-background-color:white ; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;");
-    }
-
-    public void btnDelete(MouseEvent mouseEvent) {
-        String currentText = txtpay.getText();
-        if (!currentText.isEmpty()) {
-            txtpay.setText(currentText.substring(0, currentText.length() - 1));
-            lastPayValue = txtpay.getText(); // Cập nhật giá trị của lastPayValue
-        }
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {

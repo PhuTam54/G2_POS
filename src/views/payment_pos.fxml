@@ -154,7 +154,7 @@
                   <Font size="20.0" />
                </font>
               </Button>
-              <Button layoutY="477.0" mnemonicParsing="false" onMouseClicked="#btnDeletes" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: #DDD9; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Delete">
+              <Button layoutY="477.0" mnemonicParsing="false" onMouseClicked="#btnClear" prefHeight="92.0" prefWidth="99.0" style="-fx-background-color: #DDD9; -fx-border-color: #A9A9A9; -fx-border-width: 2px;" text="Clear">
                <font>
                   <Font size="18.0" />
                </font>
