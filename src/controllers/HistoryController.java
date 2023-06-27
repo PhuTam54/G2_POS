@@ -1,6 +1,7 @@
 package controllers;
 
 import database.Connector;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -12,7 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.HistoryTable;
+import model.Order;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -45,6 +48,9 @@ public class HistoryController implements Initializable {
     public Label txtOrderDate;
     public Label txtTotalPrice;
     public TableView orderDetailView;
+    private static HistoryTable selectedOrder;
+    public Label txtAdminName;
+    public Label txtCusPoint;
 
     // Date
     public Text txtHours, txtMin, txtSecond, txtDay, txtMonth, txtYear;
@@ -63,11 +69,6 @@ public class HistoryController implements Initializable {
         colCusID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         colAdminID.setCellValueFactory(new PropertyValueFactory<>("adminID"));
         colOrderDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
-//        colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
-//        colProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
-//        colSoldPrice.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
-//        colSoldQty.setCellValueFactory(new PropertyValueFactory<>("soldQty"));
-//        colOrderStatus.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
         colOrderCash.setCellValueFactory(new PropertyValueFactory<>("orderCash"));
         colOrderNote.setCellValueFactory(new PropertyValueFactory<>("orderNotes"));
 
@@ -155,25 +156,15 @@ public class HistoryController implements Initializable {
             Statement stt = conn.createStatement();
             String sql = "SELECT * \n" +
                     "FROM orders AS o \n" +
-                    "WHERE o.orderStatus = 2 ORDER BY o.orderID DESC";
-
-//            String sql ="SELECT o.orderID, c.customerID, c.customerName, a.adminID, o.orderDate, p.productID, p.productName, od.soldPrice, od.soldQty, o.orderStatus, o.orderCash, o.orderNotes \n" +
-//                    "FROM orders AS o INNER JOIN order_detail AS od ON o.orderID = od.orderID INNER JOIN customer AS c ON o.customerID = c.customerID INNER JOIN `admin` AS a ON o.adminID = a.adminID INNER JOIN product AS p ON od.productID = p.productID\n" +
-//                    "WHERE o.orderStatus = 2 ORDER BY o.orderID DESC";
+                    "WHERE o.orderStatus  = 2 ORDER BY o.orderID DESC";
             ResultSet rs = stt.executeQuery(sql);
             while (rs.next()) {
                 int orderID = rs.getInt("orderID");
                 int customerID = rs.getInt("customerID");
                 int adminID = rs.getInt("adminID");
                 Date orderDate = rs.getDate("orderDate");
-//                int productID = rs.getInt("productID");
-//                String productName = rs.getString("productName");
-//                double soldPrice = rs.getDouble("soldPrice");
-//                int soldQty = rs.getInt("soldQty");
-//                int orderStatus = rs.getInt("orderStatus");
                 double orderCash = rs.getDouble("orderCash");
                 String orderNotes = rs.getString("orderNotes");
-//                HistoryTable historyTable= new HistoryTable(orderID, customerID, adminID, orderDate, productID, productName, soldPrice, soldQty, orderStatus, orderCash, orderNotes);
                 HistoryTable historyTable= new HistoryTable(orderID, customerID, adminID, orderDate, orderCash, orderNotes);
                 orders.add(historyTable);
             }
@@ -187,5 +178,64 @@ public class HistoryController implements Initializable {
     public void goBackHome(MouseEvent mouseEvent) {
         Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         currentStage.close();
+    }
+
+    public void viewOrderDetail(MouseEvent mouseEvent) {
+        selectedOrder = historyView.getSelectionModel().getSelectedItem(); // Lấy hàng order đang được chọn
+        ObservableList<Order> orderDetailList = FXCollections.observableArrayList();
+        if (selectedOrder != null) {
+            try {
+                colSoldQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+                colProductName.setCellValueFactory(new PropertyValueFactory<>("name"));
+                colSoldPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+                colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+                Connection conn = Connector.getInstance().getConn();
+                // query
+                Statement stt = conn.createStatement();
+                String sql ="SELECT o.orderID, c.customerID, c.customerName, c.customerPhone, c.customerPoint ,a.adminName, o.orderDate, p.productID, p.productName, od.soldPrice, od.soldQty, o.orderStatus, o.orderCash, o.orderNotes \n" +
+                    "FROM orders AS o INNER JOIN order_detail AS od ON o.orderID = od.orderID INNER JOIN customer AS c ON o.customerID = c.customerID INNER JOIN `admin` AS a ON o.adminID = a.adminID INNER JOIN product AS p ON od.productID = p.productID\n" +
+                    "WHERE o.orderID = '" + selectedOrder.getOrderID() + "'";
+                ResultSet rs = stt.executeQuery(sql);
+                while (rs.next()) {
+                    int orderID = rs.getInt("orderID");
+                    String customerName = rs.getString("customerName");
+                    int customerPhone = rs.getInt("customerPhone");
+                    String productName = rs.getString("productName");
+                    double soldPrice = rs.getDouble("soldPrice");
+                    int soldQty = rs.getInt("soldQty");
+                    Date orderDate = rs.getDate("orderDate");
+                    String adminName = rs.getString("adminName");
+                    int customerPoint = rs.getInt("customerPoint");
+
+                    Order orderDetail = new Order(soldQty, productName, soldPrice);
+                    orderDetailList.add(orderDetail);
+
+                    txtOrderID.setText(String.valueOf(orderID));
+                    txtCusName.setText(customerName);
+                    txtCusPhone.setText(String.valueOf(customerPhone));
+                    txtOrderDate.setText(String.valueOf(orderDate));
+                    txtAdminName.setText(adminName);
+                    txtCusPoint.setText(String.valueOf(customerPoint));
+
+                }
+                orderDetailView.setItems(orderDetailList);
+
+                double total = 0;
+                double totalPrice = 0;
+                for (Order order : orderDetailList) {
+                    total = order.getPrice() * order.getQty();
+                    order.setTotal(Double.valueOf(String.format("%.2f", total)));
+                    totalPrice += order.getTotal();
+                }
+
+                txtTotalPrice.setText(String.format("$%.2f", totalPrice));
+
+            } catch (Exception e) {
+                System.out.println("viewOrderDetail error: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Null");
+        }
     }
 }
