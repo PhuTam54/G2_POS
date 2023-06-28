@@ -18,6 +18,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class PaymentController implements Initializable {
@@ -32,7 +34,6 @@ public class PaymentController implements Initializable {
     public TextField txtsubtotal;
     public TextArea billTextArea;
     public TextField txttotalproduct;
-    private String previousPayValue; // Biến tạm để lưu giá trị txtpay trước khi cập nhật
     private String lastPayValue = "";
     private  String billText = "";
     // Date
@@ -48,8 +49,8 @@ public class PaymentController implements Initializable {
 
     // db
     int orderIDInPayment;
-    int customerPoint, customerID;
-    double orderTotal;
+    int customerID;
+    double orderTotal, customerPoint;
 
     public void setTotal(String total, String totalProduct) {
         txttotal.setText(total);
@@ -161,7 +162,8 @@ public class PaymentController implements Initializable {
                         showAlert(Alert.AlertType.INFORMATION, "Payment Success", "Payment completed successfully.",
                                 "Change amount: $" + String.format("%.2f", changeAmount));
                         // Lưu giá trị của txtpay vào biến tạm khi hoàn tất giao dịch
-                        previousPayValue = txtpay.getText();
+                        // Biến tạm để lưu giá trị txtpay trước khi cập nhật
+                        String previousPayValue = txtpay.getText();
 
                         // Hiển thị hóa đơn trong TextArea
                         billText += "Cash:                                  \t\t\t\t\t" + txtpay.getText() + "\n";
@@ -189,31 +191,12 @@ public class PaymentController implements Initializable {
         } catch (Exception e) {
             System.out.println("Update error: " + e.getMessage());
         }
-        if (customerID != 1) {
-            // update customer POINT
-            try {
-                if (orderTotal >= 100) {
-                    customerPoint += 10;
-                } else if (orderTotal >= 90) {
-                    customerPoint += 9;
-                } else if (orderTotal >= 80) {
-                    customerPoint += 8;
-                } else if (orderTotal >= 70) {
-                    customerPoint += 7;
-                } else if (orderTotal >= 60) {
-                    customerPoint += 6;
-                } else if (orderTotal >= 50) {
-                    customerPoint += 5;
-                } else if (orderTotal >= 40) {
-                    customerPoint += 4;
-                } else if (orderTotal >= 30) {
-                    customerPoint += 3;
-                } else if (orderTotal >= 20) {
-                    customerPoint += 2;
-                } else if (orderTotal >= 10) {
-                    customerPoint += 1;
-                }
 
+        // update customer POINT
+        if (customerID != 1) {
+            try {
+                double point = (orderTotal / 10);
+                customerPoint += point;
                 //voucher
                 if (customerPoint >= 10) {
                     // Hiển thị thông báo voucher
@@ -236,7 +219,8 @@ public class PaymentController implements Initializable {
             }
         }
     }
-    public void setCustomerPoint(int point, int cusID) {
+
+    public void setCustomerPoint(double point, int cusID) {
         customerPoint = point;
         customerID = cusID;
     }
@@ -273,7 +257,46 @@ public class PaymentController implements Initializable {
     public void payByVisa(ActionEvent actionEvent) {
         btnVis.setStyle("-fx-background-color: #4e2a84; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: white;");
         btnVnpay.setStyle("-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px;-fx-text-fill: black;");
+//        // Lấy thông tin thẻ Visa từ người dùng
+//        String cardNumber = txtCardNumber.getText();
+//        String expMonth = txtExpMonth.getText();
+//        String expYear = txtExpYear.getText();
+//        String cvc = txtCvc.getText();
+//
+//        // Tạo một đối tượng Stripe để tạo giao dịch thanh toán
+//        Stripe.apiKey = "your_stripe_api_key";
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("amount", 1000);
+//        params.put("currency", "usd");
+//        params.put("description", "Example payment");
+//        params.put("source", createToken(cardNumber, expMonth, expYear, cvc));
+//
+//        try {
+//            Charge charge = Charge.create(params);
+//            System.out.println(charge);
+//        } catch (StripeException e) {
+//            e.printStackTrace();
+//        }
     }
+
+//    private String createToken(String cardNumber, String expMonth, String expYear, String cvc) {
+//        Map<String, Object> cardParams = new HashMap<>();
+//        cardParams.put("number", cardNumber);
+//        cardParams.put("exp_month", expMonth);
+//        cardParams.put("exp_year", expYear);
+//        cardParams.put("cvc", cvc);
+//
+//        Map<String, Object> tokenParams = new HashMap<>();
+//        tokenParams.put("card", cardParams);
+//
+//        try {
+//            Token token = Token.create(tokenParams);
+//            return token.getId();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
     public void payByVNpay(ActionEvent actionEvent) {
         btnVnpay.setStyle("-fx-background-color: #4e2a84; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: white;");

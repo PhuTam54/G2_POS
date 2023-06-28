@@ -202,7 +202,7 @@ public class HistoryController implements Initializable {
                     int soldQty = rs.getInt("soldQty");
                     Date orderDate = rs.getDate("orderDate");
                     String adminUserName = rs.getString("adminUserName");
-                    int customerPoint = rs.getInt("customerPoint");
+                    double customerPoint = rs.getDouble("customerPoint");
 
                     Order orderDetail = new Order(soldQty, productName, soldPrice);
                     orderDetailList.add(orderDetail);

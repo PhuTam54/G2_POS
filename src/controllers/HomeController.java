@@ -362,7 +362,7 @@ public class HomeController implements Initializable {
     public void payment(ActionEvent actionEvent) {
         String totalPrice = total.getText();
         String totalProduct = totalProductQty.getText();
-        int customerPoint = 0;
+        double customerPoint = 0;
         int customerID = 0;
         // add to orders
         int sqlYear = year;
