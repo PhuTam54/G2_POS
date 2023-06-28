@@ -48,9 +48,12 @@ public class PaymentController implements Initializable {
 
     // db
     int orderIDInPayment;
+    int customerPoint, customerID;
+    double orderTotal;
 
     public void setTotal(String total, String totalProduct) {
         txttotal.setText(total);
+        orderTotal = Double.parseDouble(total.replaceAll("[^\\d.]", ""));
         txtsubtotal.setText(total);
         txttotalproduct.setText(totalProduct);
     }
@@ -174,16 +177,6 @@ public class PaymentController implements Initializable {
                 }
             }
         }
-    }
-    public void printBill(MouseEvent mouseEvent) {
-        // In hóa đơn
-        PrinterJob printerJob = PrinterJob.createPrinterJob();
-        if (printerJob != null) {
-            boolean success = printerJob.printPage(billTextArea);
-            if (success) {
-                printerJob.endJob();
-            }
-        }
         // update orderStatus
         try {
             String cash = txtpay.getText().replaceAll("[^\\d.]", "");
@@ -196,7 +189,64 @@ public class PaymentController implements Initializable {
         } catch (Exception e) {
             System.out.println("Update error: " + e.getMessage());
         }
+        // update customer POINT
+        try {
+            if (orderTotal >= 100) {
+                customerPoint += 10;
+            } else if (orderTotal >= 90) {
+                customerPoint += 9;
+            } else if (orderTotal >= 80) {
+                customerPoint += 8;
+            } else if (orderTotal >= 70) {
+                customerPoint += 7;
+            } else if (orderTotal >= 60) {
+                customerPoint += 6;
+            } else if (orderTotal >= 50) {
+                customerPoint += 5;
+            } else if (orderTotal >= 40) {
+                customerPoint += 4;
+            } else if (orderTotal >= 30) {
+                customerPoint += 3;
+            } else if (orderTotal >= 20) {
+                customerPoint += 2;
+            } else if (orderTotal >= 10) {
+                customerPoint += 1;
+            }
 
+            //voucher
+            if (customerPoint >= 10) {
+                // Hiển thị thông báo voucher
+                showAlert(Alert.AlertType.INFORMATION, "Voucher", "Congratulation!!!",
+                        "You got " +  customerPoint + " point so this is your voucher $10 <3");
+                customerPoint -=10;
+            }
+            // update point
+            try {
+                Connection conn = Connector.getInstance().getConn();
+                // query
+                String updatePointSql = "UPDATE `customer` SET `customerPoint`= '" + customerPoint +"' WHERE customerID = '" + customerID + "'";
+                PreparedStatement updatePointStatement = conn.prepareStatement(updatePointSql);
+                updatePointStatement.executeUpdate();
+            } catch (Exception e) {
+                System.out.println("updatePointSql error: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            System.out.println("Update error: " + e.getMessage());
+        }
+    }
+    public void setCustomerPoint(int point, int cusID) {
+        customerPoint = point;
+        customerID = cusID;
+    }
+    public void printBill(MouseEvent mouseEvent) {
+        // In hóa đơn
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+        if (printerJob != null) {
+            boolean success = printerJob.printPage(billTextArea);
+            if (success) {
+                printerJob.endJob();
+            }
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home_pos.fxml"));
             Parent root = loader.load();
