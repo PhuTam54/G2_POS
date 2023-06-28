@@ -362,6 +362,8 @@ public class HomeController implements Initializable {
     public void payment(ActionEvent actionEvent) {
         String totalPrice = total.getText();
         String totalProduct = totalProductQty.getText();
+        int customerPoint = 0;
+        int customerID = 0;
         // add to orders
         int sqlYear = year;
         int sqlMonth = month;
@@ -390,13 +392,13 @@ public class HomeController implements Initializable {
                 while (rs.next()) {
                     adminID = rs.getInt("adminID");
                 }
-                // get customer ID
-                String getCustomerIDSql = "SELECT customerID FROM customer WHERE customerPhone LIKE '" + txtCusPhoneNumber.getText() + "'";
+                // get customer ID + point
+                String getCustomerIDSql = "SELECT customerID, customerPoint FROM customer WHERE customerPhone LIKE '" + txtCusPhoneNumber.getText() + "'";
                 PreparedStatement pst2 = conn.prepareStatement(getCustomerIDSql);
                 ResultSet resultSet = pst2.executeQuery(getCustomerIDSql);
-                int customerID = 0;
                 if (resultSet.next()) {
                     customerID = resultSet.getInt("customerID");
+                    customerPoint = resultSet.getInt("customerPoint");
                 } else {
                     customerID = 1;
                 }
@@ -494,6 +496,7 @@ public class HomeController implements Initializable {
 
             pc.setInvoice(billText);
             pc.setOrderID(orderID);
+            pc.setCustomerPoint(customerPoint, customerID);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root, 1315, 805));
@@ -501,6 +504,31 @@ public class HomeController implements Initializable {
             stage.show();
         } catch (Exception e) {
             System.out.println("Payment Error: " + e.getMessage());
+        }
+    }
+
+    public void findCustomerByPhone(MouseEvent mouseEvent) {
+        try {
+            Connection conn = Connector.getInstance().getConn();
+            // query
+            // get customer name
+            String getCusNameSql = "SELECT customerName FROM customer WHERE customerPhone LIKE '" + txtCusPhoneNumber.getText() + "'";
+            PreparedStatement pst = conn.prepareStatement(getCusNameSql);
+            ResultSet rs = pst.executeQuery(getCusNameSql);
+            String customerName = "";
+            if (rs.next()) {
+                String name = rs.getString("customerName");
+                customerName = name;
+            } else {
+                customerName = "Not found";
+            }
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Customer found");
+            confirmationAlert.setHeaderText(null);
+            confirmationAlert.setContentText("Hello customer: " + customerName);
+            confirmationAlert.show();
+        }catch (Exception e) {
+            System.out.println("findCustomerByPhone error: " + e.getMessage());
         }
     }
 
