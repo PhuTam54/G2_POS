@@ -30,13 +30,13 @@
                </font>
             </Button>
               <Button layoutX="297.0" layoutY="517.0" mnemonicParsing="false" onMouseClicked="#btnMoney6" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-font-size: 18;" text="\$50" />
-              <TextField fx:id="txtchange" alignment="CENTER" layoutX="161.0" layoutY="255.0" prefHeight="37.0" prefWidth="164.0" promptText="0.0" style="-fx-background-color: white;">
+              <TextField fx:id="txtChange" alignment="CENTER" layoutX="161.0" layoutY="255.0" prefHeight="37.0" prefWidth="164.0" promptText="0.0" style="-fx-background-color: white;">
                   <font>
                       <Font size="18.0" />
                   </font>
               </TextField>
               <Button layoutX="164.0" layoutY="451.0" mnemonicParsing="false" onMouseClicked="#btnMoney2" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-font-size: 18;" text="\$2" />
-              <Button fx:id="btnVnpay" layoutX="153.0" layoutY="346.0" mnemonicParsing="false" onAction="#payByVNpay" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;" text="VNpay">
+              <Button fx:id="btnVNPay" layoutX="153.0" layoutY="346.0" mnemonicParsing="false" onAction="#payByVNpay" prefHeight="51.0" prefWidth="99.0" style="-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;" text="VNpay">
                <font>
                   <Font size="18.0" />
                </font>
@@ -46,7 +46,7 @@
                       <Font size="18.0" />
                   </font>
               </Text>
-              <TextField fx:id="txttotal" alignment="CENTER" layoutX="161.0" layoutY="73.0" prefHeight="37.0" prefWidth="164.0" promptText="0.0" style="-fx-background-color: white;">
+              <TextField fx:id="txtTotal" alignment="CENTER" layoutX="161.0" layoutY="73.0" prefHeight="37.0" prefWidth="164.0" promptText="0.0" style="-fx-background-color: white;">
                   <font>
                       <Font size="18.0" />
                   </font>
@@ -61,7 +61,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="txtsubtotal" alignment="CENTER" layoutX="161.0" layoutY="14.0" prefHeight="37.0" prefWidth="164.0" promptText="0.0" style="-fx-background-color: white;">
+            <TextField fx:id="txtSubTotal" alignment="CENTER" layoutX="161.0" layoutY="14.0" prefHeight="37.0" prefWidth="164.0" promptText="0.0" style="-fx-background-color: white;">
                <font>
                   <Font size="18.0" />
                </font>
@@ -70,7 +70,7 @@
             <Line endX="100.0" layoutX="212.0" layoutY="318.0" startX="-100.0" />
             <Pane layoutX="51.0" layoutY="136.0" prefHeight="92.0" prefWidth="296.0" style="-fx-border-color: #D3D3D3;">
                <children>
-                    <TextField fx:id="txtpay" alignment="CENTER" layoutX="110.0" layoutY="27.0" prefHeight="39.0" prefWidth="158.0" promptText="0.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 50;">
+                    <TextField fx:id="txtPay" alignment="CENTER" layoutX="110.0" layoutY="27.0" prefHeight="39.0" prefWidth="158.0" promptText="0.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 50;">
                         <font>
                             <Font size="18.0" />
                         </font>
@@ -169,7 +169,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="txttotalproduct" alignment="CENTER" layoutX="132.0" layoutY="39.0" prefHeight="39.0" prefWidth="142.0" promptText="0.0" style="-fx-background-color: white;">
+            <TextField fx:id="txtTotalProduct" alignment="CENTER" layoutX="132.0" layoutY="39.0" prefHeight="39.0" prefWidth="142.0" promptText="0.0" style="-fx-background-color: white;">
                <font>
                   <Font size="18.0" />
                </font>

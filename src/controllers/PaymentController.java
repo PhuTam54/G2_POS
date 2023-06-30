@@ -18,22 +18,20 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class PaymentController implements Initializable {
-    public TextField txtchange;
-    public TextField txtpay;
+    public TextField txtChange;
+    public TextField txtPay;
     public Button txt10k;
     @FXML
-    public TextField txttotal;
+    public TextField txtTotal;
     public Button btnVis;
-    public Button btnVnpay;
+    public Button btnVNPay;
     public Button btnBack;
-    public TextField txtsubtotal;
+    public TextField txtSubTotal;
     public TextArea billTextArea;
-    public TextField txttotalproduct;
+    public TextField txtTotalProduct;
     private String lastPayValue = "";
     private  String billText = "";
     // Date
@@ -53,10 +51,10 @@ public class PaymentController implements Initializable {
     double orderTotal, customerPoint;
 
     public void setTotal(String total, String totalProduct) {
-        txttotal.setText(total);
+        txtTotal.setText(total);
         orderTotal = Double.parseDouble(total.replaceAll("[^\\d.]", ""));
-        txtsubtotal.setText(total);
-        txttotalproduct.setText(totalProduct);
+        txtSubTotal.setText(total);
+        txtTotalProduct.setText(totalProduct);
     }
 
     public void setInvoice(String invoiceText) {
@@ -69,82 +67,82 @@ public class PaymentController implements Initializable {
     }
 
     public void btnClear(MouseEvent mouseEvent) {
-        if(txtpay!=null){
-            txtpay.setText("");
+        if(txtPay !=null){
+            txtPay.setText("");
         }
     }
 
     public void btnDelete(MouseEvent mouseEvent) {
-        String currentText = txtpay.getText();
+        String currentText = txtPay.getText();
         if (!currentText.isEmpty()) {
-            txtpay.setText(currentText.substring(0, currentText.length() - 1));
-            lastPayValue = txtpay.getText(); // Cập nhật giá trị của lastPayValue
+            txtPay.setText(currentText.substring(0, currentText.length() - 1));
+            lastPayValue = txtPay.getText(); // Cập nhật giá trị của lastPayValue
         }
     }
 
     public void btnMoney1(MouseEvent mouseEvent) {
-        txtpay.setText("$1");
+        txtPay.setText("$1");
     }
 
     public void btnMoney2(MouseEvent mouseEvent) {
-        txtpay.setText("$2");
+        txtPay.setText("$2");
     }
 
     public void btnMoney3(MouseEvent mouseEvent) {
-        txtpay.setText("$5");
+        txtPay.setText("$5");
     }
 
     public void btnMoney4(MouseEvent mouseEvent) {
-        txtpay.setText("$10");
+        txtPay.setText("$10");
     }
 
     public void btnMoney5(MouseEvent mouseEvent) {
-        txtpay.setText("$20");
+        txtPay.setText("$20");
     }
 
     public void btnMoney6(MouseEvent mouseEvent) {
-        txtpay.setText("$50");
+        txtPay.setText("$50");
     }
 
     public void btnMoney7(MouseEvent mouseEvent) {
-        txtpay.setText("$100");
+        txtPay.setText("$100");
     }
 
     public void pay(MouseEvent mouseEvent) {
-        if (txtpay != null && txttotal != null) {
-            String payText = txtpay.getText().replaceAll("[^\\d.]", "");
-            String totalText = txttotal.getText().replaceAll("[^\\d.,]", "").replace(',', '.');
+        if (txtPay != null && txtTotal != null) {
+            String payText = txtPay.getText().replaceAll("[^\\d.]", "");
+            String totalText = txtTotal.getText().replaceAll("[^\\d.,]", "").replace(',', '.');
             try {
                 double payAmount = Double.parseDouble(payText);
                 double totalAmount = Double.parseDouble(totalText);
                 double changeAmount = payAmount - totalAmount;
 
-                txtchange.setText("$" + String.format("%.2f", changeAmount));
+                txtChange.setText("$" + String.format("%.2f", changeAmount));
 
-                // Lưu giá trị của txtpay vào biến lastPayValue khi hoàn tất giao dịch
-                lastPayValue = txtpay.getText();
+                // Lưu giá trị của txtPay vào biến lastPayValue khi hoàn tất giao dịch
+                lastPayValue = txtPay.getText();
 
-                // Cập nhật giá trị của txtpay
-                txtpay.setText(lastPayValue);
-                txtpay.setText(lastPayValue + "$");
+                // Cập nhật giá trị của txtPay
+                txtPay.setText(lastPayValue);
+                txtPay.setText(lastPayValue + "$");
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
-        String changeText = txtchange.getText();
-        String payText = txtpay.getText();
+        String changeText = txtChange.getText();
+        String payText = txtPay.getText();
         if (changeText.isEmpty() && payText.isEmpty()) {
-            // Hiển thị thông báo khi cả `txtchange` và `txtpay` không có giá trị
+            // Hiển thị thông báo khi cả `txtChange` và `txtPay` không có giá trị
             showAlert(Alert.AlertType.WARNING, "Payment Error", "Empty Payment",
                     "Please enter the payment amount.");
         } else if (changeText.isEmpty() && !payText.isEmpty()) {
-            // Hiển thị thông báo khi chỉ `txtchange` không có giá trị nhưng `txtpay` có giá trị
+            // Hiển thị thông báo khi chỉ `txtChange` không có giá trị nhưng `txtPay` có giá trị
             showAlert(Alert.AlertType.WARNING, "Payment Error", "Incomplete Payment",
                     "Let's calculate the excess.");
         } else {
-            if (txtpay != null && txttotal != null) {
+            if (txtPay != null && txtTotal != null) {
                 String payAmountText = payText.replaceAll("[^\\d.]", "");
-                String totalText = txttotal.getText().replaceAll("[^\\d.,]", "").replace(',', '.');
+                String totalText = txtTotal.getText().replaceAll("[^\\d.,]", "").replace(',', '.');
 
                 try {
                     double payAmount = Double.parseDouble(payAmountText);
@@ -156,18 +154,18 @@ public class PaymentController implements Initializable {
                                 "The amount paid is less than the total amount.");
                     } else {
                         double changeAmount = payAmount - totalAmount;
-                        txtchange.setText("$" + String.format("%.2f", changeAmount));
+                        txtChange.setText("$" + String.format("%.2f", changeAmount));
 
                         // Hiển thị thông báo thành công
                         showAlert(Alert.AlertType.INFORMATION, "Payment Success", "Payment completed successfully.",
                                 "Change amount: $" + String.format("%.2f", changeAmount));
-                        // Lưu giá trị của txtpay vào biến tạm khi hoàn tất giao dịch
-                        // Biến tạm để lưu giá trị txtpay trước khi cập nhật
-                        String previousPayValue = txtpay.getText();
+                        // Lưu giá trị của txtPay vào biến tạm khi hoàn tất giao dịch
+                        // Biến tạm để lưu giá trị txtPay trước khi cập nhật
+                        String previousPayValue = txtPay.getText();
 
                         // Hiển thị hóa đơn trong TextArea
-                        billText += "Cash:                                  \t\t\t\t\t" + txtpay.getText() + "\n";
-                        billText += "Balance:                               \t\t\t\t\t" + txtchange.getText() + "\n";
+                        billText += "Cash:                                  \t\t\t\t\t" + txtPay.getText() + "\n";
+                        billText += "Balance:                               \t\t\t\t\t" + txtChange.getText() + "\n";
                         billText += "----------------------------------------------------------------\n";
                         billText +=  "            Tax Invoice will be issued within the same day" + "\n";
                         billText +=  "=====================================\n";
@@ -181,7 +179,7 @@ public class PaymentController implements Initializable {
         }
         // update orderStatus
         try {
-            String cash = txtpay.getText().replaceAll("[^\\d.]", "");
+            String cash = txtPay.getText().replaceAll("[^\\d.]", "");
             Double.parseDouble(cash);
             Connection conn = Connector.getInstance().getConn();
             // query
@@ -251,12 +249,12 @@ public class PaymentController implements Initializable {
 
     public void Number(ActionEvent ae) {
         String no = ((Button) ae.getSource()).getText();
-        txtpay.appendText(no);
+        txtPay.appendText(no);
     }
 
     public void payByVisa(ActionEvent actionEvent) {
         btnVis.setStyle("-fx-background-color: #4e2a84; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: white;");
-        btnVnpay.setStyle("-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px;-fx-text-fill: black;");
+        btnVNPay.setStyle("-fx-background-color: white; -fx-border-color: #D3D3D3; -fx-border-radius: 6px;-fx-text-fill: black;");
 //        // Lấy thông tin thẻ Visa từ người dùng
 //        String cardNumber = txtCardNumber.getText();
 //        String expMonth = txtExpMonth.getText();
@@ -299,7 +297,7 @@ public class PaymentController implements Initializable {
 //    }
 
     public void payByVNpay(ActionEvent actionEvent) {
-        btnVnpay.setStyle("-fx-background-color: #4e2a84; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: white;");
+        btnVNPay.setStyle("-fx-background-color: #4e2a84; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: white;");
         btnVis.setStyle("-fx-background-color:white ; -fx-border-color: #D3D3D3; -fx-border-radius: 6px; -fx-text-fill: black;");
     }
 
