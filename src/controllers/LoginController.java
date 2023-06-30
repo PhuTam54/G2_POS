@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -22,13 +23,13 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
     public TextField txtUser;
     public PasswordField txtPass;
-    public Label lblError;
+    public Label lblStatus;
     public Button btnSignIn;
 
     public void handleButtonAction(MouseEvent event) {
         if (event.getSource() == btnSignIn) {
             //login here
-            if (logIn().equals("Success")) {
+            if (isLoginValid().equals("Success")) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/home_pos.fxml"));
                     Parent root = fxmlLoader.load();
@@ -55,43 +56,44 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            lblStatus.setTextFill(Color.TOMATO);
+            lblStatus.setText("Server Error : Check");
             Connection conn = Connector.getInstance().getConn();
-            if (conn == null) {
-                lblError.setTextFill(Color.TOMATO);
-                lblError.setText("Server Error : Check");
-            } else {
-                lblError.setTextFill(Color.GREEN);
-                lblError.setText("Server is up : Good to go");
-            }
-
+            lblStatus.setTextFill(Color.GREEN);
+            lblStatus.setText("Server is up : Good to go");
         }catch (Exception e){
             System.err.println(e.getMessage());
         }
     }
 
-    private String logIn() {
+    private String isLoginValid() {
         String status = "Success";
         String user = txtUser.getText();
         String password = txtPass.getText();
+
         if(user.isEmpty() || password.isEmpty()) {
-            setLblError(Color.TOMATO, "Empty credentials");
+            setLblStatus(Color.TOMATO, "Empty credentials");
             status = "Error";
         } else {
             //query
-            String sql = "SELECT * FROM admin WHERE adminUsername = ? AND adminPassword = ?";
+            String sql = "SELECT * FROM admin WHERE adminUsername = ?";
             try {
                 Connection conn = Connector.getInstance().getConn();
                 PreparedStatement pst = conn.prepareStatement(sql);
                 ResultSet rs;
                 pst.setString(1, user);
-                pst.setString(2, password);
                 rs = pst.executeQuery();
-                if (!rs.next()) {
-                    setLblError(Color.TOMATO, "Enter Correct Email/Password");
-                    status = "Error";
+                if (rs.next()) {
+                    String dbPassword = rs.getString("adminPassword");
+                    boolean check = BCrypt.checkpw(password, dbPassword);
+                    if (check) {
+                        setLblStatus(Color.GREEN, "Logged In Successfully...");
+                    } else {
+                        status = "Error";
+                    }
                 } else {
-
-                    setLblError(Color.GREEN, "Logged In Successfully...");
+                    setLblStatus(Color.TOMATO, "Enter Correct Email/Password");
+                    status = "Error";
                 }
             } catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -100,9 +102,9 @@ public class LoginController implements Initializable {
         }
         return status;
     }
-    private void setLblError(Color color, String text) {
-        lblError.setTextFill(color);
-        lblError.setText(text);
+    private void setLblStatus(Color color, String text) {
+        lblStatus.setTextFill(color);
+        lblStatus.setText(text);
         System.out.println(text);
     }
 }

@@ -24,7 +24,7 @@
                <font>
                   <Font size="18.0" />
                </font></Button>
-                <Label fx:id="lblError" alignment="CENTER" layoutX="4.0" layoutY="182.0" prefHeight="23.0" prefWidth="275.0" textFill="#ff6354">
+                <Label fx:id="lblStatus" alignment="CENTER" layoutX="4.0" layoutY="182.0" prefHeight="23.0" prefWidth="275.0" textFill="#ff6354">
                     <font>
                         <Font name="Segue UI" size="16.0" />
                     </font>
