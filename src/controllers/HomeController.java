@@ -238,7 +238,6 @@ public class HomeController implements Initializable {
                 return;
             }
         }
-
         // Add the new product to the table
         Order tb = new Order(qty, name, price);
         list.add(tb);
@@ -247,31 +246,12 @@ public class HomeController implements Initializable {
         calculateTotalPrice(); // Cập nhật giá trị tổng sau khi thêm sản phẩm mới
     }
 
-    public void addToTable(MouseEvent mouseEvent, String productName, Label quantityLabel, int quantityMultiplier) {
+    public void addToTable(MouseEvent mouseEvent, String productName, Label priceLabel, int quantityMultiplier) {
         try {
-            String text = quantityLabel.getText().replace("$", "");
+            String text = priceLabel.getText().replace("$", "");
             Double price = Double.parseDouble(text);
-            boolean productExists = false;
-
-            // Check if the product is already in the table
-            for (Order order : list) {
-                if (order.getName().equals(productName)) {
-                    // Update the quantity and total price of the existing product
-                    int currentQty = order.getQty();
-                    int newQty = currentQty + quantityMultiplier;
-                    order.setQty(newQty);
-                    order.setPrice(price * newQty);
-                    tbv.refresh();
-                    updateTotalProduct();
-                    calculateTotalPrice();
-                    productExists = true;
-                    break;
-                }
-            }
-
-            if (!productExists) {
-                addTable(productName, price, quantityMultiplier);
-            }
+            // call addTable()
+            addTable(productName, price, quantityMultiplier);
         } catch (Exception e) {
             System.out.println("addToTable Error: " + e.getMessage());
         }
@@ -374,7 +354,9 @@ public class HomeController implements Initializable {
         // get product ID
         ArrayList<String> productNameInOrder = new ArrayList<>();
         ArrayList<Integer> productIDInOrder = new ArrayList<>();
+        // Data + length
         ObservableList<Order> data = tbv.getItems();
+        int dataLength = data.size();
         // get soldPrice and soldQty
         ArrayList<Double> soldPrice = new ArrayList<>();
         ArrayList<Integer> soldQty = new ArrayList<>();
@@ -389,7 +371,7 @@ public class HomeController implements Initializable {
                 PreparedStatement pst = conn.prepareStatement(getAdminIDSql);
                 ResultSet rs = pst.executeQuery(getAdminIDSql);
                 int adminID = 0;
-                while (rs.next()) {
+                if (rs.next()) {
                     adminID = rs.getInt("adminID");
                 }
                 // get customer ID + point
@@ -407,10 +389,10 @@ public class HomeController implements Initializable {
                 try {
                     String insertOrderSql = "INSERT INTO `orders`(`customerID`, `orderDate`, `orderStatus`, `adminID`, `orderNotes`) VALUES (?, ?, ?, ?, ?)";
                     PreparedStatement insertOrderStatement = conn.prepareStatement(insertOrderSql);
-                    insertOrderStatement.setString(1, String.valueOf(customerID));
+                    insertOrderStatement.setInt(1, customerID);
                     insertOrderStatement.setString(2, sqlYear + "-" + sqlMonth + "-" + sqlDay + " " + sqlHours + ":" + sqlMinute + ":" + sqlSecond);
                     insertOrderStatement.setString(3, "1");
-                    insertOrderStatement.setString(4, String.valueOf(adminID));
+                    insertOrderStatement.setInt(4, adminID);
                     insertOrderStatement.setString(5, txtNote.getText());
                     insertOrderStatement.executeUpdate();
                     System.out.println(insertOrderStatement);
@@ -422,15 +404,15 @@ public class HomeController implements Initializable {
                 String getOrdersIDSql = "SELECT `orderID` FROM `orders` WHERE `orderDate` = '" + sqlYear + "-" + sqlMonth + "-" + sqlDay + " " + sqlHours + ":" + sqlMinute + ":" + sqlSecond + "'";
                 PreparedStatement psOrders = conn.prepareStatement(getOrdersIDSql);
                 ResultSet rsOrders = psOrders.executeQuery(getOrdersIDSql);
-                while (rsOrders.next()) {
+                if (rsOrders.next()) {
                     orderID = rsOrders.getInt("orderID");
                 }
 
                 // get Product ID and soldPrice
-                for (int i = 0; i < data.size(); i++) {
+                for (int i = 0; i < dataLength; i++) {
                     productNameInOrder.add(data.get(i).getName());
                 }
-                for (int i = 0; i < data.size(); i++) {
+                for (int i = 0; i < dataLength; i++) {
                     String getProductIDSql = "SELECT `productID`, `productPrice` FROM `product` WHERE `productName` = '" + productNameInOrder.get(i) + "'";
                     PreparedStatement psProduct = conn.prepareStatement(getProductIDSql);
                     ResultSet rsProduct = psProduct.executeQuery(getProductIDSql);
@@ -441,13 +423,13 @@ public class HomeController implements Initializable {
                 }
 
                 // get soldQty
-                for (int i = 0; i < data.size(); i++) {
+                for (int i = 0; i < dataLength; i++) {
                     soldQty.add(data.get(i).getQty());
                 }
 
-//                add to order_detail
+                // add to order_detail
                 try {
-                    for (int i = 0; i < data.size(); i++) {
+                    for (int i = 0; i < dataLength; i++) {
                         String insertOrderSql = "INSERT INTO `order_detail`(`orderID`, `productID`, `soldPrice`, `soldQty`) VALUES ( ?,  ? , ? ,? )";
                         PreparedStatement insertOrderStatement = conn.prepareStatement(insertOrderSql);
                         insertOrderStatement.setString(1, String.valueOf(orderID));
@@ -468,33 +450,33 @@ public class HomeController implements Initializable {
             Parent root = loader.load();
             PaymentController pc = loader.getController(); // Lấy tham chiếu đến PayController đã tạo từ FXML
             pc.setTotal(totalPrice, totalProduct);
-            String billText = "\n                \t\t\tPOS Market \n";
-            billText += "                \t\tSố 18 Tôn Thất Thuyết \n";
-            billText += "                   \t\t+84 123456789 \n\n";
+            StringBuilder billText = new StringBuilder("\n                \t\t\tPOS Market \n");
+            billText.append("                \t\tSố 18 Tôn Thất Thuyết \n");
+            billText.append("                   \t\t+84 123456789 \n\n");
             // Thêm thông tin ngày giờ
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             String formattedDateTime = now.format(formatter);
-            billText += "                                           \tDate: " + formattedDateTime + "\n";
+            billText.append("                                           \tDate: ").append(formattedDateTime).append("\n");
             // Thêm thông tin tên và ghi chú
             if (!txtCusPhoneNumber.getText().equals("")){
-                billText += "Customer's phone number: " + txtCusPhoneNumber.getText() + "\n";
+                billText.append("Customer's phone number: ").append(txtCusPhoneNumber.getText()).append("\n");
             }
             if (!txtNote.getText().equals("")) {
-                billText += "Notes: " + txtNote.getText() + "\n";
+                billText.append("Notes: ").append(txtNote.getText()).append("\n");
             }
-            billText += "----------------------------------------------------------------\n";
-            billText += "Product\t\tPrice      \t\tQuantity                \tTotal \n";
-            billText += "----------------------------------------------------------------\n";
+            billText.append("----------------------------------------------------------------\n");
+            billText.append("Product\t\tPrice      \t\tQuantity                \tTotal \n");
+            billText.append("----------------------------------------------------------------\n");
             // Nhập dữ liệu từ db
-            for (int i = 0; i < data.size(); i++) {
-                billText += data.get(i).getName() + "\n" + productIDInOrder.get(i) + "\t\t       $"+ soldPrice.get(i) + "\t\t\t     x"+ data.get(i).getQty()+ "\t\t\t$"+ Math.ceil(data.get(i).getPrice()*100)/100 + " \n";
+            for (int i = 0; i < dataLength; i++) {
+                billText.append(data.get(i).getName()).append("\n").append(productIDInOrder.get(i)).append("\t\t       $").append(soldPrice.get(i)).append("\t\t\t     x").append(data.get(i).getQty()).append("\t\t\t$").append(Math.ceil(data.get(i).getPrice() * 100) / 100).append(" \n");
             }
 
-            billText += "----------------------------------------------------------------\n";
-            billText += "Total:                                  \t\t\t\t\t" + total.getText() + "\n";
+            billText.append("----------------------------------------------------------------\n");
+            billText.append("Total:                                  \t\t\t\t\t").append(total.getText()).append("\n");
 
-            pc.setInvoice(billText);
+            pc.setInvoice(billText.toString());
             pc.setOrderID(orderID);
             pc.setCustomerPoint(customerPoint, customerID);
 
