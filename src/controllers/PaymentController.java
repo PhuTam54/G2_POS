@@ -34,6 +34,7 @@ public class PaymentController implements Initializable {
     public TextField txtTotalProduct;
     private String lastPayValue = "";
     private  String billText = "";
+    private boolean isPayment = false;
     // Date
     public Text txtHours, txtMin, txtSecond, txtDay, txtMonth, txtYear;
     public final LocalDateTime dateTime = LocalDateTime.now();
@@ -216,6 +217,7 @@ public class PaymentController implements Initializable {
                 System.out.println("Update error: " + e.getMessage());
             }
         }
+        isPayment = true;
     }
 
     public void setCustomerPoint(double point, int cusID) {
@@ -223,27 +225,29 @@ public class PaymentController implements Initializable {
         customerID = cusID;
     }
     public void printBill(MouseEvent mouseEvent) {
-        // In hóa đơn
-        PrinterJob printerJob = PrinterJob.createPrinterJob();
-        if (printerJob != null) {
-            boolean success = printerJob.printPage(billTextArea);
-            if (success) {
-                printerJob.endJob();
+        if (isPayment) {
+            // In hóa đơn
+            PrinterJob printerJob = PrinterJob.createPrinterJob();
+            if (printerJob != null) {
+                boolean success = printerJob.printPage(billTextArea);
+                if (success) {
+                    printerJob.endJob();
+                }
             }
-        }
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home_pos.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 1315, 805));
-            stage.setTitle("POS Market | Dashboard");
-            stage.show();
-            //Đóng cửa sổ hiện tại
-            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-            currentStage.close();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home_pos.fxml"));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root, 1315, 805));
+                stage.setTitle("POS Market | Dashboard");
+                stage.show();
+                //Đóng cửa sổ hiện tại
+                Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+                currentStage.close();
 
-        } catch (Exception e) {
-            System.out.println("From print bill to home error: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("From print bill to home error: " + e.getMessage());
+            }
         }
     }
 
